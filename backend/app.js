@@ -6,12 +6,15 @@ const csurf = require("csurf");
 const helmet = require("helmet");
 const cookieParser = require("cookie-parser");
 
+const routes = require("./routes");
+
 const { environment } = require("./config");
 const isProduction = environment === "production";
 
 const app = express();
 
 app.use(morgan("dev"));
+
 app.use(cookieParser());
 app.use(express.json());
 
@@ -20,12 +23,14 @@ if (!isProduction) {
   // enable cors only in development
   app.use(cors());
 }
+
 // helmet helps set a variety of headers to better secure your app
 app.use(
   helmet.crossOriginResourcePolicy({
     policy: "cross-origin",
   })
 );
+
 // Set the _csrf token and create req.csrfToken method
 app.use(
   csurf({
@@ -37,7 +42,6 @@ app.use(
   })
 );
 
-const routes = require("./routes");
 
 app.use(routes); // Connect all the routes
 
