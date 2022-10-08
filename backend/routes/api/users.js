@@ -44,4 +44,11 @@ router.post("/", validateSignup, async (req, res) => {
   });
 });
 
+//! GET all users for testing
+router.get("/", async (req, res) => {
+  const allUsers = await User.findAll();
+
+  res.json(allUsers);
+});
+
 module.exports = router;
