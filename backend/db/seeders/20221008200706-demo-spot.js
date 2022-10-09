@@ -14,7 +14,7 @@ module.exports = {
      */
     return queryInterface.bulkInsert("Spots", [
       {
-        ownerId: 1,
+        ownerId: 4,
         address: "567 Open Road",
         city: "Brooklyn",
         state: "New York",
@@ -26,7 +26,7 @@ module.exports = {
         price: 168,
       },
       {
-        ownerId: 2,
+        ownerId: 5,
         address: "1998 Century Street",
         city: "Los Angeles",
         state: "California",
@@ -36,6 +36,18 @@ module.exports = {
         name: "Tiny Home",
         description: "You will love this home for a vacation",
         price: 99,
+      },
+      {
+        ownerId: 6,
+        address: "2451 Next Street",
+        city: "San Francisco",
+        state: "California",
+        country: "United States of America",
+        lat: 37.7790262,
+        lng: -122.419906,
+        name: "Super Home",
+        description: "You will love this home for a vacation",
+        price: 190,
       },
     ]);
   },
