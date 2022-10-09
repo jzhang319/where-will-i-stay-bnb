@@ -61,7 +61,7 @@ module.exports = {
      */
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete("Spots", {
-      name: { [Op.in]: ["Home Sweet Home", "Tiny Home"] },
+      name: { [Op.in]: ["Home Sweet Home", "Tiny Home", "Super Home"] },
     });
   },
 };
