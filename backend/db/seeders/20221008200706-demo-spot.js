@@ -14,7 +14,7 @@ module.exports = {
      */
     return queryInterface.bulkInsert("Spots", [
       {
-        ownerId: 4,
+        ownerId: 1,
         address: "567 Open Road",
         city: "Brooklyn",
         state: "New York",
@@ -26,7 +26,7 @@ module.exports = {
         price: 168,
       },
       {
-        ownerId: 5,
+        ownerId: 1,
         address: "1998 Century Street",
         city: "Los Angeles",
         state: "California",
@@ -38,7 +38,7 @@ module.exports = {
         price: 99,
       },
       {
-        ownerId: 6,
+        ownerId: 2,
         address: "2451 Next Street",
         city: "San Francisco",
         state: "California",
@@ -48,6 +48,18 @@ module.exports = {
         name: "Super Home",
         description: "You will love this home for a vacation",
         price: 190,
+      },
+      {
+        ownerId: 3,
+        address: "970 Corner Street",
+        city: "El Paso",
+        state: "Texas",
+        country: "United States of America",
+        lat: 31.7865623,
+        lng: -106.441207,
+        name: "Dry Home",
+        description: "Your vacation home",
+        price: 78,
       },
     ]);
   },
@@ -61,7 +73,9 @@ module.exports = {
      */
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete("Spots", {
-      name: { [Op.in]: ["Home Sweet Home", "Tiny Home", "Super Home"] },
+      name: {
+        [Op.in]: ["Home Sweet Home", "Tiny Home", "Super Home", "Dry Home"],
+      },
     });
   },
 };
