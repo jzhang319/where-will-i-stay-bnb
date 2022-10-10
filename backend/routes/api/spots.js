@@ -1,15 +1,44 @@
 const express = require("express");
 const { Spot, SpotImage, User } = require("../../db/models");
-const spot = require("../../db/models/spot");
 const { requireAuth, restoreUser } = require("../../utils/auth.js");
 const router = express.Router();
+
+// PUT edit a spot with spotID
+router.put("/:spotId", restoreUser, async (req, res) => {
+  const id = req.params.spotId;
+  const { address, city, state, country, lat, lng, name, description, price } =
+    req.body;
+  let currSpot = await Spot.findAll({ where: { id } });
+  console.log(currSpot, ` ----------------`);
+  if (currSpot.length === 0) {
+    return res.status(400).json({
+      message: "Spot couldn't be found",
+      statusCode: 404,
+    });
+  }
+  currSpot = {
+    id,
+    ownerId: req.user.id,
+    address,
+    city,
+    state,
+    country,
+    lat,
+    lng,
+    name,
+    description,
+    price,
+  };
+
+  res.json(currSpot);
+});
 
 // POST create Spot
 router.post("/", restoreUser, async (req, res) => {
   const { address, city, state, country, lat, lng, name, description, price } =
     req.body;
   // console.log(req)
-  // console.log(req.user.id, ` --------------------------------`);
+  // console.log(req.user.id, ` --------------------`);
   const newSpot = await Spot.create({
     ownerId: req.user.id,
     address,
