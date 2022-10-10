@@ -1,7 +1,32 @@
 const express = require("express");
-const { Spot, SpotImage, User } = require("../../db/models");
+const { Spot, SpotImage, User, Review } = require("../../db/models");
+const spot = require("../../db/models/spot");
 const { requireAuth, restoreUser } = require("../../utils/auth.js");
 const router = express.Router();
+
+// DELETE deletes an existing spot
+router.delete("/:spotId", restoreUser, async (req, res) => {
+  const id = req.params.spotId;
+  let currSpot = await Spot.findAll({ where: { id } });
+  if (currSpot.length === 0) {
+    res.status(404).json({
+      message: "Spot not found",
+      statusCode: 404,
+    });
+  }
+  if (req.user.id === currSpot[0].ownerId) {
+    await Spot.destroy({ where: { id: id } });
+    res.json({
+      message: "Successfully deleted",
+      statusCode: 200,
+    });
+  } else {
+    res.status(404).json({
+      message: "You are not the owner of this spot",
+      statusCode: 404,
+    });
+  }
+});
 
 // PUT edit a spot with spotID
 router.put("/:spotId", restoreUser, async (req, res) => {
@@ -9,28 +34,36 @@ router.put("/:spotId", restoreUser, async (req, res) => {
   const { address, city, state, country, lat, lng, name, description, price } =
     req.body;
   let currSpot = await Spot.findAll({ where: { id } });
-  console.log(currSpot, ` ----------------`);
+  // console.log(currSpot, ` ----------------`);
   if (currSpot.length === 0) {
-    return res.status(400).json({
+    return res.status(404).json({
       message: "Spot couldn't be found",
       statusCode: 404,
     });
   }
-  currSpot = {
-    id,
-    ownerId: req.user.id,
-    address,
-    city,
-    state,
-    country,
-    lat,
-    lng,
-    name,
-    description,
-    price,
-  };
-
-  res.json(currSpot);
+  // console.log(req.user.id, ` ---user id`);
+  // console.log(currSpot[0].ownerId, ` ---currSpot`);
+  if (req.user.id === currSpot[0].ownerId) {
+    currSpot = {
+      id,
+      ownerId: req.user.id,
+      address,
+      city,
+      state,
+      country,
+      lat,
+      lng,
+      name,
+      description,
+      price,
+    };
+    res.json(currSpot);
+  } else {
+    res.status(404).json({
+      message: "You are not the owner of the spot",
+      statusCode: 404,
+    });
+  }
 });
 
 // POST create Spot
