@@ -1,5 +1,11 @@
 const express = require("express");
-const { Spot, SpotImage, User, Review } = require("../../db/models");
+const {
+  Spot,
+  SpotImage,
+  User,
+  Review,
+  ReviewImage,
+} = require("../../db/models");
 const { requireAuth, restoreUser } = require("../../utils/auth.js");
 const router = express.Router();
 
@@ -149,7 +155,7 @@ router.get("/:spotId/reviews", async (req, res) => {
   const id = req.params.spotId;
   const currSpot = await Review.findAll({
     where: { spotId: id },
-    include: [User],
+    include: [User, ReviewImage],
   });
   if (currSpot.length === 0) {
     res.status(404).json({
