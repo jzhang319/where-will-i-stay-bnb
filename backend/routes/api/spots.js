@@ -1,6 +1,5 @@
 const express = require("express");
 const { Spot, SpotImage, User, Review } = require("../../db/models");
-const spot = require("../../db/models/spot");
 const { requireAuth, restoreUser } = require("../../utils/auth.js");
 const router = express.Router();
 
@@ -142,6 +141,23 @@ router.post("/:spotId/images", restoreUser, async (req, res) => {
     });
   } else {
     res.json(newSpotImage);
+  }
+});
+
+// GET all reviews by spotId
+router.get("/:spotId/reviews", async (req, res) => {
+  const id = req.params.spotId;
+  const currSpot = await Review.findAll({
+    where: { spotId: id },
+    include: [User],
+  });
+  if (currSpot.length === 0) {
+    res.status(404).json({
+      message: "Spot couldn't be found",
+      statusCode: 404,
+    });
+  } else {
+    res.json(currSpot);
   }
 });
 
