@@ -8,7 +8,7 @@ const { handleValidationErrors } = require("../../utils/validation");
 
 const router = express.Router();
 
-// middleware for checking the keys and validate them
+// middleware for checking the username / pw and validate them
 const validateLogin = [
   check("credential")
     .exists({ checkFalsy: true })
@@ -24,7 +24,7 @@ const validateLogin = [
 router.post("/", validateLogin, async (req, res, next) => {
   const { credential, password } = req.body;
 
-  const user = await User.login({ credential, password });
+  let user = await User.login({ credential, password });
 
   if (!user) {
     const err = new Error("Login failed");
@@ -36,15 +36,13 @@ router.post("/", validateLogin, async (req, res, next) => {
 
   await setTokenCookie(res, user);
 
-  return res.json({
-    user,
-  });
+  return res.json(user);
 });
 
 // Log out
 router.delete("/", (_req, res) => {
   res.clearCookie("token");
-  return res.json({ message: "success" });
+  return res.json({ message: "Success" });
 });
 
 // Restore session user
