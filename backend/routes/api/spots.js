@@ -10,7 +10,7 @@ const { requireAuth, restoreUser } = require("../../utils/auth.js");
 const router = express.Router();
 
 // DELETE deletes an existing spot
-router.delete("/:spotId", restoreUser, async (req, res) => {
+router.delete("/:spotId", requireAuth, async (req, res) => {
   const id = req.params.spotId;
   let currSpot = await Spot.findAll({ where: { id } });
   if (currSpot.length === 0) {
@@ -34,13 +34,13 @@ router.delete("/:spotId", restoreUser, async (req, res) => {
 });
 
 // PUT edit a spot with spotID
-router.put("/:spotId", restoreUser, async (req, res) => {
+router.put("/:spotId", requireAuth, async (req, res) => {
   const id = req.params.spotId;
   const { address, city, state, country, lat, lng, name, description, price } =
     req.body;
-  let currSpot = await Spot.findAll({ where: { id } });
+  let currSpot = await Spot.findOne({ where: { id } });
   // console.log(currSpot, ` ----------------`);
-  if (currSpot.length === 0) {
+  if (!currSpot) {
     return res.status(404).json({
       message: "Spot couldn't be found",
       statusCode: 404,
@@ -48,8 +48,8 @@ router.put("/:spotId", restoreUser, async (req, res) => {
   }
   // console.log(req.user.id, ` ---user id`);
   // console.log(currSpot[0].ownerId, ` ---currSpot`);
-  if (req.user.id === currSpot[0].ownerId) {
-    currSpot = {
+  if (req.user.id === currSpot.ownerId) {
+    currSpot.set({
       id,
       ownerId: req.user.id,
       address,
@@ -61,7 +61,8 @@ router.put("/:spotId", restoreUser, async (req, res) => {
       name,
       description,
       price,
-    };
+    });
+    await currSpot.save();
     res.json(currSpot);
   } else {
     res.status(404).json({
@@ -72,7 +73,7 @@ router.put("/:spotId", restoreUser, async (req, res) => {
 });
 
 // POST create Spot
-router.post("/", restoreUser, async (req, res) => {
+router.post("/", requireAuth, async (req, res) => {
   const { address, city, state, country, lat, lng, name, description, price } =
     req.body;
   // console.log(req)
@@ -107,7 +108,7 @@ router.post("/", restoreUser, async (req, res) => {
 });
 
 // GET Spots owned by current user
-router.get("/current", restoreUser, async (req, res) => {
+router.get("/current", requireAuth, async (req, res) => {
   const { user } = req;
   // console.log(user.id, `-----------------------`);
   // const currUser = await User.findByPk(user.id);
@@ -129,7 +130,7 @@ router.get("/", async (req, res) => {
 });
 
 // POST Add an Image to Spot based on spotId
-router.post("/:spotId/images", restoreUser, async (req, res) => {
+router.post("/:spotId/images", requireAuth, async (req, res) => {
   const { spotId } = req.params;
   const { url, preview } = req.body;
   // console.log(spotId, ` ------------------`);
@@ -153,10 +154,19 @@ router.post("/:spotId/images", restoreUser, async (req, res) => {
 // GET all reviews by spotId
 router.get("/:spotId/reviews", async (req, res) => {
   const id = req.params.spotId;
+  // console.log(id, ` <-----`);
   const currSpot = await Review.findAll({
     where: { spotId: id },
-    include: [User, ReviewImage],
+    include: [
+      {
+        model: User,
+      },
+      {
+        model: ReviewImage,
+      },
+    ],
   });
+
   if (currSpot.length === 0) {
     res.status(404).json({
       message: "Spot couldn't be found",
@@ -165,6 +175,44 @@ router.get("/:spotId/reviews", async (req, res) => {
   } else {
     res.json(currSpot);
   }
+});
+
+// POST edit a review based on spotId
+router.post("/:spotId/reviews", requireAuth, async (req, res) => {
+  const id = req.params.spotId;
+  const { user } = req;
+  const currSpot = await Spot.findAll({ where: { id: id } });
+  const currReview = await Review.findAll({ where: { userId: user.id } });
+  // console.log(currSpot, ` <-------------`);
+  if (currReview.length > 0) {
+    res.status(403).json({
+      message: "User already has a review for this spot",
+      statusCode: 403,
+    });
+  }
+  if (currSpot.length === 0) {
+    return res.status(404).json({
+      message: "Spot couldn't be found",
+      statusCode: 404,
+    });
+  }
+  if (!req.body.review || !req.body.stars) {
+    return res.status(400).json({
+      message: "Validation error",
+      statusCode: 400,
+      errors: {
+        review: "Review text is required",
+        stars: "Stars must be an integer from 1 to 5",
+      },
+    });
+  }
+  const currUserReviews = await Review.create({
+    userId: user.id,
+    spotId: id,
+    review: req.body.review,
+    stars: req.body.stars,
+  });
+  res.status(201).json(currUserReviews);
 });
 
 // GET detail of Spot from spotId
