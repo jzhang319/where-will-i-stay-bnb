@@ -175,7 +175,7 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
   const { user } = req;
   // console.log(currSpot.ownerId);
   const checkDate = await Booking.findAll({
-    where: { startDate: startDate, endDate: endDate },
+    where: { spotId: id, startDate: startDate, endDate: endDate },
   });
   if (!currSpot) {
     return res.status(404).json({
@@ -183,7 +183,7 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
       statusCode: 404,
     });
   }
-  if (checkDate !== 0) {
+  if (!checkDate) {
     return res.status(403).json({
       message: "Sorry, this spot is already booked for the specified dates",
       statusCode: 403,
@@ -205,7 +205,7 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
       startDate,
       endDate,
     });
-    res.json(newBooking);
+    // res.json(newBooking);
   }
 });
 
