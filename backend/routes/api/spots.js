@@ -209,6 +209,7 @@ router.get("/:spotId/reviews", async (req, res) => {
       },
       {
         model: ReviewImage,
+        attributes: ["id", "url"],
       },
     ],
   });

@@ -9,27 +9,63 @@ const {
 const { requireAuth, restoreUser } = require("../../utils/auth.js");
 const router = express.Router();
 
+// DELETE a review
+router.delete("/:reviewId", requireAuth, async (req, res) => {
+  const id = req.params.reviewId;
+  const currReview = await Review.findByPk(id);
+  // console.log(currReview);
+  const { user } = req;
+  // console.log(user.id);
+  // console.log(currReview.userId);
+  if (!currReview) {
+    return res.status(404).json({
+      message: "Review couldn't be found",
+      statusCode: 404,
+    });
+  }
+
+  if (user.id !== currReview.userId) {
+    return res.status(403).json({
+      message: "Forbidden",
+      statusCode: 403,
+    });
+  } else {
+    currReview.destroy();
+    res.json({
+      message: "Successfully deleted",
+      statusCode: 200,
+    });
+  }
+});
+
 // POST create image for a review by reviewID
 router.post("/:reviewId/images", requireAuth, async (req, res) => {
   const id = req.params.reviewId;
   const { user } = req;
   // console.log(id, user, ` <-----------`);
   const currReview = await Review.findAll({
-    where: { id },
+    where: { id: id },
   });
-  if (currReview[0].ownerId !== user.id) {
-    return res.status(403).json({
-      message: "Forbidden",
-      statusCode: 403,
-    });
-  }
+  // console.log(currReview[0].userId, ` <-----------`);
+  // console.log(user.id, ` <-----------`);
   if (currReview.length === 0) {
     return res.status(404).json({
       message: "Review couldn't be found",
       statusCode: 404,
     });
   }
-  if (currReview.length > 9) {
+
+  if (currReview[0].userId !== user.id) {
+    return res.status(403).json({
+      message: "Forbidden",
+      statusCode: 403,
+    });
+  }
+  const numReviews = await ReviewImage.findAll({
+    where: { reviewId: currReview[0].id },
+  });
+  console.log(numReviews.length, ` <---------`);
+  if (numReviews.length > 9) {
     return res.status(403).json({
       message: "Maximum number of images for this resource was reached",
       statusCode: 403,
@@ -51,7 +87,11 @@ router.get("/current", requireAuth, async (req, res) => {
 
   const userReviews = await Review.findAll({
     where: { userId: user.id },
-    include: [{ model: User }, { model: Spot }, { model: ReviewImage }],
+    include: [
+      { model: User },
+      { model: Spot },
+      { model: ReviewImage, attributes: ["id", "url"] },
+    ],
   });
 
   // console.log(userReviews, ` <-----------`);
@@ -62,16 +102,28 @@ router.get("/current", requireAuth, async (req, res) => {
       statusCode: 404,
     });
   }
-  res.json(userReviews);
+
+  let reviewArray = [];
+  userReviews.forEach((review) => {
+    reviewArray.push(review.toJSON());
+  });
+
+  reviewArray.forEach((review) => {
+    // console.log(review.Spot, ` <-----`);
+    review.Spot.previewImage = review.ReviewImages[0].url;
+  });
+
+  res.json(reviewArray);
 });
 
 // PUT edit a review
 router.put("/:reviewId", requireAuth, async (req, res) => {
   const { user } = req;
   const reviewId = req.params.reviewId;
-  const { id, userId, spotId, review, stars } = req.body;
+  const { review, stars } = req.body;
   const currReview = await Review.findOne({ where: { id: reviewId } });
   // console.log(currReview.userId, ` <-----------`);
+  console.log(user, ` <---------`);
   if (!currReview) {
     return res.status(404).json({
       message: "Review couldn't be found",
@@ -95,14 +147,12 @@ router.put("/:reviewId", requireAuth, async (req, res) => {
       },
     });
   }
-  let updateReview = {
-    id,
-    userId,
-    spotId,
+  currReview.set({
     review,
     stars,
-  };
-  res.status(200).json(updateReview);
+  });
+  await currReview.save();
+  res.status(200).json(currReview);
 });
 
 module.exports = router;
