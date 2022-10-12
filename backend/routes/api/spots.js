@@ -124,9 +124,27 @@ router.get("/current", requireAuth, async (req, res) => {
 
 // GET all spots
 router.get("/", async (req, res) => {
-  const allSpots = await Spot.findAll({ include: SpotImage });
+  const allSpots = await Spot.findAll({
+    include: [{ model: SpotImage, attributes: ["url"] }],
+  });
 
-  res.json(allSpots);
+  let spotArray = [];
+  allSpots.forEach((spot) => {
+    spotArray.push(spot.toJSON());
+  });
+
+  spotArray.forEach((spot) => {
+    spot.SpotImages.forEach((img) => {
+      // console.log(img.url, ` <-----`);
+      if (img.url) {
+        // console.log(img, ` <----`);
+        spot.previewImage = img.url;
+      }
+      delete spot.SpotImages;
+    });
+  });
+  // console.log(spotArray);
+  res.json(spotArray);
 });
 
 // POST Add an Image to Spot based on spotId
