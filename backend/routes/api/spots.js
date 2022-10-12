@@ -65,9 +65,9 @@ router.put("/:spotId", requireAuth, async (req, res) => {
     await currSpot.save();
     res.json(currSpot);
   } else {
-    res.status(404).json({
-      message: "You are not the owner of the spot",
-      statusCode: 404,
+    res.status(403).json({
+      message: "Forbidden",
+      statusCode: 403,
     });
   }
 });
