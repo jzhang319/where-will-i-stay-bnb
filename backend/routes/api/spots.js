@@ -26,9 +26,9 @@ router.delete("/:spotId", requireAuth, async (req, res) => {
       statusCode: 200,
     });
   } else {
-    res.status(404).json({
-      message: "You are not the owner of this spot",
-      statusCode: 404,
+    res.status(403).json({
+      message: "Forbidden",
+      statusCode: 403,
     });
   }
 });
@@ -116,16 +116,31 @@ router.get("/current", requireAuth, async (req, res) => {
   // console.log(currUser, ` -------------------`);
   const ownerSpots = await Spot.findAll({
     where: { ownerId: user.id },
-    // include: [User],
+    include: [{ model: SpotImage, attributes: ["url"] }],
   });
-  // console.log(spotOwner, ` ----------------`);
-  res.json(ownerSpots);
+  // console.log(spotOwner, ` --------`);
+  let spotArray = [];
+  ownerSpots.forEach((spot) => {
+    spotArray.push(spot.toJSON());
+  });
+  spotArray.forEach((spot) => {
+    spot.SpotImages.forEach((img) => {
+      if (img.url) {
+        spot.previewImage = img.url;
+      }
+    });
+    if (!spot.previewImage) {
+      spot.previewImage = `no preview image found`;
+    }
+    delete spot.SpotImages;
+  });
+  res.json(spotArray);
 });
 
 // GET all spots
 router.get("/", async (req, res) => {
   const allSpots = await Spot.findAll({
-    include: [{ model: SpotImage, attributes: ["url"] }],
+    include: [{ model: SpotImage }],
   });
 
   let spotArray = [];
@@ -140,8 +155,11 @@ router.get("/", async (req, res) => {
         // console.log(img, ` <----`);
         spot.previewImage = img.url;
       }
-      delete spot.SpotImages;
     });
+    if (!spot.previewImage) {
+      spot.previewImage = `no preview image found`;
+    }
+    delete spot.SpotImages;
   });
   // console.log(spotArray);
   res.json(spotArray);
@@ -151,22 +169,32 @@ router.get("/", async (req, res) => {
 router.post("/:spotId/images", requireAuth, async (req, res) => {
   const { spotId } = req.params;
   const { url, preview } = req.body;
+  const { user } = req;
   // console.log(spotId, ` ------------------`);
-  const currSpot = await Spot.findAll({ where: { id: spotId } });
-  console.log(currSpot, ` ----------------`);
+  const currSpot = await Spot.findOne({ where: { id: spotId } });
+  // console.log(currSpot, ` ----------------`);
+  // console.log(currSpot.ownerId);
+  // console.log(user.id);
+  if (!currSpot) {
+    return res.status(404).json({
+      message: `Spot couldn't be found`,
+      statusCode: 404,
+    });
+  }
+
+  if (user.id !== currSpot.ownerId) {
+    return res.status(403).json({
+      message: "Forbidden",
+      statusCode: 403,
+    });
+  }
   const newSpotImage = await SpotImage.create({
     spotId,
     url,
     preview,
   });
-  if (currSpot.length === 0) {
-    res.status(404).json({
-      message: `Spot couldn't be found`,
-      statusCode: 404,
-    });
-  } else {
-    res.json(newSpotImage);
-  }
+
+  res.json(newSpotImage);
 });
 
 // GET all reviews by spotId
@@ -195,25 +223,26 @@ router.get("/:spotId/reviews", async (req, res) => {
   }
 });
 
-// POST edit a review based on spotId
+// POST create a review based on spotId
 router.post("/:spotId/reviews", requireAuth, async (req, res) => {
   const id = req.params.spotId;
   const { user } = req;
   const currSpot = await Spot.findAll({ where: { id: id } });
   const currReview = await Review.findAll({ where: { userId: user.id } });
   // console.log(currSpot, ` <-------------`);
-  if (currReview.length > 0) {
-    res.status(403).json({
-      message: "User already has a review for this spot",
-      statusCode: 403,
-    });
-  }
   if (currSpot.length === 0) {
     return res.status(404).json({
       message: "Spot couldn't be found",
       statusCode: 404,
     });
   }
+  if (currReview.length > 0) {
+    return res.status(403).json({
+      message: "User already has a review for this spot",
+      statusCode: 403,
+    });
+  }
+
   if (!req.body.review || !req.body.stars) {
     return res.status(400).json({
       message: "Validation error",
@@ -238,16 +267,27 @@ router.get("/:spotId", async (req, res, next) => {
   const id = req.params.spotId;
   const currSpot = await Spot.findAll({
     where: { id },
-    include: [SpotImage, User],
+    include: [{ model: SpotImage }, { model: User }],
   });
   // console.log(currSpot, ` ----------------`);
+  let spotArray = [];
+  currSpot.forEach((spot) => {
+    spotArray.push(spot.toJSON());
+  });
+
+  spotArray.forEach((spot) => {
+    // console.log(spot, ` <-------`);
+    spot.Owner = spot.User;
+    delete spot.User;
+  });
+
   if (currSpot.length === 0) {
     res.status(404).json({
       message: "Spot couldn't be found",
       statusCode: 404,
     });
   } else {
-    res.json(currSpot);
+    res.json(spotArray);
   }
 });
 

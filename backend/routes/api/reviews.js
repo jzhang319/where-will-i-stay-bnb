@@ -12,9 +12,17 @@ const router = express.Router();
 // POST create image for a review by reviewID
 router.post("/:reviewId/images", requireAuth, async (req, res) => {
   const id = req.params.reviewId;
+  const { user } = req;
+  // console.log(id, user, ` <-----------`);
   const currReview = await Review.findAll({
-    where: { id: id },
+    where: { id },
   });
+  if (currReview[0].ownerId !== user.id) {
+    return res.status(403).json({
+      message: "Forbidden",
+      statusCode: 403,
+    });
+  }
   if (currReview.length === 0) {
     return res.status(404).json({
       message: "Review couldn't be found",
@@ -46,7 +54,7 @@ router.get("/current", requireAuth, async (req, res) => {
     include: [{ model: User }, { model: Spot }, { model: ReviewImage }],
   });
 
-  console.log(userReviews, ` <-----------`);
+  // console.log(userReviews, ` <-----------`);
 
   if (userReviews.length === 0) {
     return res.status(404).json({
@@ -64,7 +72,7 @@ router.put("/:reviewId", requireAuth, async (req, res) => {
   const { id, userId, spotId, review, stars } = req.body;
   const currReview = await Review.findOne({ where: { id: reviewId } });
   // console.log(currReview.userId, ` <-----------`);
-  if (!currReview){
+  if (!currReview) {
     return res.status(404).json({
       message: "Review couldn't be found",
       statusCode: 404,
