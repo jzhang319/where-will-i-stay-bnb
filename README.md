@@ -2,7 +2,7 @@
 
 ## schema
 
-![image](https://user-images.githubusercontent.com/99565823/194720794-3b76a0b9-b1a6-4f50-ab02-7f6ea2a6c42b.png)
+![image](https://user-images.githubusercontent.com/99565823/195233329-23753bd4-6631-4dcd-ae66-af75ad0bf3a9.png)
 
 ### All endpoints that require authentication
 
