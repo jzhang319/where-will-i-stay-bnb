@@ -171,11 +171,9 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
   const id = req.params.spotId;
   const { startDate, endDate } = req.body;
   // console.log(req.body, ` <-------`);
-  const currSpot = await Spot.findByPk(id,
-    {
-      include: [{ model: Booking }]
-    }
-    );
+  const currSpot = await Spot.findByPk(id, {
+    include: [{ model: Booking }],
+  });
   const { user } = req;
   // console.log(currSpot.ownerId, ` <-------`);
   const checkDate = await Booking.findAll({
@@ -323,6 +321,12 @@ router.get("/:spotId", async (req, res, next) => {
     include: [{ model: SpotImage }, { model: User }],
   });
   // console.log(currSpot, ` ----------------`);
+  const numberReviews = await Review.findAll({ where: { spotId: id } });
+  let totalStars = 0
+  numberReviews.forEach(review => {
+    console.log(review.stars)
+    totalStars += review.stars
+  })
   let spotArray = [];
   currSpot.forEach((spot) => {
     spotArray.push(spot.toJSON());
@@ -330,6 +334,8 @@ router.get("/:spotId", async (req, res, next) => {
 
   spotArray.forEach((spot) => {
     // console.log(spot, ` <-------`);
+    spot.numReviews = numberReviews.length;
+    spot.avgRating = (totalStars / numberReviews.length);
     spot.Owner = spot.User;
     delete spot.User;
   });
