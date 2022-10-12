@@ -2,7 +2,6 @@
   "name": "authenticate-me",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "install": "npm --prefix backend install backend",
@@ -21,6 +20,5 @@
   "bugs": {
     "url": "https://github.com/jzhang319/API-project/issues"
   },
-  "homepage": "https://github.com/jzhang319/API-project#readme",
-  "description": ""
+  "homepage": "https://github.com/jzhang319/API-project#readme"
 }
