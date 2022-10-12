@@ -174,7 +174,9 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
   const currSpot = await Spot.findByPk(id, { include: [{ model: Booking }] });
   const { user } = req;
   // console.log(currSpot.ownerId);
-  const checkDate = await Booking.findAll({ where: { startDate: startDate } });
+  const checkDate = await Booking.findAll({
+    where: { startDate: startDate, endDate: endDate },
+  });
   if (!currSpot) {
     return res.status(404).json({
       message: "Spot couldn't be found",
