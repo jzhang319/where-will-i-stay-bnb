@@ -25,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
 
     static async login({ credential, password }) {
       const { Op } = require("sequelize");
+
       const user = await User.scope("loginUser").findOne({
         where: {
           [Op.or]: {
@@ -38,9 +39,11 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
 
-    static async signup({ username, email, password }) {
+    static async signup({ firstName, lastName, username, email, password }) {
       const hashedPassword = bcrypt.hashSync(password);
       const user = await User.create({
+        firstName,
+        lastName,
         username,
         email,
         hashedPassword,
@@ -50,10 +53,39 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
+      User.hasMany(models.Spot, {
+        foreignKey: "ownerId",
+        onDelete: "CASCADE",
+        hooks: true,
+      });
+      User.hasMany(models.Booking, {
+        foreignKey: "userId",
+        onDelete: "CASCADE",
+        hooks: true,
+      });
+      User.hasMany(models.Review, {
+        foreignKey: "userId",
+        onDelete: "CASCADE",
+        hooks: true,
+      });
     }
   }
   User.init(
     {
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [1, 50],
+        },
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [1, 50],
+        },
+      },
       username: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -87,13 +119,19 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "User",
       defaultScope: {
         attributes: {
-          exclude: ["hashedPassword", "email", "createdAt", "updatedAt"],
+          exclude: [
+            "hashedPassword",
+            "username",
+            "email",
+            "createdAt",
+            "updatedAt",
+          ],
         },
       },
       scopes: {
         currentUser: {
           attributes: {
-            exclude: ["hashedPassword"],
+            exclude: ["hashedPassword", "createdAt", "updatedAt"],
           },
         },
         loginUser: {
