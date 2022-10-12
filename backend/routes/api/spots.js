@@ -5,6 +5,7 @@ const {
   User,
   Review,
   ReviewImage,
+  Booking,
 } = require("../../db/models");
 const { requireAuth, restoreUser } = require("../../utils/auth.js");
 const router = express.Router();
@@ -168,6 +169,7 @@ router.get("/", async (req, res) => {
 // POST create a Booking from a Spot based on Spot id
 router.post("/:spotId/bookings", requireAuth, async (req, res) => {
   const id = req.params.spotId;
+  const { spotId, userId, startDate, endDate } = req.params;
   const currSpot = await Spot.findByPk(id, { include: [{ model: Booking }] });
   const { user } = req;
   // console.log(currSpot.ownerId);
@@ -182,6 +184,14 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
       message: "Forbidden",
       statusCode: 403,
     });
+  } else {
+    const newBooking = await Booking.create({
+      spotId,
+      userId,
+      startDate,
+      endDate,
+    });
+    res.json(newBooking);
   }
 });
 
