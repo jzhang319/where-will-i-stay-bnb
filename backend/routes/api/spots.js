@@ -165,6 +165,26 @@ router.get("/", async (req, res) => {
   res.json(spotArray);
 });
 
+// POST create a Booking from a Spot based on Spot id
+router.post("/:spotId/bookings", requireAuth, async (req, res) => {
+  const id = req.params.spotId;
+  const currSpot = await Spot.findByPk(id);
+  const { user } = req;
+  // console.log(currSpot.ownerId);
+  if (!currSpot) {
+    return res.status(404).json({
+      message: "Spot couldn't be found",
+      statusCode: 404,
+    });
+  }
+  if (user.id === currSpot.ownerId) {
+    return res.status(403).json({
+      message: "Forbidden",
+      statusCode: 403,
+    });
+  }
+});
+
 // POST Add an Image to Spot based on spotId
 router.post("/:spotId/images", requireAuth, async (req, res) => {
   const { spotId } = req.params;
