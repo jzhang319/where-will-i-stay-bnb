@@ -1,5 +1,5 @@
 {
-  "name": "authenticate-me",
+  "name": "where-will-i-stay-bnb",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -12,13 +12,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jzhang319/API-project.git"
+    "url": "git+https://github.com/jzhang319/where-will-i-stay-bnb.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jzhang319/API-project/issues"
+    "url": "https://github.com/jzhang319/where-will-i-stay-bnb/issues"
   },
-  "homepage": "https://github.com/jzhang319/API-project#readme"
+  "homepage": "https://github.com/jzhang319/where-will-i-stay-bnb#readme",
+  "dependencies": {
+    "sqlite3": "^5.1.2"
+  }
 }

@@ -171,9 +171,13 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
   const id = req.params.spotId;
   const { startDate, endDate } = req.body;
   // console.log(req.body, ` <-------`);
-  const currSpot = await Spot.findByPk(id, { include: [{ model: Booking }] });
+  const currSpot = await Spot.findByPk(id,
+    {
+      include: [{ model: Booking }]
+    }
+    );
   const { user } = req;
-  // console.log(currSpot.ownerId);
+  // console.log(currSpot.ownerId, ` <-------`);
   const checkDate = await Booking.findAll({
     where: {
       spotId: id,
@@ -185,7 +189,7 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
       statusCode: 404,
     });
   }
-  console.log(checkDate.length, ` <-------`);
+  // console.log(checkDate.length, ` <-------`);
 
   if (checkDate.length > 0 || checkDate.startDate === startDate) {
     return res.status(403).json({
