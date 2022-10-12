@@ -168,7 +168,7 @@ router.get("/", async (req, res) => {
 // POST create a Booking from a Spot based on Spot id
 router.post("/:spotId/bookings", requireAuth, async (req, res) => {
   const id = req.params.spotId;
-  const currSpot = await Spot.findByPk(id);
+  const currSpot = await Spot.findByPk(id, { include: [{ model: Booking }] });
   const { user } = req;
   // console.log(currSpot.ownerId);
   if (!currSpot) {
