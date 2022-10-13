@@ -34,18 +34,21 @@ router.get("/current", requireAuth, async (req, res) => {
     bookingArray.push(booking.toJSON());
   });
   console.log(bookingArray);
-  res.json(bookingArray);
-});
-
-// GET get all current User's booking
-router.get("/bookings/current", requireAuth, async (req, res) => {
-  const { user } = req;
-  const currUserBookings = await Booking.findAll({
-    where: { userId: user },
-    include: [{ model: Spot }, { model: SpotImage, attributes: ["url"] }],
+  bookingArray.forEach((booking) => {
+    console.log(booking.Spot.SpotImages, ` <-----`);
+    // booking.Spot.SpotImages.forEach((img) => {
+    //   // console.log(img.preview)
+    //   if (img.preview) {
+    //     // console.log(`this ran`)
+    //     booking.Spot.previewImage = img.url;
+    //   }
+    //   if (!booking.Spot.previewImage) {
+    //     booking.Spot.previewImage = "no preview image found";
+    //   }
+    // });
+    // delete booking.SpotImages;
   });
-
-  
+  res.json(bookingArray);
 });
 
 module.exports = router;
