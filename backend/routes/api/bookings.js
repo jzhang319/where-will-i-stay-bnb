@@ -41,21 +41,20 @@ router.get("/current", requireAuth, async (req, res) => {
   currBookings.forEach((booking) => {
     bookingArray.push(booking.toJSON());
   });
-  console.log(bookingArray);
-  // bookingArray.forEach((booking) => {
-  //   console.log(booking.Spot.SpotImages, ` <-----`);
-  //   booking.Spot.SpotImages.forEach((img) => {
-  //     // console.log(img.preview)
-  //     if (img.preview) {
-  //       // console.log(`this ran`)
-  //       booking.Spot.previewImage = img.url;
-  //     }
-  //     if (!booking.Spot.previewImage) {
-  //       booking.Spot.previewImage = "no preview image found";
-  //     }
-  //   });
-  //   delete booking.SpotImages;
-  // });
+  // console.log(bookingArray);
+  bookingArray.forEach((booking) => {
+    console.log(booking.Spot.SpotImages, ` <-----`);
+    booking.Spot.SpotImages.forEach((img) => {
+      // console.log(img.preview)
+      if (img.preview) {
+        // console.log(`this ran`)
+        booking.Spot.previewImage = img.url;
+      } else {
+        booking.Spot.previewImage = "no preview image found";
+      }
+    });
+    delete booking.Spot.SpotImages;
+  });
   res.json(bookingArray);
 });
 
