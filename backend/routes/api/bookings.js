@@ -18,13 +18,21 @@ router.get("/current", requireAuth, async (req, res) => {
     include: [
       {
         model: Spot,
-        include: [
-          {
-            model: SpotImage,
-            where: { preview: true },
-            attribute: ["url"],
-          },
+        attributes: [
+          "id",
+          "ownerId",
+          "address",
+          "city",
+          "state",
+          "country",
+          "lat",
+          "lng",
+          "name",
+          "price",
         ],
+        include: {
+          model: SpotImage,
+        },
       },
     ],
   });
@@ -33,7 +41,20 @@ router.get("/current", requireAuth, async (req, res) => {
   currBookings.forEach((booking) => {
     bookingArray.push(booking.toJSON());
   });
-  console.log(bookingArray);
+  // console.log(bookingArray);
+  bookingArray.forEach((booking) => {
+    // console.log(booking.Spot.SpotImages, ` <-----`);
+    booking.Spot.previewImage = "no preview image found";
+    booking.Spot.SpotImages.forEach((img) => {
+      // console.log(img.preview)
+      if (img.preview) {
+        // console.log(`this ran`)
+        booking.Spot.previewImage = img.url;
+      }
+
+    });
+    delete booking.Spot.SpotImages;
+  });
   res.json(bookingArray);
 });
 
