@@ -37,4 +37,15 @@ router.get("/current", requireAuth, async (req, res) => {
   res.json(bookingArray);
 });
 
+// GET get all current User's booking
+router.get("/bookings/current", requireAuth, async (req, res) => {
+  const { user } = req;
+  const currUserBookings = await Booking.findAll({
+    where: { userId: user },
+    include: [{ model: Spot }, { model: SpotImage, attributes: ["url"] }],
+  });
+
+  
+});
+
 module.exports = router;
