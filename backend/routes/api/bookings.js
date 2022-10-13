@@ -43,15 +43,15 @@ router.get("/current", requireAuth, async (req, res) => {
   });
   // console.log(bookingArray);
   bookingArray.forEach((booking) => {
-    console.log(booking.Spot.SpotImages, ` <-----`);
+    // console.log(booking.Spot.SpotImages, ` <-----`);
+    booking.Spot.previewImage = "no preview image found";
     booking.Spot.SpotImages.forEach((img) => {
       // console.log(img.preview)
       if (img.preview) {
         // console.log(`this ran`)
         booking.Spot.previewImage = img.url;
-      } else {
-        booking.Spot.previewImage = "no preview image found";
       }
+
     });
     delete booking.Spot.SpotImages;
   });
