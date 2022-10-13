@@ -18,13 +18,21 @@ router.get("/current", requireAuth, async (req, res) => {
     include: [
       {
         model: Spot,
-        include: [
-          {
-            model: SpotImage,
-            where: { preview: true },
-            attribute: ["url"],
-          },
+        attributes: [
+          "id",
+          "ownerId",
+          "address",
+          "city",
+          "state",
+          "country",
+          "lat",
+          "lng",
+          "name",
+          "price",
         ],
+        include: {
+          model: SpotImage,
+        },
       },
     ],
   });
@@ -34,20 +42,20 @@ router.get("/current", requireAuth, async (req, res) => {
     bookingArray.push(booking.toJSON());
   });
   console.log(bookingArray);
-  bookingArray.forEach((booking) => {
-    console.log(booking.Spot.SpotImages, ` <-----`);
-    // booking.Spot.SpotImages.forEach((img) => {
-    //   // console.log(img.preview)
-    //   if (img.preview) {
-    //     // console.log(`this ran`)
-    //     booking.Spot.previewImage = img.url;
-    //   }
-    //   if (!booking.Spot.previewImage) {
-    //     booking.Spot.previewImage = "no preview image found";
-    //   }
-    // });
-    // delete booking.SpotImages;
-  });
+  // bookingArray.forEach((booking) => {
+  //   console.log(booking.Spot.SpotImages, ` <-----`);
+  //   booking.Spot.SpotImages.forEach((img) => {
+  //     // console.log(img.preview)
+  //     if (img.preview) {
+  //       // console.log(`this ran`)
+  //       booking.Spot.previewImage = img.url;
+  //     }
+  //     if (!booking.Spot.previewImage) {
+  //       booking.Spot.previewImage = "no preview image found";
+  //     }
+  //   });
+  //   delete booking.SpotImages;
+  // });
   res.json(bookingArray);
 });
 
