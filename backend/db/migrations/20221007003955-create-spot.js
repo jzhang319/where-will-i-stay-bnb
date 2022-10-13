@@ -50,12 +50,6 @@ module.exports = {
         type: Sequelize.DECIMAL,
         allowNull: false,
       },
-      numReviews: {
-        type: Sequelize.INTEGER,
-      },
-      avgRating: {
-        type: Sequelize.DECIMAL,
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
