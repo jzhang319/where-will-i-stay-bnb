@@ -321,12 +321,18 @@ router.get("/:spotId", async (req, res, next) => {
     include: [{ model: SpotImage }, { model: User }],
   });
   // console.log(currSpot, ` ----------------`);
+  
   const numberReviews = await Review.findAll({ where: { spotId: id } });
   let totalStars = 0
   numberReviews.forEach(review => {
     console.log(review.stars)
     totalStars += review.stars
   })
+  let avgRatingCalculation
+  if (numberReviews.length === 0){
+    avgRatingCalculation = 0
+  }
+
   let spotArray = [];
   currSpot.forEach((spot) => {
     spotArray.push(spot.toJSON());
@@ -335,7 +341,7 @@ router.get("/:spotId", async (req, res, next) => {
   spotArray.forEach((spot) => {
     // console.log(spot, ` <-------`);
     spot.numReviews = numberReviews.length;
-    spot.avgRating = (totalStars / numberReviews.length);
+    spot.avgRating = avgRatingCalculation
     spot.Owner = spot.User;
     delete spot.User;
   });

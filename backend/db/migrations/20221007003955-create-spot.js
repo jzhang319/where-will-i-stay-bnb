@@ -12,7 +12,7 @@ module.exports = {
       ownerId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        // autoIncrement: true,
+        autoIncrement: true,
       },
       address: {
         type: Sequelize.STRING,
