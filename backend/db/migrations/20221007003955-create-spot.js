@@ -12,12 +12,12 @@ module.exports = {
       ownerId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        autoIncrement: true,
+        // autoIncrement: true,
       },
       address: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
+        // unique: true,
       },
       city: {
         type: Sequelize.STRING,
