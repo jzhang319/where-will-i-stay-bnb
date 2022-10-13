@@ -58,4 +58,9 @@ router.get("/current", requireAuth, async (req, res) => {
   res.json(bookingArray);
 });
 
+// PUT update existing Booking
+router.put('/:bookingId', requireAuth, async (req, res) => {
+  
+})
+
 module.exports = router;

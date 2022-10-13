@@ -199,6 +199,15 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
       },
     });
   }
+  if (endDate < startDate) {
+    return res.status(400).json({
+      message: "Validation error",
+      statusCode: 400,
+      errors: {
+        endDate: "endDate cannot be on or before startDate",
+      },
+    });
+  }
   if (user.id === currSpot.ownerId) {
     return res.status(403).json({
       message: "Forbidden",
@@ -248,11 +257,58 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
 });
 
 // GET all Bookings with spotID
-router.get('/:spotId/bookings', requireAuth, async (req, res) => {
+router.get("/:spotId/bookings", requireAuth, async (req, res) => {
   const id = req.params.spotId;
-  const {user} = req;
-  const allBookings = await Booking.findAll({where:{spotId: id}})
-})
+  const { user } = req;
+  const allBookings = await Booking.findAll({
+    where: { spotId: id },
+    include: [
+      { model: User, attributes: ["id", "firstName", "lastName"] },
+      { model: Spot, attributes: ["ownerId"] },
+    ],
+  });
+  // console.log(allBookings, ` <-------`);
+  let bookingArray = [];
+  allBookings.forEach((el) => {
+    bookingArray.push(el.toJSON());
+  });
+  let ownerIdnum;
+  let ownerArray = [];
+  let nonOwnerArray = [];
+  for (let i = 0; i < bookingArray.length; i++) {
+    let currBooking = bookingArray[i];
+    // console.log(currBooking.Spot.ownerId);
+    ownerIdnum = currBooking.Spot.ownerId;
+    if (currBooking.Spot.ownerId === user.id) {
+      // console.log(currBooking.Spot.ownerId);
+      delete currBooking.Spot;
+      ownerArray.push(currBooking);
+    } else {
+      delete currBooking.User;
+      delete currBooking.Spot;
+      delete currBooking.userId;
+      delete currBooking.id;
+      delete currBooking.createdAt;
+      delete currBooking.updatedAt;
+      nonOwnerArray.push(currBooking);
+    }
+  }
+
+  console.log(allBookings, ` <-------`);
+  // console.log(ownerIdnum, ` <-------`);
+  // console.log(ownerArray);
+  if (!ownerArray.length && !nonOwnerArray.length) {
+    return res.status(404).json({
+      message: "Spot couldn't be found",
+      statusCode: 404,
+    });
+  }
+  if (user.id !== ownerIdnum) {
+    return res.json(nonOwnerArray);
+  } else {
+    return res.json(ownerArray);
+  }
+});
 
 // GET all reviews by spotId
 router.get("/:spotId/reviews", async (req, res) => {
@@ -329,11 +385,11 @@ router.get("/:spotId", async (req, res, next) => {
   });
   // console.log(currSpot, ` ----------------`);
   const numberReviews = await Review.findAll({ where: { spotId: id } });
-  let totalStars = 0
-  numberReviews.forEach(review => {
-    console.log(review.stars)
-    totalStars += review.stars
-  })
+  let totalStars = 0;
+  numberReviews.forEach((review) => {
+    console.log(review.stars);
+    totalStars += review.stars;
+  });
   let spotArray = [];
   currSpot.forEach((spot) => {
     spotArray.push(spot.toJSON());
@@ -342,7 +398,7 @@ router.get("/:spotId", async (req, res, next) => {
   spotArray.forEach((spot) => {
     // console.log(spot, ` <-------`);
     spot.numReviews = numberReviews.length;
-    spot.avgRating = (totalStars / numberReviews.length);
+    spot.avgRating = totalStars / numberReviews.length;
     spot.Owner = spot.User;
     delete spot.User;
   });
