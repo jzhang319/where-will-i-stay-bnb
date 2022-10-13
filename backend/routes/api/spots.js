@@ -247,6 +247,13 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
   res.json(newSpotImage);
 });
 
+// GET all Bookings with spotID
+router.get('/:spotId/bookings', requireAuth, async (req, res) => {
+  const id = req.params.spotId;
+  const {user} = req;
+  const allBookings = await Booking.findAll({where:{spotId: id}})
+})
+
 // GET all reviews by spotId
 router.get("/:spotId/reviews", async (req, res) => {
   const id = req.params.spotId;
