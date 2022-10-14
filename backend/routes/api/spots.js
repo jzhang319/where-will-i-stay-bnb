@@ -13,15 +13,15 @@ const router = express.Router();
 // DELETE deletes an existing spot
 router.delete("/:spotId", requireAuth, async (req, res) => {
   const id = req.params.spotId;
-  let currSpot = await Spot.findAll({ where: { id } });
-  if (currSpot.length === 0) {
+  let currSpot = await Spot.findOne({ where: { id } });
+  if (!currSpot) {
     res.status(404).json({
       message: "Spot not found",
       statusCode: 404,
     });
   }
-  if (req.user.id === currSpot[0].ownerId) {
-    await Spot.destroy({ where: { id: id } });
+  if (req.user.id === currSpot.ownerId) {
+    await Spot.destroy({ where: { id } });
     res.json({
       message: "Successfully deleted",
       statusCode: 200,

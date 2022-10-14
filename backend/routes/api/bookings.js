@@ -132,7 +132,7 @@ router.delete("/:bookingId", requireAuth, async (req, res) => {
   }
   // console.log(currBooking.userId, ` <-------`);
   if (currBooking.Spot.ownerId === user.id || currBooking.userId === user.id) {
-    currBooking.destroy();
+    await currBooking.destroy();
     return res.status(200).json({
       message: "Successfully deleted",
       statusCode: 200,
