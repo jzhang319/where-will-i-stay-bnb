@@ -118,7 +118,7 @@ router.get("/current", requireAuth, async (req, res) => {
   // console.log(currUser, ` -------------------`);
   const ownerSpots = await Spot.findAll({
     where: { ownerId: user.id },
-    include: [{ model: SpotImage, attributes: ["url"] }],
+    include: [{ model: SpotImage, attributes: ["url"] },{model:Review, attributes: ["stars"]}],
   });
   // console.log(spotOwner, ` --------`);
   let spotArray = [];
@@ -126,6 +126,12 @@ router.get("/current", requireAuth, async (req, res) => {
     spotArray.push(spot.toJSON());
   });
   spotArray.forEach((spot) => {
+    let totalStars = 0
+    spot.Reviews.forEach(el => {
+      totalStars += el.stars
+    })
+    spot.numReviews = spot.Reviews.length
+    spot.avgRating = totalStars / spot.Reviews.length;
     spot.SpotImages.forEach((img) => {
       if (img.url) {
         spot.previewImage = img.url;
@@ -135,6 +141,7 @@ router.get("/current", requireAuth, async (req, res) => {
       spot.previewImage = `no preview image found`;
     }
     delete spot.SpotImages;
+    delete spot.Reviews
   });
   res.json(spotArray);
 });
@@ -187,7 +194,7 @@ router.get("/", async (req, res) => {
     spot.numReviews = spot.Reviews.length;
     spot.avgRating = totalStars / spot.Reviews.length;
     delete spot.User;
-    delete spot.Reviews
+    delete spot.Reviews;
   });
 
   spotArray.forEach((spot) => {
@@ -295,8 +302,11 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
     url,
     preview,
   });
-
-  res.json(newSpotImage);
+  let obj = newSpotImage.toJSON();
+  delete obj.spotId;
+  delete obj.createdAt;
+  delete obj.updatedAt;
+  res.json(obj);
 });
 
 // GET all Bookings with spotID
