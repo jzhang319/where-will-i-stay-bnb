@@ -77,7 +77,11 @@ router.post("/:reviewId/images", requireAuth, async (req, res) => {
     reviewId: id,
     url: req.body.url,
   });
-  res.status(200).json(newReviewImage);
+  let imageObj = newReviewImage.toJSON();
+  delete imageObj.reviewId;
+  delete imageObj.updatedAt;
+  delete imageObj.createdAt;
+  res.status(200).json(imageObj);
 });
 
 // GET all reviews of current user
@@ -113,7 +117,9 @@ router.get("/current", requireAuth, async (req, res) => {
     review.Spot.previewImage = review.ReviewImages[0].url;
   });
 
-  res.json(reviewArray);
+  res.json({
+    Reviews: reviewArray
+  });
 });
 
 // PUT edit a review

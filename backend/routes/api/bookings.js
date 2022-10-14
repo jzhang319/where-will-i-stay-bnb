@@ -55,7 +55,9 @@ router.get("/current", requireAuth, async (req, res) => {
     });
     delete booking.Spot.SpotImages;
   });
-  res.json(bookingArray);
+  res.json({
+    Bookings: bookingArray,
+  });
 });
 
 // PUT update existing Booking

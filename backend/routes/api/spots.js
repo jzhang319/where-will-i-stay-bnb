@@ -9,6 +9,7 @@ const {
 } = require("../../db/models");
 const { requireAuth, restoreUser } = require("../../utils/auth.js");
 const router = express.Router();
+const { Op } = require("sequelize");
 
 // DELETE deletes an existing spot
 router.delete("/:spotId", requireAuth, async (req, res) => {
@@ -117,7 +118,10 @@ router.get("/current", requireAuth, async (req, res) => {
   // console.log(currUser, ` -------------------`);
   const ownerSpots = await Spot.findAll({
     where: { ownerId: user.id },
-    include: [{ model: SpotImage, attributes: ["url"] }],
+    include: [
+      { model: SpotImage, attributes: ["url"] },
+      { model: Review, attributes: ["stars"] },
+    ],
   });
   // console.log(spotOwner, ` --------`);
   let spotArray = [];
@@ -125,6 +129,12 @@ router.get("/current", requireAuth, async (req, res) => {
     spotArray.push(spot.toJSON());
   });
   spotArray.forEach((spot) => {
+    let totalStars = 0;
+    spot.Reviews.forEach((el) => {
+      totalStars += el.stars;
+    });
+    spot.numReviews = spot.Reviews.length;
+    spot.avgRating = totalStars / spot.Reviews.length;
     spot.SpotImages.forEach((img) => {
       if (img.url) {
         spot.previewImage = img.url;
@@ -134,19 +144,60 @@ router.get("/current", requireAuth, async (req, res) => {
       spot.previewImage = `no preview image found`;
     }
     delete spot.SpotImages;
+    delete spot.Reviews;
   });
   res.json(spotArray);
 });
 
 // GET all spots
 router.get("/", async (req, res) => {
+  let { page, size } = req.query;
+  // console.log(size, ` <--- size (limit)`);
+  // console.log(page, ` <--- page (offset)`);
+  //! not actual numbers
+  page = Number(page);
+  size = Number(size);
+  if (Number.isNaN(page)) {
+    page = 1;
+  }
+  if (Number.isNaN(size)) {
+    size = 20;
+  }
+  let limit;
+  let offset;
+
+  if (page === 0) {
+    page = null;
+    size = null;
+  } else {
+    limit = size;
+    offset = size * (page - 1);
+  }
+
   const allSpots = await Spot.findAll({
-    include: [{ model: SpotImage }],
+    order: ["id"],
+    include: [
+      { model: SpotImage },
+      { model: User },
+      { model: Review, attributes: ["spotId", "stars"] },
+    ],
+    limit: limit,
+    offset: offset,
   });
 
   let spotArray = [];
   allSpots.forEach((spot) => {
     spotArray.push(spot.toJSON());
+  });
+  spotArray.forEach((spot) => {
+    let totalStars = 0;
+    spot.Reviews.forEach((el) => {
+      totalStars += el.stars;
+    });
+    spot.numReviews = spot.Reviews.length;
+    spot.avgRating = totalStars / spot.Reviews.length;
+    delete spot.User;
+    delete spot.Reviews;
   });
 
   spotArray.forEach((spot) => {
@@ -163,7 +214,9 @@ router.get("/", async (req, res) => {
     delete spot.SpotImages;
   });
   // console.log(spotArray);
-  res.json(spotArray);
+  res.json({
+    Spots: spotArray,
+  });
 });
 
 // POST create a Booking from a Spot based on Spot id
@@ -252,8 +305,11 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
     url,
     preview,
   });
-
-  res.json(newSpotImage);
+  let obj = newSpotImage.toJSON();
+  delete obj.spotId;
+  delete obj.createdAt;
+  delete obj.updatedAt;
+  res.json(obj);
 });
 
 // GET all Bookings with spotID
@@ -294,7 +350,7 @@ router.get("/:spotId/bookings", requireAuth, async (req, res) => {
     }
   }
 
-  console.log(allBookings, ` <-------`);
+  // console.log(allBookings, ` <-------`);
   // console.log(ownerIdnum, ` <-------`);
   // console.log(ownerArray);
   if (!ownerArray.length && !nonOwnerArray.length) {
@@ -304,9 +360,13 @@ router.get("/:spotId/bookings", requireAuth, async (req, res) => {
     });
   }
   if (user.id !== ownerIdnum) {
-    return res.json(nonOwnerArray);
+    return res.json({
+      Bookings: nonOwnerArray,
+    });
   } else {
-    return res.json(ownerArray);
+    return res.json({
+      Bookings: ownerArray,
+    });
   }
 });
 
@@ -333,7 +393,9 @@ router.get("/:spotId/reviews", async (req, res) => {
       statusCode: 404,
     });
   } else {
-    res.json(currSpot);
+    res.json({
+      Reviews: currSpot,
+    });
   }
 });
 
@@ -379,8 +441,9 @@ router.post("/:spotId/reviews", requireAuth, async (req, res) => {
 // GET detail of Spot from spotId
 router.get("/:spotId", async (req, res, next) => {
   const id = req.params.spotId;
-  const currSpot = await Spot.findAll({
+  const currSpot = await Spot.findOne({
     where: { id },
+<<<<<<< HEAD
     include: [{ model: SpotImage }, { model: User }],
   });
   // console.log(currSpot, ` ----------------`);
@@ -419,16 +482,38 @@ router.get("/:spotId", async (req, res, next) => {
 >>>>>>> dev
     spot.Owner = spot.User;
     delete spot.User;
+=======
+    include: [{ model: SpotImage }, { model: User }, { model: Review }],
+>>>>>>> dev
   });
-
-  if (currSpot.length === 0) {
+  // console.log(currSpot, ` <---------------`);
+  if (!currSpot) {
     res.status(404).json({
       message: "Spot couldn't be found",
       statusCode: 404,
     });
-  } else {
-    res.json(spotArray);
   }
+
+  let spotArray = currSpot.toJSON();
+  // console.log(spotArray, ` <---------------`);
+  let totalStars = 0;
+  for (let i = 0; i < spotArray.Reviews.length; i++) {
+    let currReview = spotArray.Reviews[i];
+    totalStars += currReview.stars;
+  }
+
+  // console.log(spot, ` <-------`);
+  spotArray.numReviews = spotArray.Reviews.length;
+  let avgRatingCalc = totalStars / spotArray.Reviews.length;
+  spotArray.avgRating = avgRatingCalc;
+  if (!spotArray.avgRating) {
+    spotArray.avgRating = 0;
+  }
+  spotArray.Owner = spotArray.User;
+  delete spotArray.User;
+  delete spotArray.Reviews;
+
+  res.json(spotArray);
 });
 
 module.exports = router;
