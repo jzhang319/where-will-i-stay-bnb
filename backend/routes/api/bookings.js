@@ -115,7 +115,7 @@ router.delete("/:bookingId", requireAuth, async (req, res) => {
     where: { id },
     include: [{ model: Spot, attributes: ["ownerId"] }],
   });
-  console.log(user.id);
+  // console.log(user.id);
   if (!currBooking) {
     return res.status(404).json({
       message: "Booking couldn't be found",
@@ -124,25 +124,25 @@ router.delete("/:bookingId", requireAuth, async (req, res) => {
   }
   const date = new Date();
   // console.log(date, ` <-------`);
-  if (currBooking.startDate > date) {
+  if (currBooking.startDate < date) {
     return res.status(403).json({
       message: "Bookings that have been started can't be deleted",
       statusCode: 403,
     });
   }
-  if (user.id !== currBooking.Spot.ownerId) {
-    return res.status(403).json({
-      message: "Forbidden",
-      statusCode: 403,
-    });
-  } else {
+  // console.log(currBooking.userId, ` <-------`);
+  if (currBooking.Spot.ownerId === user.id || currBooking.userId === user.id) {
     currBooking.destroy();
     return res.status(200).json({
       message: "Successfully deleted",
       statusCode: 200,
     });
+  } else {
+    return res.status(403).json({
+      message: "Forbidden",
+      statusCode: 403,
+    });
   }
-
 });
 
 module.exports = router;
