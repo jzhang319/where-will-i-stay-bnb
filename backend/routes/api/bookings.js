@@ -99,7 +99,7 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
       endDate,
     });
     await currBooking.save();
-    console.log(currBooking.Spot, ` <-------`);
+    // console.log(currBooking.Spot, ` <-------`);
     let obj = currBooking.toJSON();
     delete obj.Spot;
     res.json(obj);

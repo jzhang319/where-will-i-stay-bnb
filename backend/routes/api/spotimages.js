@@ -9,7 +9,10 @@ const {
 const { requireAuth, restoreUser } = require("../../utils/auth.js");
 const router = express.Router();
 
-
+// DELETE a spotImage with spotImageId
+router.delete('/:spotImageId', requireAuth, async (req, res) =>{
+  
+});
 
 
 
