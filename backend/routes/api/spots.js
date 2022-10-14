@@ -118,7 +118,10 @@ router.get("/current", requireAuth, async (req, res) => {
   // console.log(currUser, ` -------------------`);
   const ownerSpots = await Spot.findAll({
     where: { ownerId: user.id },
-    include: [{ model: SpotImage, attributes: ["url"] },{model:Review, attributes: ["stars"]}],
+    include: [
+      { model: SpotImage, attributes: ["url"] },
+      { model: Review, attributes: ["stars"] },
+    ],
   });
   // console.log(spotOwner, ` --------`);
   let spotArray = [];
@@ -126,11 +129,11 @@ router.get("/current", requireAuth, async (req, res) => {
     spotArray.push(spot.toJSON());
   });
   spotArray.forEach((spot) => {
-    let totalStars = 0
-    spot.Reviews.forEach(el => {
-      totalStars += el.stars
-    })
-    spot.numReviews = spot.Reviews.length
+    let totalStars = 0;
+    spot.Reviews.forEach((el) => {
+      totalStars += el.stars;
+    });
+    spot.numReviews = spot.Reviews.length;
     spot.avgRating = totalStars / spot.Reviews.length;
     spot.SpotImages.forEach((img) => {
       if (img.url) {
@@ -141,7 +144,7 @@ router.get("/current", requireAuth, async (req, res) => {
       spot.previewImage = `no preview image found`;
     }
     delete spot.SpotImages;
-    delete spot.Reviews
+    delete spot.Reviews;
   });
   res.json(spotArray);
 });
@@ -432,38 +435,38 @@ router.post("/:spotId/reviews", requireAuth, async (req, res) => {
 // GET detail of Spot from spotId
 router.get("/:spotId", async (req, res, next) => {
   const id = req.params.spotId;
-  const currSpot = await Spot.findAll({
+  const currSpot = await Spot.findOne({
     where: { id },
-    include: [{ model: SpotImage }, { model: User }],
+    include: [{ model: SpotImage }, { model: User }, { model: Review }],
   });
-  // console.log(currSpot, ` ----------------`);
-  const numberReviews = await Review.findAll({ where: { spotId: id } });
-  let totalStars = 0;
-  numberReviews.forEach((review) => {
-    // console.log(review.stars);
-    totalStars += review.stars;
-  });
-  let spotArray = [];
-  currSpot.forEach((spot) => {
-    spotArray.push(spot.toJSON());
-  });
-
-  spotArray.forEach((spot) => {
-    // console.log(spot, ` <-------`);
-    spot.numReviews = numberReviews.length;
-    spot.avgRating = totalStars / numberReviews.length;
-    spot.Owner = spot.User;
-    delete spot.User;
-  });
-
-  if (currSpot.length === 0) {
+  // console.log(currSpot, ` <---------------`);
+  if (!currSpot) {
     res.status(404).json({
       message: "Spot couldn't be found",
       statusCode: 404,
     });
-  } else {
-    res.json(spotArray);
   }
+
+  let spotArray = currSpot.toJSON();
+  // console.log(spotArray, ` <---------------`);
+  let totalStars = 0;
+  for (let i = 0; i < spotArray.Reviews.length; i++) {
+    let currReview = spotArray.Reviews[i];
+    totalStars += currReview.stars;
+  }
+
+  // console.log(spot, ` <-------`);
+  spotArray.numReviews = spotArray.Reviews.length;
+  let avgRatingCalc = totalStars / spotArray.Reviews.length;
+  spotArray.avgRating = avgRatingCalc;
+  if (!spotArray.avgRating) {
+    spotArray.avgRating = 0;
+  }
+  spotArray.Owner = spotArray.User;
+  delete spotArray.User;
+  delete spotArray.Reviews;
+
+  res.json(spotArray);
 });
 
 module.exports = router;
