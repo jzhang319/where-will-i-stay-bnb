@@ -360,9 +360,13 @@ router.get("/:spotId/bookings", requireAuth, async (req, res) => {
     });
   }
   if (user.id !== ownerIdnum) {
-    return res.json(nonOwnerArray);
+    return res.json({
+      Bookings: nonOwnerArray,
+    });
   } else {
-    return res.json(ownerArray);
+    return res.json({
+      Bookings: ownerArray,
+    });
   }
 });
 
@@ -389,7 +393,9 @@ router.get("/:spotId/reviews", async (req, res) => {
       statusCode: 404,
     });
   } else {
-    res.json(currSpot);
+    res.json({
+      Reviews: currSpot,
+    });
   }
 });
 
