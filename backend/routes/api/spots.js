@@ -9,6 +9,7 @@ const {
 } = require("../../db/models");
 const { requireAuth, restoreUser } = require("../../utils/auth.js");
 const router = express.Router();
+const { Op } = require("sequelize");
 
 // DELETE deletes an existing spot
 router.delete("/:spotId", requireAuth, async (req, res) => {
@@ -140,13 +141,53 @@ router.get("/current", requireAuth, async (req, res) => {
 
 // GET all spots
 router.get("/", async (req, res) => {
+  let { page, size } = req.query;
+  // console.log(size, ` <--- size (limit)`);
+  // console.log(page, ` <--- page (offset)`);
+  //! not actual numbers
+  page = Number(page);
+  size = Number(size);
+  if (Number.isNaN(page)) {
+    page = 1;
+  }
+  if (Number.isNaN(size)) {
+    size = 20;
+  }
+  let limit;
+  let offset;
+
+  if (page === 0) {
+    page = null;
+    size = null;
+  } else {
+    limit = size;
+    offset = size * (page - 1);
+  }
+
   const allSpots = await Spot.findAll({
-    include: [{ model: SpotImage }],
+    order: ["id"],
+    include: [
+      { model: SpotImage },
+      { model: User },
+      { model: Review, attributes: ["spotId", "stars"] },
+    ],
+    limit: limit,
+    offset: offset,
   });
 
   let spotArray = [];
   allSpots.forEach((spot) => {
     spotArray.push(spot.toJSON());
+  });
+  spotArray.forEach((spot) => {
+    let totalStars = 0;
+    spot.Reviews.forEach((el) => {
+      totalStars += el.stars;
+    });
+    spot.numReviews = spot.Reviews.length;
+    spot.avgRating = totalStars / spot.Reviews.length;
+    delete spot.User;
+    delete spot.Reviews
   });
 
   spotArray.forEach((spot) => {
@@ -163,7 +204,9 @@ router.get("/", async (req, res) => {
     delete spot.SpotImages;
   });
   // console.log(spotArray);
-  res.json(spotArray);
+  res.json({
+    Spots: spotArray,
+  });
 });
 
 // POST create a Booking from a Spot based on Spot id
@@ -294,7 +337,7 @@ router.get("/:spotId/bookings", requireAuth, async (req, res) => {
     }
   }
 
-  console.log(allBookings, ` <-------`);
+  // console.log(allBookings, ` <-------`);
   // console.log(ownerIdnum, ` <-------`);
   // console.log(ownerArray);
   if (!ownerArray.length && !nonOwnerArray.length) {
@@ -387,7 +430,7 @@ router.get("/:spotId", async (req, res, next) => {
   const numberReviews = await Review.findAll({ where: { spotId: id } });
   let totalStars = 0;
   numberReviews.forEach((review) => {
-    console.log(review.stars);
+    // console.log(review.stars);
     totalStars += review.stars;
   });
   let spotArray = [];
