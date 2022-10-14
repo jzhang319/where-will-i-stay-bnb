@@ -1,4 +1,5 @@
 const express = require("express");
+const { DATE } = require("sequelize");
 const {
   Spot,
   SpotImage,
@@ -67,7 +68,7 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
     where: { id },
     include: [{ model: Spot, attributes: ["ownerId"] }],
   });
-  if (!currBooking){
+  if (!currBooking) {
     return res.status(404).json({
       message: "Booking couldn't be found",
       statusCode: 404,
@@ -79,7 +80,7 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
   // console.log(bookingObj);
   ownerIdnum = bookingObj.Spot.ownerId;
   // console.log(ownerIdnum);
-  if(endDate < startDate) {
+  if (endDate < startDate) {
     return res.status(400).json({
       message: "Validation error",
       statusCode: 400,
@@ -104,6 +105,44 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
     delete obj.Spot;
     res.json(obj);
   }
+});
+
+// DELETE a Booking with bookingId
+router.delete("/:bookingId", requireAuth, async (req, res) => {
+  const id = req.params.bookingId;
+  const { user } = req;
+  const currBooking = await Booking.findOne({
+    where: { id },
+    include: [{ model: Spot, attributes: ["ownerId"] }],
+  });
+  console.log(user.id);
+  if (!currBooking) {
+    return res.status(404).json({
+      message: "Booking couldn't be found",
+      statusCode: 404,
+    });
+  }
+  const date = new Date();
+  // console.log(date, ` <-------`);
+  if (currBooking.startDate > date) {
+    return res.status(403).json({
+      message: "Bookings that have been started can't be deleted",
+      statusCode: 403,
+    });
+  }
+  if (user.id !== currBooking.Spot.ownerId) {
+    return res.status(403).json({
+      message: "Forbidden",
+      statusCode: 403,
+    });
+  } else {
+    currBooking.destroy();
+    return res.status(200).json({
+      message: "Successfully deleted",
+      statusCode: 200,
+    });
+  }
+
 });
 
 module.exports = router;
