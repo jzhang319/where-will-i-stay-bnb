@@ -50,9 +50,12 @@ router.delete("/", (_req, res) => {
 // Restore session user
 router.get("/", restoreUser, (req, res) => {
   const { user } = req;
+  const { token } = req.cookies;
+
   if (user) {
     return res.json({
       user: user.toSafeObject(),
+      token,
     });
   } else return res.json({});
 });
