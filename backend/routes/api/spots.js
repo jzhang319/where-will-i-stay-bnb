@@ -492,7 +492,6 @@ router.get("/:spotId", async (req, res, next) => {
     include: [{ model: SpotImage }, { model: User }, { model: Review }],
 >>>>>>> dev
   });
-  // console.log(currSpot, ` <---------------`);
   if (!currSpot) {
     res.status(404).json({
       message: "Spot couldn't be found",
@@ -501,14 +500,12 @@ router.get("/:spotId", async (req, res, next) => {
   }
 
   let spotArray = currSpot.toJSON();
-  // console.log(spotArray, ` <---------------`);
   let totalStars = 0;
   for (let i = 0; i < spotArray.Reviews.length; i++) {
     let currReview = spotArray.Reviews[i];
     totalStars += currReview.stars;
   }
 
-  // console.log(spot, ` <-------`);
   spotArray.numReviews = spotArray.Reviews.length;
   let avgRatingCalc = totalStars / spotArray.Reviews.length;
   spotArray.avgRating = avgRatingCalc;
