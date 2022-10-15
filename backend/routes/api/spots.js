@@ -169,6 +169,10 @@ router.get("/", async (req, res) => {
   if (page === 0) {
     page = null;
     size = null;
+  } else if (page > 10) {
+    page = 10;
+  } else if (size > 20) {
+    size = 20;
   } else {
     limit = size;
     offset = size * (page - 1);
@@ -216,6 +220,8 @@ router.get("/", async (req, res) => {
   // console.log(spotArray);
   res.json({
     Spots: spotArray,
+    page: page,
+    size: size,
   });
 });
 
