@@ -220,6 +220,8 @@ router.get("/", async (req, res) => {
   // console.log(spotArray);
   res.json({
     Spots: spotArray,
+    page: page,
+    size: size,
   });
 });
 
