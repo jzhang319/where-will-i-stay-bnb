@@ -80,6 +80,34 @@ router.post("/", requireAuth, async (req, res) => {
     req.body;
   // console.log(req)
   // console.log(req.user.id, ` --------------------`);
+  if (
+    !address ||
+    !city ||
+    !state ||
+    !country ||
+    !lat ||
+    !lng ||
+    !name ||
+    !description ||
+    !price
+  ) {
+    return res.status(400).json({
+      message: "Validation Error",
+      statusCode: 400,
+      errors: {
+        address: "Street address is required",
+        city: "City is required",
+        state: "State is required",
+        country: "Country is required",
+        lat: "Latitude is not valid",
+        lng: "Longitude is not valid",
+        name: "Name must be less than 50 characters",
+        description: "Description is required",
+        price: "Price per day is required",
+      },
+    });
+  }
+
   const newSpot = await Spot.create({
     ownerId: req.user.id,
     address,
