@@ -64,7 +64,7 @@ router.post("/:reviewId/images", requireAuth, async (req, res) => {
   const numReviews = await ReviewImage.findAll({
     where: { reviewId: currReview.id },
   });
-  console.log(numReviews.length, ` <---------`);
+  // console.log(numReviews.length, ` <---------`);
   if (numReviews.length > 9) {
     return res.status(403).json({
       message: "Maximum number of images for this resource was reached",
@@ -133,7 +133,7 @@ router.put("/:reviewId", requireAuth, async (req, res) => {
   const { review, stars } = req.body;
   const currReview = await Review.findOne({ where: { id: reviewId } });
   // console.log(currReview.userId, ` <-----------`);
-  console.log(user, ` <---------`);
+  // console.log(user, ` <---------`);
   if (!currReview) {
     return res.status(404).json({
       message: "Review couldn't be found",
