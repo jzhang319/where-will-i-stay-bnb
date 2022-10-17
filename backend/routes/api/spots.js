@@ -174,7 +174,7 @@ router.get("/current", requireAuth, async (req, res) => {
     delete spot.SpotImages;
     delete spot.Reviews;
   });
-  res.json(spotArray);
+  res.json({ Spots: spotArray });
 });
 
 // GET all spots
@@ -226,7 +226,7 @@ router.get("/", async (req, res) => {
     spot.Reviews.forEach((el) => {
       totalStars += el.stars;
     });
-    spot.numReviews = spot.Reviews.length;
+    // spot.numReviews = spot.Reviews.length;
     spot.avgRating = totalStars / spot.Reviews.length;
     delete spot.User;
     delete spot.Reviews;
@@ -438,7 +438,9 @@ router.post("/:spotId/reviews", requireAuth, async (req, res) => {
   const id = req.params.spotId;
   const { user } = req;
   const currSpot = await Spot.findAll({ where: { id: id } });
-  const currReview = await Review.findAll({ where: { userId: user.id } });
+  const currReview = await Review.findAll({
+    where: { userId: user.id, spotId: id },
+  });
   // console.log(currSpot, ` <-------------`);
   if (currSpot.length === 0) {
     return res.status(404).json({
@@ -477,7 +479,11 @@ router.get("/:spotId", async (req, res, next) => {
   const id = req.params.spotId;
   const currSpot = await Spot.findOne({
     where: { id },
-    include: [{ model: SpotImage }, { model: User }, { model: Review }],
+    include: [
+      { model: SpotImage, attributes: ["id", "url", "preview"] },
+      { model: User },
+      { model: Review },
+    ],
   });
   if (!currSpot) {
     res.status(404).json({
