@@ -163,6 +163,9 @@ router.get("/current", requireAuth, async (req, res) => {
     });
     spot.numReviews = spot.Reviews.length;
     spot.avgRating = totalStars / spot.Reviews.length;
+    if (!spot.avgRating) {
+      spot.avgRating = 0;
+    }
     spot.SpotImages.forEach((img) => {
       if (img.url) {
         spot.previewImage = img.url;
