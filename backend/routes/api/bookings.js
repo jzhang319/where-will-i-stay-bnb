@@ -77,7 +77,7 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
     });
   }
 
-  let ownerIdnum;
+  // let ownerIdnum;
   let bookingObj = currBooking.toJSON();
   // console.log(bookingObj);
   // ownerIdnum = bookingObj.Spot.ownerId;
