@@ -52,8 +52,8 @@ router.put("/:spotId", requireAuth, async (req, res) => {
   // console.log(currSpot[0].ownerId, ` ---currSpot`);
   if (req.user.id === currSpot.ownerId) {
     currSpot.set({
-      id,
-      ownerId: req.user.id,
+      // id,
+      // ownerId: req.user.id,
       address,
       city,
       state,
