@@ -77,10 +77,10 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
     });
   }
 
-  let ownerIdnum;
+  // let ownerIdnum;
   let bookingObj = currBooking.toJSON();
   // console.log(bookingObj);
-  ownerIdnum = bookingObj.Spot.ownerId;
+  // ownerIdnum = bookingObj.Spot.ownerId;
   // console.log(ownerIdnum);
   if (endDate < startDate) {
     return res.status(400).json({
@@ -91,7 +91,7 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
       },
     });
   }
-  if (user.id !== ownerIdnum) {
+  if (user.id !== bookingObj.userId) {
     return res.status(403).json({
       message: "Forbidden",
       statusCode: 403,
