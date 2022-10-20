@@ -411,7 +411,18 @@ router.get("/:spotId/bookings", requireAuth, async (req, res) => {
 router.get("/:spotId/reviews", async (req, res) => {
   const id = req.params.spotId;
   // console.log(id, ` <-----`);
-  const currSpot = await Review.findAll({
+  const currSpot = await Spot.findOne({
+    where: { id },
+  });
+  // console.log(currSpot, ` <-----`);
+  if (!currSpot) {
+    res.status(404).json({
+      message: "Spot couldn't be found",
+      statusCode: 404,
+    });
+  }
+
+  const currReview = await Review.findOne({
     where: { spotId: id },
     include: [
       {
@@ -423,15 +434,14 @@ router.get("/:spotId/reviews", async (req, res) => {
       },
     ],
   });
-
-  if (currSpot.length === 0) {
+  if (!currReview) {
     res.status(404).json({
-      message: "Spot couldn't be found",
+      message: "There is no review for this spot",
       statusCode: 404,
     });
   } else {
     res.json({
-      Reviews: currSpot,
+      Reviews: currReview,
     });
   }
 });
@@ -449,11 +459,11 @@ router.post("/:spotId/reviews", requireAuth, async (req, res) => {
       statusCode: 404,
     });
   }
-  const currReview = await Review.findAll({
+  const currReview = await Review.findOne({
     where: { userId: user.id, spotId: id },
   });
 
-  if (currReview.length > 0) {
+  if (currReview) {
     return res.status(403).json({
       message: "User already has a review for this spot",
       statusCode: 403,
