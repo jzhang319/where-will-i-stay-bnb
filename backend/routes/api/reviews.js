@@ -44,7 +44,7 @@ router.post("/:reviewId/images", requireAuth, async (req, res) => {
   const { user } = req;
   // console.log(id, user, ` <-----------`);
   const currReview = await Review.findOne({
-    where: { id: id },
+    where: { id },
   });
   // console.log(currReview[0].userId, ` <-----------`);
   // console.log(user.id, ` <-----------`);
@@ -61,11 +61,11 @@ router.post("/:reviewId/images", requireAuth, async (req, res) => {
       statusCode: 403,
     });
   }
-  const numReviews = await ReviewImage.findAll({
-    where: { reviewId: currReview.id },
+  const numReviewImages = await ReviewImage.findAll({
+    where: { reviewId: id },
   });
   // console.log(numReviews.length, ` <---------`);
-  if (numReviews.length > 9) {
+  if (numReviewImages.length > 9) {
     return res.status(403).json({
       message: "Maximum number of images for this resource was reached",
       statusCode: 403,
