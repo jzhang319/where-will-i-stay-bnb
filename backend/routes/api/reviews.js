@@ -43,6 +43,14 @@ router.post("/:reviewId/images", requireAuth, async (req, res) => {
   const id = req.params.reviewId;
   const { user } = req;
   // console.log(id, user, ` <-----------`);
+
+if (currReview.userId !== user.id) {
+  return res.status(403).json({
+    message: "Forbidden",
+    statusCode: 403,
+  });
+}
+
   const currReview = await Review.findOne({
     where: { id },
   });
@@ -55,12 +63,7 @@ router.post("/:reviewId/images", requireAuth, async (req, res) => {
     });
   }
 
-  if (currReview.userId !== user.id) {
-    return res.status(403).json({
-      message: "Forbidden",
-      statusCode: 403,
-    });
-  }
+
   const numReviewImages = await ReviewImage.findAll({
     where: { reviewId: id },
   });
@@ -93,7 +96,7 @@ router.get("/current", requireAuth, async (req, res) => {
     where: { userId: user.id },
     include: [
       { model: User },
-      { model: Spot },
+      { model: Spot }, 
       { model: ReviewImage, attributes: ["id", "url"] },
     ],
   });
@@ -111,7 +114,7 @@ router.get("/current", requireAuth, async (req, res) => {
   userReviews.forEach((review) => {
     reviewArray.push(review.toJSON());
   });
-  console.log(reviewArray, ` <-----------`);
+  // console.log(reviewArray, ` <-----------`);
   reviewArray.forEach((review) => {
     if (reviewArray.ReviewImages) {
       review.Spot.previewImage = review.ReviewImages[0].url;
