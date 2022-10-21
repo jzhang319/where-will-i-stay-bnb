@@ -14,22 +14,22 @@ module.exports = {
      */
     return queryInterface.bulkInsert("ReviewImages", [
       {
-        id: 1,
+
         reviewId: 1,
         url: "this url.com",
       },
       {
-        id: 2,
+
         reviewId: 2,
         url: "whats url.com",
       },
       {
-        id: 3,
+
         reviewId: 2,
         url: "oh this url.com",
       },
       {
-        id: 4,
+
         reviewId: 3,
         url: "i see this url.com",
       },
