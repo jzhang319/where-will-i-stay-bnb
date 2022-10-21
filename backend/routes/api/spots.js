@@ -298,6 +298,7 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
       },
     });
   }
+  const numId = Number(id)
   if (user.id === currSpot.ownerId) {
     return res.status(403).json({
       message: "Forbidden",
@@ -305,7 +306,7 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
     });
   } else {
     const newBooking = await Booking.create({
-      spotId: id,
+      spotId: numId,
       userId: user.id,
       startDate,
       endDate,
@@ -480,9 +481,10 @@ router.post("/:spotId/reviews", requireAuth, async (req, res) => {
       },
     });
   }
+  const numId = Number(id);
   const currUserReviews = await Review.create({
     userId: user.id,
-    spotId: id,
+    spotId: numId,
     review: req.body.review,
     stars: req.body.stars,
   });
