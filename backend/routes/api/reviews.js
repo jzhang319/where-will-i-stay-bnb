@@ -43,8 +43,16 @@ router.post("/:reviewId/images", requireAuth, async (req, res) => {
   const id = req.params.reviewId;
   const { user } = req;
   // console.log(id, user, ` <-----------`);
+
+  if (currReview.userId !== user.id) {
+    return res.status(403).json({
+      message: "Forbidden",
+      statusCode: 403,
+    });
+  }
+
   const currReview = await Review.findOne({
-    where: { id: id },
+    where: { id },
   });
   // console.log(currReview[0].userId, ` <-----------`);
   // console.log(user.id, ` <-----------`);
@@ -55,17 +63,11 @@ router.post("/:reviewId/images", requireAuth, async (req, res) => {
     });
   }
 
-  if (currReview.userId !== user.id) {
-    return res.status(403).json({
-      message: "Forbidden",
-      statusCode: 403,
-    });
-  }
-  const numReviews = await ReviewImage.findAll({
-    where: { reviewId: currReview.id },
+  const numReviewImages = await ReviewImage.findAll({
+    where: { reviewId: id },
   });
   // console.log(numReviews.length, ` <---------`);
-  if (numReviews.length > 9) {
+  if (numReviewImages.length > 9) {
     return res.status(403).json({
       message: "Maximum number of images for this resource was reached",
       statusCode: 403,
@@ -93,7 +95,12 @@ router.get("/current", requireAuth, async (req, res) => {
     where: { userId: user.id },
     include: [
       { model: User },
-      { model: Spot },
+      {
+        model: Spot,
+        include: [
+          { model: SpotImage, attributes: ["url"], where: { preview: true } },
+        ],
+      },
       { model: ReviewImage, attributes: ["id", "url"] },
     ],
   });
@@ -111,14 +118,16 @@ router.get("/current", requireAuth, async (req, res) => {
   userReviews.forEach((review) => {
     reviewArray.push(review.toJSON());
   });
-  console.log(reviewArray, ` <-----------`);
+  // console.log(reviewArray, ` <-----------`);
   reviewArray.forEach((review) => {
-    if (reviewArray.ReviewImages) {
-      review.Spot.previewImage = review.ReviewImages[0].url;
+    console.log(review.Spot.SpotImages[0].url, ` <-----------`);
+    if (review.Spot.SpotImages[0]) {
+      review.Spot.previewImage = review.Spot.SpotImages[0].url;
     } else {
-      review.Spot.previewImage = []
+      review.Spot.previewImage = [];
     }
     // console.log(review.Spot, ` <-----`);
+    delete review.Spot.SpotImages;
   });
 
   res.json({
