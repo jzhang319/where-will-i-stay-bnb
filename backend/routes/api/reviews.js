@@ -44,6 +44,10 @@ router.post("/:reviewId/images", requireAuth, async (req, res) => {
   const { user } = req;
   // console.log(id, user, ` <-----------`);
 
+  const currReview = await Review.findOne({
+    where: { id },
+  });
+
   if (currReview.userId !== user.id) {
     return res.status(403).json({
       message: "Forbidden",
@@ -51,9 +55,6 @@ router.post("/:reviewId/images", requireAuth, async (req, res) => {
     });
   }
 
-  const currReview = await Review.findOne({
-    where: { id },
-  });
   // console.log(currReview[0].userId, ` <-----------`);
   // console.log(user.id, ` <-----------`);
   if (!currReview) {
