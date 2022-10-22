@@ -423,7 +423,7 @@ router.get("/:spotId/reviews", async (req, res) => {
     });
   }
 
-  const currReview = await Review.findOne({
+  const currReview = await Review.findAll({
     where: { spotId: id },
     include: [
       {
@@ -435,7 +435,7 @@ router.get("/:spotId/reviews", async (req, res) => {
       },
     ],
   });
-  if (!currReview) {
+  if (currReview.length === 0) {
     res.status(404).json({
       message: "There is no review for this spot",
       statusCode: 404,
