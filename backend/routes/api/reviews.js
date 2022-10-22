@@ -61,7 +61,7 @@ router.post("/:reviewId/images", requireAuth, async (req, res) => {
       statusCode: 403,
     });
   }
-  console.log(user.id, ` <-----------`);
+  // console.log(user.id, ` <-----------`);
 
 
   const numReviewImages = await ReviewImage.findAll({
