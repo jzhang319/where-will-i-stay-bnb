@@ -47,6 +47,13 @@ router.post("/:reviewId/images", requireAuth, async (req, res) => {
   const currReview = await Review.findOne({
     where: { id },
   });
+  // console.log(currReview[0].userId, ` <-----------`);
+  if (!currReview) {
+    return res.status(404).json({
+      message: "Review couldn't be found",
+      statusCode: 404,
+    });
+  }
 
   if (currReview.userId !== user.id) {
     return res.status(403).json({
@@ -54,15 +61,8 @@ router.post("/:reviewId/images", requireAuth, async (req, res) => {
       statusCode: 403,
     });
   }
+  console.log(user.id, ` <-----------`);
 
-  // console.log(currReview[0].userId, ` <-----------`);
-  // console.log(user.id, ` <-----------`);
-  if (!currReview) {
-    return res.status(404).json({
-      message: "Review couldn't be found",
-      statusCode: 404,
-    });
-  }
 
   const numReviewImages = await ReviewImage.findAll({
     where: { reviewId: id },
