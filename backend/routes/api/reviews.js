@@ -121,7 +121,7 @@ router.get("/current", requireAuth, async (req, res) => {
   });
   // console.log(reviewArray, ` <-----------`);
   reviewArray.forEach((review) => {
-    console.log(review.Spot.SpotImages[0].url, ` <-----------`);
+    // console.log(review.Spot.SpotImages[0].url, ` <-----------`);
     if (review.Spot.SpotImages[0]) {
       review.Spot.previewImage = review.Spot.SpotImages[0].url;
     } else {
