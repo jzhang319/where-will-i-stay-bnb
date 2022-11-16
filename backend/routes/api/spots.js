@@ -488,7 +488,7 @@ router.post("/:spotId/reviews", requireAuth, async (req, res) => {
     review: req.body.review,
     stars: req.body.stars,
   });
-  console.log(currUserReviews, ` <-------`);
+  // console.log(currUserReviews, ` <-------`);
   res.status(201).json(currUserReviews);
 });
 
