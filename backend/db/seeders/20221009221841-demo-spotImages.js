@@ -18,7 +18,7 @@ module.exports = {
      * }], {});
      */
     options.tableName = "SpotImages";
-    return queryInterface.bulkInsert(options, "SpotImages", [
+    return queryInterface.bulkInsert(options, [
       {
         spotId: 2,
         url: "spotimageurl.com/hello.jgp",
@@ -48,7 +48,7 @@ module.exports = {
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(
       options,
-      "SpotImages",
+
       {
         spotId: [2, 3],
       },

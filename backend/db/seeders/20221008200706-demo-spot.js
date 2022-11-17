@@ -18,7 +18,7 @@ module.exports = {
      * }], {});
      */
     options.tableName = "Spots";
-    return queryInterface.bulkInsert(options, "Spots", [
+    return queryInterface.bulkInsert(options, [
       {
         ownerId: 1,
         address: "567 Open Road",
@@ -79,7 +79,7 @@ module.exports = {
      */
     options.tableName = "Spots";
     const Op = Sequelize.Op;
-    return queryInterface.bulkDelete(options, "Spots", {
+    return queryInterface.bulkDelete(options, {
       name: {
         [Op.in]: ["Home Sweet Home", "Tiny Home", "Super Home", "Dry Home"],
       },

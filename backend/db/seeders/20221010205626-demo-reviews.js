@@ -18,7 +18,7 @@ module.exports = {
      * }], {});
      */
     options.tableName = "Reviews";
-    return queryInterface.bulkInsert(options, "Reviews", [
+    return queryInterface.bulkInsert(options,  [
       {
         userId: 1,
         spotId: 1,
@@ -56,7 +56,7 @@ module.exports = {
     options.tableName = "Reviews";
     return queryInterface.bulkDelete(
       options,
-      "Reviews",
+      
       {
         id: [1, 2, 3, 4],
       },
