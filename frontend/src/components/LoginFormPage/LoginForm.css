@@ -1,0 +1,40 @@
+html,
+body,
+input,
+textarea,
+button,
+select,
+a {
+  font-family: 'Open Sans';
+  font-size: 16px;
+}
+
+button {
+  border: 0;
+  background: none;
+  font-weight: 700;
+  padding: .5em 1em;
+  text-transform: uppercase;
+  transition: background-color .25s, color .25s;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: blueviolet;
+  color: white;
+}
+
+form {
+  flex: 0 0 400px;
+}
+
+input {
+  border: 0;
+  border-bottom: 2px solid #CCC;
+  box-sizing: border-box;
+  display: block;
+  outline: 0;
+  padding: .25em .5em;
+  width: 100%;
+}
+

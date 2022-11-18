@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import "./LoginForm.css";
 
-const LoginFormPage = () => {
+function LoginFormPage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [credential, setCredential] = useState("");
@@ -51,6 +51,6 @@ const LoginFormPage = () => {
       <button type="submit">Log In</button>
     </form>
   );
-};
+}
 
 export default LoginFormPage;
