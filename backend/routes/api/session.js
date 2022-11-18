@@ -40,7 +40,7 @@ router.post("/", validateLogin, async (req, res, next) => {
 
   const userObj = user.toJSON();
   token = await setTokenCookie(res, user);
-  userObj.token = token;
+  // userObj.token = token;
 
   return res.json(userObj);
 });
@@ -56,7 +56,7 @@ router.get("/", restoreUser, (req, res) => {
   const { user } = req;
   const { token } = req.cookies;
 
-  user.token = token;
+  // user.token = token;
 
   if (user) {
     return res.json(
