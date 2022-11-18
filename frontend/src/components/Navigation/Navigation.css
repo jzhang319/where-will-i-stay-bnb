@@ -12,3 +12,7 @@ button:hover {
   background-color: blueviolet;
   color: white;
 }
+
+profile-dropdown {
+  size: 50px;
+}
