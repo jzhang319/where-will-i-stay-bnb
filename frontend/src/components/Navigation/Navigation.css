@@ -1,0 +1,14 @@
+button {
+  border: 0;
+  background: none;
+  font-weight: 700;
+  padding: .5em 1em;
+  text-transform: uppercase;
+  transition: background-color .25s, color .25s;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: blueviolet;
+  color: white;
+}
