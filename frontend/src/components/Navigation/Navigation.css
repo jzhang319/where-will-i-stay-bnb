@@ -9,12 +9,7 @@ button {
 }
 
 button:hover {
-  background-color: blueviolet;
-  color: white;
+  background-color: pink;
+  color: blue;
 }
-
-profile-dropdown {
-  size: 50px;
-}
-
 

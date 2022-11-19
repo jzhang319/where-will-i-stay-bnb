@@ -20,7 +20,7 @@ button {
 }
 
 button:hover {
-  background-color: blueviolet;
+  background-color: pink;
   color: white;
 }
 

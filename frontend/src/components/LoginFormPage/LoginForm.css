@@ -19,11 +19,6 @@ button {
   cursor: pointer;
 }
 
-button:hover {
-  background-color: blueviolet;
-  color: white;
-}
-
 form {
   flex: 0 0 400px;
 }
