@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/jzhang319/where-will-i-stay-bnb#readme",
   "dependencies": {
+    "react-icons": "^4.6.0",
     "sqlite3": "^5.1.2"
   },
   "proxy": "http://localhost:8000"

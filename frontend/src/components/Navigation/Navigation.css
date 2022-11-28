@@ -1,4 +1,5 @@
 button {
+  /* display: flex; */
   border: 0;
   background: none;
   font-weight: 700;
@@ -12,4 +13,62 @@ button:hover {
   background-color: blue;
   border-radius: 50px;
   color: white;
+}
+.bnb-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  grid-template-areas:
+    "anywhere anyweek addguest search-button";
+  font-weight: bold;
+  height: 50px;
+  width: 400px;
+  border: 2px solid gray;
+  justify-items: center;
+  align-items: center;
+  border-radius: 50px;
+
+}
+
+.anywhere-btn {
+  grid-area: anywhere;
+}
+
+.anyweek-btn {
+  grid-area: anyweek;
+}
+
+.addguests-btn {
+  grid-area: addguest;
+}
+
+.search-btn {
+  border: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 50px;
+  background-color: pink;
+  grid-area: search-button;
+}
+
+.anywhere-btn:hover,
+.anyweek-btn:hover,
+.addguests-btn:hover
+{
+  border-radius: 20px;
+  background-color: lightblue;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.search-btn:hover
+{
+  background-color: red;
+  cursor: pointer;
+}
+
+.nav-search-btn-section
+{
+  display: flex;
+  justify-content: center;
 }
