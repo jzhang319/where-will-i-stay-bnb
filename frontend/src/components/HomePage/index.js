@@ -1,4 +1,5 @@
 import homePic from "../../img/homePic.webp";
+import "./HomePage.css";
 
 const HomePage = () => {
   return (

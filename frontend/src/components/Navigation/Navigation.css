@@ -14,7 +14,33 @@ button:hover {
   border-radius: 50px;
   color: white;
 }
+
+.nav-section{
+  display: flex;
+  margin-top: 40px;
+}
+
+.menu-btn
+{
+  border: solid 2px;
+  border-radius: 25px;
+  border-color: gray;
+  position: absolute;
+  top: 5%;
+  right: 14%;
+}
+
+.nav-ul
+{
+  display: flex;
+  justify-content: end;
+  position: absolute;
+  right: 5px;
+}
+
 .bnb-buttons {
+  position: absolute;
+  right: 35%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;

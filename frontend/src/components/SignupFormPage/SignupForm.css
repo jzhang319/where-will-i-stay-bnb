@@ -9,7 +9,7 @@ a {
   font-size: 16px;
 }
 
-button {
+button.sign-up-btn {
   border: 0;
   background: none;
   font-weight: 700;
@@ -19,13 +19,14 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+button:hover.sign-up-btn {
   background-color: pink;
   color: white;
 }
 
 form {
   flex: 0 0 400px;
+
 }
 
 input {

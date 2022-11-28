@@ -9,7 +9,6 @@ const NavButtons = () => {
         <div class="addguests-btn">Add guests</div>
         <button class="search-btn">
           <BsSearch />
-          <img src="" alt="" />
         </button>
       </div>
     </div>
