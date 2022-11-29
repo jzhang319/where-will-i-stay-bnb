@@ -22,6 +22,7 @@ const HomePage = () => {
         return (
           <div className="each-spot">
             <NavLink key={spot.id} to={`/api/spots/${spot.id}`}>
+              
               <img src={spot.previewImage} alt="" />
               <div className="spot-info">
                 <div className="city-country">

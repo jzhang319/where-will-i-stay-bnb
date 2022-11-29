@@ -1,3 +1,9 @@
 .modal-login-btn{
   border: none;
+
+}
+
+.modal-login-btn:hover{
+  color: blue;
+  cursor: pointer;
 }
