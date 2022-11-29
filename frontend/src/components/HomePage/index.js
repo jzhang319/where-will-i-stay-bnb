@@ -17,20 +17,23 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="homepage-div">
+    <div className="homepage-container">
       {allSpots.map((spot) => {
         return (
-          <NavLink key={spot.id} to={`/api/spots/${spot.id}`}>
-            <img src={spot.previewImage} alt="" />
-            <div>
-              {spot.city},{spot.country}
-            </div>
-            <div>{spot.updatedAt}</div>
-            <div>${spot.price}</div>
-          </NavLink>
+          <div className="each-spot">
+            <NavLink key={spot.id} to={`/api/spots/${spot.id}`}>
+              <img src={spot.previewImage} alt="" />
+              <div className="spot-info">
+                <div className="city-country">
+                  {spot.city},{spot.country}
+                </div>
+                <div className="updated-at">{spot.updatedAt}</div>
+                <div className="price">${spot.price}</div>
+              </div>
+            </NavLink>
+          </div>
         );
       })}
-      {/* <img className="homepagePic" src={homePic} alt="homePage Pic" /> */}
     </div>
   );
 };

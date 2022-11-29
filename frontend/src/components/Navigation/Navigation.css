@@ -1,45 +1,28 @@
-button {
-  /* display: flex; */
-  border: 0;
+.nav-section {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+.menu-btn {
+  height: 100px;
+  border: 2px solid gray;
+  border-radius: 25px;
   background: none;
   font-weight: 700;
   padding: .5em 1em;
   text-transform: uppercase;
   transition: background-color .25s, color .25s;
   cursor: pointer;
+  position: relative
 }
 
-button:hover {
-  background-color: blue;
-  border-radius: 50px;
+.menu-btn:hover {
+  background-color: pink;
+  border-radius: 25px;
   color: white;
 }
 
-.nav-section{
-  display: flex;
-  position: sticky;
-}
-
-.homepagePic
-{
-  width: 200px;
-
-}
-
-.menu-btn
-{
-  border: solid 2px;
-  border-radius: 25px;
-  border-color: gray;
-  position: absolute;
-  top: 1.5rem;
-  right: 13rem;
-}
-
-.nav-ul
-{
-  display: flex;
-  justify-content: end;
-  position: absolute;
-  right: 5px;
+ul.nav-ul{
+  display: block
 }
