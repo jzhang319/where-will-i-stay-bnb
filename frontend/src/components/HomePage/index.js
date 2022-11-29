@@ -1,11 +1,16 @@
 import homePic from "../../img/homePic.webp";
 import "./HomePage.css";
+import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getAllSpots } from "../../store/spot";
 
 const HomePage = () => {
   const dispatch = useDispatch();
+
+  const allSpots = useSelector((state) => Object.values(state.spot));
+
+  console.log(allSpots, ` <---`);
 
   useEffect(() => {
     dispatch(getAllSpots());
@@ -13,9 +18,19 @@ const HomePage = () => {
 
   return (
     <div className="homepage-div">
-      <h1>Home Page</h1>
-      <h2>detail for page</h2>
-      <img className="homepagePic" src={homePic} alt="homePage Pic" />
+      {allSpots.map((spot) => {
+        return (
+          <NavLink key={spot.id} to={`/api/spots/${spot.id}`}>
+            <div>{spot.previewImage}</div>
+            <div>
+              {spot.city},{spot.country}
+            </div>
+            <div>{spot.updatedAt}</div>
+            <div>{spot.price}</div>
+          </NavLink>
+        );
+      })}
+      {/* <img className="homepagePic" src={homePic} alt="homePage Pic" /> */}
     </div>
   );
 };
