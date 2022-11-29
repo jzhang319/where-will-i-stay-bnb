@@ -1,14 +1,16 @@
 const GET_SPOTS = "spot/GET_SPOTS";
 export const getSpots = (spots) => ({
   type: GET_SPOTS,
-  payload: spots,
+  spots,
 });
 
 export const getAllSpots = () => async (dispatch) => {
   const response = await fetch("/api/spots");
-  const data = await response.json();
-  dispatch(getSpots(data));
-  return response;
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(getSpots(data));
+    return response;
+  }
 };
 
 // const initialState = {
@@ -20,10 +22,10 @@ const spotReducer = (state = {}, action) => {
   switch (action.type) {
     case GET_SPOTS: {
       const allSpots = {};
-      action.payload.forEach((spot) => {
+      action.spots.Spots.forEach((spot) => {
         allSpots[spot.id] = spot;
       });
-
+      // console.log(allSpots);
       return {
         ...allSpots,
         ...newState,

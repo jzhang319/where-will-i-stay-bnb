@@ -1,8 +1,16 @@
 import homePic from "../../img/homePic.webp";
 import "./HomePage.css";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { getAllSpots } from "../../store/spot";
 
 const HomePage = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllSpots());
+  }, []);
+
   return (
     <div className="homepage-div">
       <h1>Home Page</h1>
