@@ -1,4 +1,4 @@
-import { BsSearch } from "react-icons/bs";
+
 
 const NavButtons = () => {
   return (
@@ -8,7 +8,7 @@ const NavButtons = () => {
         <div class="anyweek-btn">Any week</div>
         <div class="addguests-btn">Add guests</div>
         <button class="search-btn">
-          <BsSearch />
+          
         </button>
       </div>
     </div>

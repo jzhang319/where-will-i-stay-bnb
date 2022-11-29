@@ -3,11 +3,11 @@ import "./HomePage.css";
 
 const HomePage = () => {
   return (
-    <>
-      <h1>HomePage</h1>
-      <h2>Benny's a dumbo</h2>
+    <div className="homepage-div">
+      <h1>Home Page</h1>
+      <h2>detail for page</h2>
       <img src={homePic} alt="homePage Pic" />
-    </>
+    </div>
   );
 };
 

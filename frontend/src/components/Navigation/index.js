@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import LoginFormModal from "../LoginFormModal";
 import "./Navigation.css";
-import NavButtons from "./NavButton";
+
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -25,7 +25,6 @@ function Navigation({ isLoaded }) {
   return (
     <>
       <div className="nav-section">
-        <NavButtons />
         <button className="menu-btn">menu</button>
         <ul className="nav-ul">
           <li>
