@@ -17,7 +17,12 @@ button:hover {
 
 .nav-section{
   display: flex;
+}
 
+.homepagePic
+{
+  width: 200px;
+  
 }
 
 .menu-btn
@@ -36,12 +41,4 @@ button:hover {
   justify-content: end;
   position: absolute;
   right: 5px;
-}
-
-
-
-.nav-search-btn-section
-{
-  display: flex;
-  justify-content: center;
 }
