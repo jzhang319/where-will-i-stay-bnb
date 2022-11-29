@@ -10,7 +10,7 @@ const HomePage = () => {
 
   const allSpots = useSelector((state) => Object.values(state.spot));
 
-  console.log(allSpots, ` <---`);
+  // console.log(allSpots.previewImage, ` <---`);
 
   useEffect(() => {
     dispatch(getAllSpots());
@@ -21,12 +21,12 @@ const HomePage = () => {
       {allSpots.map((spot) => {
         return (
           <NavLink key={spot.id} to={`/api/spots/${spot.id}`}>
-            <div>{spot.previewImage}</div>
+            <img src={spot.previewImage} alt="" />
             <div>
               {spot.city},{spot.country}
             </div>
             <div>{spot.updatedAt}</div>
-            <div>{spot.price}</div>
+            <div>${spot.price}</div>
           </NavLink>
         );
       })}

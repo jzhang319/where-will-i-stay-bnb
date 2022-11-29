@@ -17,12 +17,13 @@ button:hover {
 
 .nav-section{
   display: flex;
+  position: sticky;
 }
 
 .homepagePic
 {
   width: 200px;
-  
+
 }
 
 .menu-btn
