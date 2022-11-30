@@ -22,14 +22,15 @@ const HomePage = () => {
         return (
           <div className="each-spot">
             <NavLink key={spot.id} to={`/api/spots/${spot.id}`}>
-              
-              <img src={spot.previewImage} alt="" />
+              <div className="spot-img-box">
+                <img src={spot.previewImage} alt="" />
+              </div>
               <div className="spot-info">
                 <div className="city-country">
                   {spot.city},{spot.country}
                 </div>
                 <div className="updated-at">{spot.updatedAt}</div>
-                <div className="price">${spot.price}</div>
+                <div className="price">${spot.price} night</div>
               </div>
             </NavLink>
           </div>

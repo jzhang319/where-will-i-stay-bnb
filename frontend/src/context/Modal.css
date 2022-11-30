@@ -1,9 +1,8 @@
 #modal {
-  position: fixed;
-  top: 0;
+  position: absolute;
+  top: 32px;
   right: 0;
   left: 0;
-  bottom: 500px;
   display: flex;
   justify-content: center;
   align-items: center;

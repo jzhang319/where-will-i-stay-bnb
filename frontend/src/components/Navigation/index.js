@@ -27,29 +27,22 @@ function Navigation({ isLoaded }) {
 
   const [showMenu, setShowMenu] = useState(false);
 
-  const openMenu = (e) => {
-    e.preventDefault()
-    if (showMenu) return;
-    setShowMenu(true);
-  };
-
-  useEffect(() => {
-    if (!showMenu) return;
-    const closeMenu = () => {
-      setShowMenu(false);
-    };
-
-    document.addEventListener("click", closeMenu);
-
-    return () => document.removeEventListener("click", closeMenu);
-  }, [showMenu]);
+  
 
   return (
     <>
       <div className="nav-section">
-        <button className="menu-btn" onClick={openMenu}>
-          menu <i />
+        <button className="menu-btn" onClick={showMenu}>
+          menu
         </button>
+        {/* <ul className="nav-ul">
+          <li>
+            <NavLink exact to="/">
+              Home
+            </NavLink>
+            {isLoaded && sessionLinks}
+          </li>
+        </ul> */}
         {showMenu && (
           <ul className="nav-ul">
             <li>

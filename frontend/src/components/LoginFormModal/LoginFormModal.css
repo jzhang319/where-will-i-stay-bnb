@@ -1,6 +1,5 @@
 .modal-login-btn{
-  border: none;
-
+  border-radius: 5px;
 }
 
 .modal-login-btn:hover{

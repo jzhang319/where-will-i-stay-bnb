@@ -1,10 +1,7 @@
 
 div.homepage-container {
-
   display: grid;
-
   grid-template-columns: repeat(4, 25% [spot]);
-
   grid-template-rows: repeat(5, 403px);
 }
 
@@ -16,4 +13,20 @@ img {
 
 div.each-spot{
   margin: 20px;
+}
+
+div.city-country {
+  color: black;
+  font-size: large;
+  font-weight: bolder;
+}
+
+div.updated-at {
+  color: gray;
+  font-size: medium;
+}
+
+div.price {
+  color: black;
+  font-weight: bold;
 }
