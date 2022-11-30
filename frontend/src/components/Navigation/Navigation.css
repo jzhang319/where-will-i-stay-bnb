@@ -1,11 +1,12 @@
 .nav-section {
   display: flex;
-  justify-content: center;
   margin: 20px;
+  height: 150px;
 }
 
 .menu-btn {
-  height: 100px;
+  margin-left: 85%;
+  height: 90px;
   border: 2px solid gray;
   border-radius: 25px;
   background: none;
@@ -24,4 +25,14 @@
 
 ul.nav-ul{
   color: darkgray;
+}
+
+button.demo-login-btn{
+  height: 50px;
+  border-radius: 25px;
+}
+button.demo-login-btn:hover{
+  background-color: blue;
+  color: white;
+  cursor: pointer;
 }

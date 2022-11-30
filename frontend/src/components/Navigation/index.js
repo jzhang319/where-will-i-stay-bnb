@@ -27,12 +27,16 @@ function Navigation({ isLoaded }) {
 
   const [showMenu, setShowMenu] = useState(false);
 
-  
+  // useEffect(() => {}, [showMenu]);
 
   return (
     <>
       <div className="nav-section">
-        <button className="menu-btn" onClick={showMenu}>
+        <button className="demo-login-btn">DEMO-USER</button>
+        <button
+          className="menu-btn"
+          onClick={() => setShowMenu(showMenu ? false : true)}
+        >
           menu
         </button>
         {/* <ul className="nav-ul">
