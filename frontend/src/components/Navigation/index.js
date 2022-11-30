@@ -5,8 +5,11 @@ import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import LoginFormModal from "../LoginFormModal";
 import "./Navigation.css";
+import * as sessionActions from "../../store/session";
+import { useDispatch } from "react-redux";
 
 function Navigation({ isLoaded }) {
+  const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
 
   let sessionLinks;
@@ -26,13 +29,26 @@ function Navigation({ isLoaded }) {
   }
 
   const [showMenu, setShowMenu] = useState(false);
+  const [errors, setErrors] = useState([]);
 
-  // useEffect(() => {}, [showMenu]);
+  const handleSubmit = (e) => {
+    let credential = "demo@user.io";
+    let password = "password";
+    e.preventDefault();
+    return dispatch(sessionActions.login({ credential, password })).catch(
+      async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      }
+    );
+  };
 
   return (
     <>
       <div className="nav-section">
-        <button className="demo-login-btn">DEMO-USER</button>
+        <button className="demo-login-btn" onClick={handleSubmit}>
+          DEMO-USER
+        </button>
         <button
           className="menu-btn"
           onClick={() => setShowMenu(showMenu ? false : true)}

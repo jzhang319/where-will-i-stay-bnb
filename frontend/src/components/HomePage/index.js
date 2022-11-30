@@ -21,7 +21,7 @@ const HomePage = () => {
       {allSpots.map((spot) => {
         return (
           <div className="each-spot">
-            <NavLink key={spot.id} to={`/api/spots/${spot.id}`}>
+            <NavLink key={spot.id} to={`/spots/${spot.id}`}>
               <div className="spot-img-box">
                 <img src={spot.previewImage} alt="" />
               </div>
