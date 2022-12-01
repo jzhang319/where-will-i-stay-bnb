@@ -1,7 +1,6 @@
-import homePic from "../../img/homePic.webp";
 import "./HomePage.css";
 import { NavLink } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllSpots } from "../../store/spot";
 

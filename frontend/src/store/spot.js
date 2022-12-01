@@ -1,15 +1,26 @@
-const GET_SPOTS = "spot/GET_SPOTS";
+//! Actions
+
+const GET_SPOTS = "spots/GET_SPOTS";
 export const getSpots = (spots) => ({
   type: GET_SPOTS,
   spots,
 });
 
-const GET_SPOT = "spot/GET_SPOT";
+const GET_SPOT = "spots/GET_SPOT";
 export const getSpot = (spot) => ({
   type: GET_SPOT,
   spot,
 });
 
+// const DEL_SPOT = "spots/DEL_SPOT";
+// export const delSpot = (spotId) => ({
+//   type: DEL_SPOT,
+//   spot: [spotId],
+// });
+
+//! Thunks
+
+// READ ALL
 export const getAllSpots = () => async (dispatch) => {
   const response = await fetch("/api/spots");
   if (response.ok) {
@@ -18,9 +29,9 @@ export const getAllSpots = () => async (dispatch) => {
     return response;
   }
 };
-
+// READ ONE
 export const getSpotWithId = (spotId) => async (dispatch) => {
-  const response = await fetch(`/api/spot/${[spotId]}`);
+  const response = await fetch(`/api/spots/${spotId}`);
 
   if (response.ok) {
     const spot = await response.json();
@@ -29,11 +40,9 @@ export const getSpotWithId = (spotId) => async (dispatch) => {
   }
 };
 
-// const initialState = {
+const initialState = {};
 
-// }
-
-const spotReducer = (state = {}, action) => {
+const spotReducer = (state = initialState, action) => {
   let newState = {};
   switch (action.type) {
     case GET_SPOTS: {
@@ -47,11 +56,14 @@ const spotReducer = (state = {}, action) => {
         ...newState,
       };
     }
-    // case GET_SPOT:{
-    //   const spot = {};
-    //   const {spotId} = req.body
-    //   newState.spot
-    // }
+    case GET_SPOT: {
+      newState = {
+        
+        ...action.spot,
+      };
+      // console.log(newState);
+      return newState;
+    }
     default:
       return state;
   }
