@@ -2,7 +2,7 @@ import "./SpotDetail.css";
 import { NavLink, useParams, useHistory } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getSpotWithId } from "../../store/spot";
+import { getSpotWithId, createSpot } from "../../store/spot";
 
 const SpotDetail = () => {
   const sessionUser = useSelector((state) => state.session.user);
@@ -11,22 +11,11 @@ const SpotDetail = () => {
   const dispatch = useDispatch();
   const spot = useSelector((state) => state.spot);
 
-  // const spot = Object.values(spotObj);
-  // if (!spot) history.push("/");
-  console.log(spot, ` <---`);
+  // console.log(spot, ` <---`);
   useEffect(() => {
     // console.log(spotId);
     dispatch(getSpotWithId(spotId));
   }, [dispatch]);
-
-  // const preview = Object.values(spot.SpotImages);
-  // console.log(preview);
-
-  // console.log(
-  //   spot.SpotImages.find((spotImg) => spotImg.preview === true),
-  //   ` <---`
-  // );
-  // if (!spot.SpotImages) return null;
 
   return (
     <div className="spot-detail-container">
