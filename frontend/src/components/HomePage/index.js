@@ -28,6 +28,7 @@ const HomePage = () => {
                 <div className="city-country">
                   {spot.city},{spot.country}
                 </div>
+                <div className="spot-description">{spot.description}</div>
                 <div className="updated-at">{spot.updatedAt}</div>
                 <div className="price">${spot.price} night</div>
               </div>

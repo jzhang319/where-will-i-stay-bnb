@@ -4,8 +4,9 @@
   width: 150px;
   border: none;
 }
-.join-bnb-btn:hover{
+.create-form-btn:hover{
   cursor: pointer;
+  background-color: pink;
 }
 .create-form-btn{
   background-color: white;

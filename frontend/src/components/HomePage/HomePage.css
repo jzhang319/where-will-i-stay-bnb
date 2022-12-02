@@ -16,17 +16,26 @@ div.each-spot{
 }
 
 div.city-country {
+  padding-top: 5px;
   color: black;
   font-size: large;
   font-weight: bolder;
 }
 
+div.spot-description{
+  padding-top: 5px;
+  color: gray;
+  font-size: large;
+}
+
 div.updated-at {
   color: gray;
   font-size: medium;
+  padding-top: 5px;
 }
 
 div.price {
   color: black;
   font-weight: bold;
+  padding-top: 5px;
 }

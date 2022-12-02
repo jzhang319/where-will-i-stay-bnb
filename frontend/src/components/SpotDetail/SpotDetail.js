@@ -2,12 +2,12 @@ import "./SpotDetail.css";
 import { NavLink, useParams, useHistory } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getSpotWithId, createSpot } from "../../store/spot";
+import { getSpotWithId } from "../../store/spot";
 
 const SpotDetail = () => {
-  const sessionUser = useSelector((state) => state.session.user);
+  // const sessionUser = useSelector((state) => state.session.user);
   const { spotId } = useParams();
-  const history = useHistory();
+  // const history = useHistory();
   const dispatch = useDispatch();
   const spot = useSelector((state) => state.spot);
 

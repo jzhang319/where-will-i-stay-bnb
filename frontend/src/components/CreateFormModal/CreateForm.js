@@ -41,21 +41,21 @@ const CreateForm = () => {
       });
   };
 
-  const handleCancelClick = (e) => {
-    e.preventDefault();
-    history.push("/");
-  };
+  // const handleCancelClick = (e) => {
+  //   e.preventDefault();
+  //   history.push("/");
+  // };
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="form-element-container">
+      <div className="form-container">
         <ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
         </ul>
       </div>
-      <div className="create-form-element-left">
+      <div className="create-form-elements">
         <label>
           Address
           <input
@@ -107,6 +107,33 @@ const CreateForm = () => {
             type="decimal"
             value={lng}
             onChange={(e) => setLng(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          Name for your spot
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          Description of your spot
+          <input
+            type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          Price $
+          <input
+            type="decimal"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
             required
           />
         </label>

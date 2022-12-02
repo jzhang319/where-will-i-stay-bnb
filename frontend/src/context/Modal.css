@@ -1,6 +1,6 @@
 #modal {
-  position: absolute;
-  top: 32px;
+  position: fixed;
+  top: 100px;
   right: 0;
   left: 0;
   display: flex;
@@ -14,10 +14,11 @@
   right: 0;
   left: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(216, 196, 196, 0.7);
 }
 
 #modal-content {
-  position: absolute;
+  position: fixed;
   background-color:white;
+  height: 0px;
 }
