@@ -6,6 +6,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
 }
 
 #modal-background {
@@ -14,7 +15,7 @@
   right: 0;
   left: 0;
   bottom: 0;
-  background-color: rgba(216, 196, 196, 0.7);
+  background-color: rgba(0, 0, 0, 0.9);
 }
 
 #modal-content {

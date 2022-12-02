@@ -51,6 +51,7 @@ function Navigation({ isLoaded }) {
           DEMO-USER
         </button>
         <div className="join-bnb-btn">{sessionUser && <CreateFormModal />}</div>
+        <button className="curr-owner-spot-btn">Current Owner Spots</button>
         <button
           className="menu-btn"
           onClick={() => setShowMenu(showMenu ? false : true)}

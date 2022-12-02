@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { updateSpot } from "../../store/spot";
+import "./UpdateFormModal.css";
 
-const UpdateForm = () => {
+const UpdateForm = ({ setShowModal }) => {
+  const { spotId } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
   const [name, setName] = useState("");
@@ -14,18 +16,33 @@ const UpdateForm = () => {
   const spot = useSelector((state) => state.spot);
   // console.log(spot, ` <---`);
 
+  useEffect(() => {
+    setName(spot.name);
+    setDescription(spot.description);
+    setPrice(spot.price);
+  }, [spot]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
 
     dispatch(
       updateSpot({
+        address: spot.address,
+        city: spot.city,
+        state: spot.state,
+        country: spot.country,
+        lat: spot.lat,
+        lng: spot.lng,
         name,
         description,
         price,
+        id: spotId,
       })
     )
-      .then(() => history.push("/"))
+      // (`/spots/${spot.id}`)
+      .then(() => setShowModal(false))
+
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.error) setErrors(data.errors);
@@ -45,7 +62,7 @@ const UpdateForm = () => {
           Update Name
           <input
             type="text"
-            value={spot.name}
+            value={name}
             onChange={(e) => setName(e.target.value)}
             required
           />
@@ -54,7 +71,7 @@ const UpdateForm = () => {
           Update Description
           <input
             type="text"
-            value={spot.description}
+            value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
           />
@@ -63,12 +80,14 @@ const UpdateForm = () => {
           Update Price $
           <input
             type="decimal"
-            value={spot.price}
+            value={price}
             onChange={(e) => setPrice(e.target.value)}
             required
           />
         </label>
-        <button type="submit">UPDATE</button>
+        <button className="update-btn" type="submit">
+          UPDATE
+        </button>
       </div>
     </form>
   );

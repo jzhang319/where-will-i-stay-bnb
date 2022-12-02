@@ -21,6 +21,10 @@ const HomePage = () => {
       {allSpots.map((spot) => {
         if (spot.previewImage === "no preview image found")
           spot.previewImage = defaultImage;
+
+        const date = new Date(spot.updatedAt);
+        let currDate = date.toDateString();
+        
         return (
           <div className="each-spot">
             <NavLink
@@ -36,7 +40,7 @@ const HomePage = () => {
                   {spot.city},{spot.country}
                 </div>
                 <div className="spot-description">{spot.description}</div>
-                <div className="updated-at">{spot.updatedAt}</div>
+                <div className="updated-at">{currDate}</div>
                 <div className="price">${spot.price} night</div>
               </div>
             </NavLink>

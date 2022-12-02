@@ -9,3 +9,10 @@
   cursor: pointer;
   background-color: pink;
 }
+
+.update-btn{
+  border-radius: 10px;
+}
+.update-btn:hover{
+  cursor: pointer;;
+}

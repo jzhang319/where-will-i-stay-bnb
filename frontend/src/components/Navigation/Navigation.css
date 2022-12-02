@@ -36,3 +36,14 @@ button.demo-login-btn:hover{
   color: white;
   cursor: pointer;
 }
+
+.curr-owner-spot-btn{
+  width: 150px;
+  height: 50px;
+  border-radius: 25px;
+}
+.curr-owner-spot-btn:hover{
+  background-color: greenyellow;
+  color: black;
+  cursor: pointer;
+}

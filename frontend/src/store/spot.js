@@ -21,8 +21,14 @@ export const addSpot = (spot) => ({
 });
 
 const UPDATE_SPOT = "spots/UPDATE_SPOT";
-export const updateSpot = (spot) => ({
+export const updateCurrSpot = (spot) => ({
   type: UPDATE_SPOT,
+  spot,
+});
+
+const GET_CURR_USER = "spots/GET_CURR_USER";
+export const getCurrUser = (spot) => ({
+  type: GET_CURR_USER,
   spot,
 });
 
@@ -81,10 +87,26 @@ export const createSpot = (spot) => async (dispatch) => {
   }
 };
 
+// UPDATE
+export const updateSpot = (spot) => async (dispatch) => {
+  console.log(spot, ` <----`);
+  const respond = await csrfFetch(`/api/spots/${spot.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(spot),
+  });
+  if (respond.ok) {
+    const spot = await respond.json();
+    dispatch(updateCurrSpot(spot));
+    return spot;
+  }
+};
+
 const initialState = {};
 
 const spotReducer = (state = initialState, action) => {
-  let newState = {};
   switch (action.type) {
     case GET_SPOTS: {
       const allSpots = {};
@@ -94,20 +116,27 @@ const spotReducer = (state = initialState, action) => {
       // console.log(allSpots);
       return {
         ...allSpots,
-        ...newState,
+        ...state,
       };
     }
     case GET_SPOT: {
-      newState = {
+      const newState = {
         ...action.spot,
       };
       // console.log(newState);
       return newState;
     }
     case ADD_SPOT: {
-      newState = {
+      const newState = {
         ...state,
         [action.spot.id]: { ...action.spot },
+      };
+      return newState;
+    }
+    case UPDATE_SPOT: {
+      const newState = {
+        ...state,
+        ...action.spot,
       };
       return newState;
     }

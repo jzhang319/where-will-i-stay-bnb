@@ -13,7 +13,7 @@ function UpdateFormModal() {
       </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <UpdateForm />
+          <UpdateForm setShowModal={setShowModal} />
         </Modal>
       )}
     </>
