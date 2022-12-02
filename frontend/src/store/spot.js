@@ -32,15 +32,15 @@ export const getCurrUser = (spot) => ({
   spot,
 });
 
-// const DEL_SPOT = "spots/DEL_SPOT";
-// export const delSpot = (spotId) => ({
-//   type: DEL_SPOT,
-//   spot: [spotId],
-// });
+const DEL_SPOT = "spots/DEL_SPOT";
+export const delSpot = (spotId) => ({
+  type: DEL_SPOT,
+  spot: [spotId],
+});
 
 //! Thunks
 
-// READ ALL
+// GET ALL
 export const getAllSpots = () => async (dispatch) => {
   const response = await fetch("/api/spots");
   if (response.ok) {
@@ -49,7 +49,7 @@ export const getAllSpots = () => async (dispatch) => {
     return response;
   }
 };
-// READ ONE
+// GET ONE
 export const getSpotWithId = (spotId) => async (dispatch) => {
   const response = await fetch(`/api/spots/${spotId}`);
 
@@ -104,13 +104,24 @@ export const updateSpot = (spot) => async (dispatch) => {
   }
 };
 
-// GET CURRENT USER SPOTS
+// GET CURRENT USER - SPOTS
 export const getCurrUserSpots = () => async (dispatch) => {
   const response = await fetch("/api/spots/current");
   if (response.ok) {
     const data = await response.json();
     dispatch(getCurrUser(data));
     return data;
+  }
+};
+
+export const deleteSpot = (spotId) => async (dispatch) => {
+  const response = await fetch(`/api/spots/${spotId}`, {
+    method: "DELETE",
+  });
+  if (response.ok) {
+    const spot = await response.json();
+    dispatch(delSpot(spotId));
+    return spot;
   }
 };
 
@@ -153,6 +164,11 @@ const spotReducer = (state = initialState, action) => {
       const newState = {
         ...action.spot.Spots,
       };
+      return newState;
+    }
+    case DEL_SPOT: {
+      const newState = { ...state };
+      delete newState[action.spotId];
       return newState;
     }
     default:
