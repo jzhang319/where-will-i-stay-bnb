@@ -7,6 +7,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import HomePage from "./components/HomePage";
 import SpotDetail from "./components/SpotDetail/SpotDetail";
+import CurrentUserSpots from "./components/CurrentUserSpots";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,6 +26,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route path="/spots/current">
+            <CurrentUserSpots />
           </Route>
           <Route path="/spots/:spotId">
             <SpotDetail />

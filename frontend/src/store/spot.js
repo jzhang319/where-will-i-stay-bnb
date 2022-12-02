@@ -104,6 +104,16 @@ export const updateSpot = (spot) => async (dispatch) => {
   }
 };
 
+// GET CURRENT USER SPOTS
+export const getCurrUserSpots = () => async (dispatch) => {
+  const response = await fetch("/api/spots/current");
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(getCurrUser(data));
+    return data;
+  }
+};
+
 const initialState = {};
 
 const spotReducer = (state = initialState, action) => {
@@ -116,7 +126,6 @@ const spotReducer = (state = initialState, action) => {
       // console.log(allSpots);
       return {
         ...allSpots,
-        ...state,
       };
     }
     case GET_SPOT: {
@@ -137,6 +146,12 @@ const spotReducer = (state = initialState, action) => {
       const newState = {
         ...state,
         ...action.spot,
+      };
+      return newState;
+    }
+    case GET_CURR_USER: {
+      const newState = {
+        ...action.spot.Spots,
       };
       return newState;
     }

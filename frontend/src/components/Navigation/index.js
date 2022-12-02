@@ -8,6 +8,7 @@ import CreateFormModal from "../CreateFormModal";
 import "./Navigation.css";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
+import CurrentUserSpots from "../CurrentUserSpots";
 
 function Navigation({ isLoaded }) {
   const dispatch = useDispatch();
@@ -43,6 +44,9 @@ function Navigation({ isLoaded }) {
       }
     );
   };
+  const goNew = () => {
+    <CurrentUserSpots />;
+  };
 
   return (
     <>
@@ -51,21 +55,17 @@ function Navigation({ isLoaded }) {
           DEMO-USER
         </button>
         <div className="join-bnb-btn">{sessionUser && <CreateFormModal />}</div>
-        <button className="curr-owner-spot-btn">Current Owner Spots</button>
+        <button className="curr-owner-spot-btn" onClick={goNew}>
+          <NavLink exact to="/spots/current" onClick={goNew}>
+            Current Owner Spots
+          </NavLink>
+        </button>
         <button
           className="menu-btn"
           onClick={() => setShowMenu(showMenu ? false : true)}
         >
           menu
         </button>
-        {/* <ul className="nav-ul">
-          <li>
-            <NavLink exact to="/">
-              Home
-            </NavLink>
-            {isLoaded && sessionLinks}
-          </li>
-        </ul> */}
         {showMenu && (
           <ul className="nav-ul">
             <li>
