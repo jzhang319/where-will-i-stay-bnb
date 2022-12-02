@@ -50,9 +50,7 @@ function Navigation({ isLoaded }) {
         <button className="demo-login-btn" onClick={handleSubmit}>
           DEMO-USER
         </button>
-        <button className="join-bnb-btn">
-          <CreateFormModal />
-        </button>
+        <div className="join-bnb-btn">{sessionUser && <CreateFormModal />}</div>
         <button
           className="menu-btn"
           onClick={() => setShowMenu(showMenu ? false : true)}

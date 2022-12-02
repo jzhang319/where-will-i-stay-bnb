@@ -11,6 +11,9 @@ const UpdateForm = () => {
   const [price, setPrice] = useState("");
   const [errors, setErrors] = useState([]);
 
+  const spot = useSelector((state) => state.spot);
+  // console.log(spot, ` <---`);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
@@ -42,7 +45,7 @@ const UpdateForm = () => {
           Update Name
           <input
             type="text"
-            value={name}
+            value={spot.name}
             onChange={(e) => setName(e.target.value)}
             required
           />
@@ -51,7 +54,7 @@ const UpdateForm = () => {
           Update Description
           <input
             type="text"
-            value={description}
+            value={spot.description}
             onChange={(e) => setDescription(e.target.value)}
             required
           />
@@ -60,7 +63,7 @@ const UpdateForm = () => {
           Update Price $
           <input
             type="decimal"
-            value={price}
+            value={spot.price}
             onChange={(e) => setPrice(e.target.value)}
             required
           />
