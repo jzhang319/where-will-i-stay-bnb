@@ -20,6 +20,12 @@ export const addSpot = (spot) => ({
   spot,
 });
 
+const UPDATE_SPOT = "spots/UPDATE_SPOT";
+export const updateSpot = (spot) => ({
+  type: UPDATE_SPOT,
+  spot,
+});
+
 // const DEL_SPOT = "spots/DEL_SPOT";
 // export const delSpot = (spotId) => ({
 //   type: DEL_SPOT,

@@ -4,9 +4,10 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getSpotWithId } from "../../store/spot";
 import defaultImage from "../../img/default-image.webp";
+import UpdateFormModal from "../UpdateFormModal";
 
 const SpotDetail = () => {
-  // const sessionUser = useSelector((state) => state.session.user);
+  const sessionUser = useSelector((state) => state.session.user);
   const { spotId } = useParams();
   // const history = useHistory();
   const dispatch = useDispatch();
@@ -44,7 +45,9 @@ const SpotDetail = () => {
         <h2>{spot.description}</h2>
         <h3>${spot.price} night</h3>
       </div>
-      <div></div>
+      <div className="edit-spot-section">
+        {sessionUser && sessionUser.id === spot.ownerId && <UpdateFormModal />}
+      </div>
     </div>
   );
 };

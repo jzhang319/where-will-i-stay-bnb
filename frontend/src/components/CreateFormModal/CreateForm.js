@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createSpot } from "../../store/spot";
 
-const CreateForm = () => {
+const CreateFormModal = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [address, setAddress] = useState("");
@@ -143,4 +143,4 @@ const CreateForm = () => {
   );
 };
 
-export default CreateForm;
+export default CreateFormModal;

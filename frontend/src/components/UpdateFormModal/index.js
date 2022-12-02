@@ -1,23 +1,23 @@
-import "./CreateFormModal.css";
+import "./UpdateFormModal.css";
 import React, { useState } from "react";
 import { Modal } from "../../context/Modal";
-import CreateForm from "./CreateForm";
+import UpdateForm from "./UpdateForm";
 
-function CreateFormModal() {
+function UpdateFormModal() {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <button className="create-form-btn" onClick={() => setShowModal(true)}>
-        bnb your home
+      <button className="update-form-btn" onClick={() => setShowModal(true)}>
+        Edit
       </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <CreateForm />
+          <UpdateForm />
         </Modal>
       )}
     </>
   );
 }
 
-export default CreateFormModal;
+export default UpdateFormModal;

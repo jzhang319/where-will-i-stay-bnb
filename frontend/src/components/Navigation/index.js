@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import LoginFormModal from "../LoginFormModal";
-import CreateForm from "../CreateFormModal";
+import CreateFormModal from "../CreateFormModal";
 import "./Navigation.css";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
@@ -51,7 +51,7 @@ function Navigation({ isLoaded }) {
           DEMO-USER
         </button>
         <button className="join-bnb-btn">
-          <CreateForm />
+          <CreateFormModal />
         </button>
         <button
           className="menu-btn"
