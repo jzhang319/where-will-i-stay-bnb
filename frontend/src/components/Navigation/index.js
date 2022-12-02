@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import LoginFormModal from "../LoginFormModal";
+import CreateForm from "../CreateFormModal";
 import "./Navigation.css";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
@@ -48,6 +49,9 @@ function Navigation({ isLoaded }) {
       <div className="nav-section">
         <button className="demo-login-btn" onClick={handleSubmit}>
           DEMO-USER
+        </button>
+        <button className="join-bnb-btn">
+          <CreateForm />
         </button>
         <button
           className="menu-btn"

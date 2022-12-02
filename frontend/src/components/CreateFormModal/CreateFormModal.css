@@ -1,0 +1,14 @@
+.join-bnb-btn{
+  background-color: white;
+  height: 50px;
+  width: 150px;
+  border: none;
+}
+.join-bnb-btn:hover{
+  cursor: pointer;
+}
+.create-form-btn{
+  background-color: white;
+  height: 50px;
+  border-radius: 10px;
+}
