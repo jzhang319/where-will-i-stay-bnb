@@ -3,6 +3,7 @@ import { NavLink, useParams, useHistory } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getSpotWithId } from "../../store/spot";
+import defaultImage from "../../img/default-image.webp";
 
 const SpotDetail = () => {
   // const sessionUser = useSelector((state) => state.session.user);
@@ -10,6 +11,19 @@ const SpotDetail = () => {
   // const history = useHistory();
   const dispatch = useDispatch();
   const spot = useSelector((state) => state.spot);
+  // spot?.SpotImages?.find((spotImg) => spotImg.preview === true).url
+
+  let url;
+  (() => {
+    let proposedPreview = spot?.SpotImages?.find(
+      (spotImg) => spotImg.preview === true
+    );
+    if (proposedPreview) {
+      url = proposedPreview.url;
+    } else {
+      url = defaultImage;
+    }
+  })();
 
   // console.log(spot, ` <---`);
   useEffect(() => {
@@ -24,12 +38,7 @@ const SpotDetail = () => {
         {spot.city}, {spot.state}, {spot.country}
       </h3>
       <div className="preview-picture">
-        <img
-          src={
-            spot?.SpotImages?.find((spotImg) => spotImg.preview === true).url
-          }
-          alt=""
-        />
+        <img src={url} alt="" />
       </div>
       <div className="spot-details">
         <h2>{spot.description}</h2>

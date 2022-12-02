@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllSpots } from "../../store/spot";
+import defaultImage from "../../img/default-image.webp";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -18,9 +19,15 @@ const HomePage = () => {
   return (
     <div className="homepage-container">
       {allSpots.map((spot) => {
+        if (spot.previewImage === "no preview image found")
+          spot.previewImage = defaultImage;
         return (
           <div className="each-spot">
-            <NavLink key={spot.id} to={`/spots/${spot.id}`}>
+            <NavLink
+              className="spot-link"
+              key={spot.id}
+              to={`/spots/${spot.id}`}
+            >
               <div className="spot-img-box">
                 <img src={spot.previewImage} alt="" />
               </div>
