@@ -51,6 +51,7 @@ function Navigation({ isLoaded }) {
   return (
     <>
       <div className="nav-section">
+        <img src="../../img/logo.png" alt="page-logo" />
         <button className="demo-login-btn" onClick={handleSubmit}>
           <i class="fa-solid fa-user"></i>
           DEMO-USER

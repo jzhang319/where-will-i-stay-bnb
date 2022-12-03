@@ -35,12 +35,12 @@ export const getCurrUser = (spot) => ({
 const DEL_SPOT = "spots/DEL_SPOT";
 export const delSpot = (spotId) => ({
   type: DEL_SPOT,
-  spot: [spotId],
+  spot: spotId,
 });
 
 //! Thunks
 
-// GET ALL
+// GET ALL SPOTS
 export const getAllSpots = () => async (dispatch) => {
   const response = await fetch("/api/spots");
   if (response.ok) {
@@ -49,7 +49,7 @@ export const getAllSpots = () => async (dispatch) => {
     return response;
   }
 };
-// GET ONE
+// GET ONE SPOT
 export const getSpotWithId = (spotId) => async (dispatch) => {
   const response = await fetch(`/api/spots/${spotId}`);
 
@@ -59,7 +59,7 @@ export const getSpotWithId = (spotId) => async (dispatch) => {
     return spot;
   }
 };
-// CREATE
+// CREATE SPOT
 export const createSpot = (spot) => async (dispatch) => {
   const { address, city, state, country, lat, lng, name, description, price } =
     spot;
@@ -82,12 +82,13 @@ export const createSpot = (spot) => async (dispatch) => {
   });
   if (response.ok) {
     const spot = await response.json();
+    spot.previewImage = "no preview image found";
     dispatch(addSpot(spot));
     return spot;
   }
 };
 
-// UPDATE
+// UPDATE SPOT
 export const updateSpot = (spot) => async (dispatch) => {
   console.log(spot, ` <----`);
   const respond = await csrfFetch(`/api/spots/${spot.id}`, {
@@ -114,6 +115,7 @@ export const getCurrUserSpots = () => async (dispatch) => {
   }
 };
 
+// DELETE SPOT
 export const deleteSpot = (spotId) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${spotId}`, {
     method: "DELETE",
@@ -168,6 +170,7 @@ const spotReducer = (state = initialState, action) => {
     }
     case DEL_SPOT: {
       const newState = { ...state };
+      console.log(newState[action.spotId]);
       delete newState[action.spotId];
       return newState;
     }
