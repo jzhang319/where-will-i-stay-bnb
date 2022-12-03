@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createSpot } from "../../store/spot";
 
-const CreateFormModal = () => {
+const CreateFormModal = ({ setShowModa }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [address, setAddress] = useState("");
@@ -35,6 +35,7 @@ const CreateFormModal = () => {
       })
     )
       .then(() => history.push("/"))
+      .then(() => setShowModa(false))
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.error) setErrors(data.errors);

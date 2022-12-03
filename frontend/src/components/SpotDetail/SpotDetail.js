@@ -2,7 +2,7 @@ import "./SpotDetail.css";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getSpotWithId } from "../../store/spot";
+import { deleteSpot, getSpotWithId } from "../../store/spot";
 import defaultImage from "../../img/default-image.webp";
 import UpdateFormModal from "../UpdateFormModal";
 
@@ -32,6 +32,12 @@ const SpotDetail = () => {
     dispatch(getSpotWithId(spotId));
   }, [dispatch]);
 
+  const handleDelete = () => {
+    if (sessionUser && sessionUser.id === spot.ownerId) {
+      dispatch(deleteSpot(spotId));
+    }
+  };
+
   return (
     <div className="spot-detail-container">
       <h1 className="title">{spot.name}</h1>
@@ -47,6 +53,9 @@ const SpotDetail = () => {
       </div>
       <div className="edit-spot-section">
         {sessionUser && sessionUser.id === spot.ownerId && <UpdateFormModal />}
+      </div>
+      <div>
+        {sessionUser && sessionUser.id === spot.ownerId && handleDelete}
       </div>
     </div>
   );
