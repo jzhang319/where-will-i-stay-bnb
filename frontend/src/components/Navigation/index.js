@@ -52,21 +52,22 @@ function Navigation({ isLoaded }) {
     <>
       <div className="nav-section">
         <button className="demo-login-btn" onClick={handleSubmit}>
+          <i class="fa-solid fa-user"></i>
           DEMO-USER
+        </button>
+        <button className="curr-owner-spot-btn" onClick={goNew}>
+          <NavLink exact to="/spots/current">
+            Current Owner Spots
+          </NavLink>
         </button>
         <div className="join-bnb-section">
           {sessionUser && <CreateFormModal />}
         </div>
-        <button className="curr-owner-spot-btn" onClick={goNew}>
-          <NavLink exact to="/spots/current" onClick={goNew}>
-            Current Owner Spots
-          </NavLink>
-        </button>
         <button
           className="menu-btn"
           onClick={() => setShowMenu(showMenu ? false : true)}
         >
-          menu
+          <i class="fa-solid fa-bars"></i>
         </button>
         {showMenu && (
           <ul className="nav-ul">
