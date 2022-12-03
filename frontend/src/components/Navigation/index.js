@@ -54,7 +54,9 @@ function Navigation({ isLoaded }) {
         <button className="demo-login-btn" onClick={handleSubmit}>
           DEMO-USER
         </button>
-        <div className="join-bnb-btn">{sessionUser && <CreateFormModal />}</div>
+        <div className="join-bnb-section">
+          {sessionUser && <CreateFormModal />}
+        </div>
         <button className="curr-owner-spot-btn" onClick={goNew}>
           <NavLink exact to="/spots/current" onClick={goNew}>
             Current Owner Spots

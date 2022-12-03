@@ -8,18 +8,18 @@ div.homepage-container {
   flex-wrap: wrap;
 }
 
-img {
+img{
   max-width: 100%;
   max-height: 100%;
   display: block;
+  max-height: 303px;
 }
 
 div.each-spot{
   display: flex;
   margin: 20px;
   min-width: 250px;
-  max-width: 350px;
-
+  max-width: 320px;
 }
 
 div.city-country {

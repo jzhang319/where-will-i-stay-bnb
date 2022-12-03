@@ -24,7 +24,7 @@ const HomePage = () => {
 
         const date = new Date(spot.updatedAt);
         let currDate = date.toDateString();
-        
+
         return (
           <div className="each-spot">
             <NavLink
