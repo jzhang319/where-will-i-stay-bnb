@@ -51,11 +51,8 @@ const UpdateForm = ({ setShowModal }) => {
 
   const handleDelete = async (e) => {
     e.preventDefault();
-    dispatch(
-      deleteSpot({
-        id: spotId,
-      })
-    );
+    dispatch(deleteSpot(spotId)).then(() => setShowModal(false));
+    history.push("/");
   };
 
   return (

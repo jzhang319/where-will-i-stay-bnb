@@ -106,7 +106,7 @@ export const updateSpot = (spot) => async (dispatch) => {
 
 // GET CURRENT USER - SPOTS
 export const getCurrUserSpots = () => async (dispatch) => {
-  const response = await fetch("/api/spots/current");
+  const response = await csrfFetch("/api/spots/current");
   if (response.ok) {
     const data = await response.json();
     dispatch(getCurrUser(data));
@@ -115,7 +115,7 @@ export const getCurrUserSpots = () => async (dispatch) => {
 };
 
 export const deleteSpot = (spotId) => async (dispatch) => {
-  const response = await fetch(`/api/spots/${spotId}`, {
+  const response = await csrfFetch(`/api/spots/${spotId}`, {
     method: "DELETE",
   });
   if (response.ok) {
