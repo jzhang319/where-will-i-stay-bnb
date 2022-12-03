@@ -32,12 +32,6 @@ const SpotDetail = () => {
     dispatch(getSpotWithId(spotId));
   }, [dispatch]);
 
-  const handleDelete = () => {
-    if (sessionUser && sessionUser.id === spot.ownerId) {
-      dispatch(deleteSpot(spotId));
-    }
-  };
-
   return (
     <div className="spot-detail-container">
       <h1 className="title">{spot.name}</h1>
@@ -53,9 +47,6 @@ const SpotDetail = () => {
       </div>
       <div className="edit-spot-section">
         {sessionUser && sessionUser.id === spot.ownerId && <UpdateFormModal />}
-      </div>
-      <div>
-        {sessionUser && sessionUser.id === spot.ownerId && handleDelete}
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { updateSpot } from "../../store/spot";
+import { updateSpot, deleteSpot } from "../../store/spot";
 import "./UpdateFormModal.css";
 
 const UpdateForm = ({ setShowModal }) => {
@@ -48,6 +48,16 @@ const UpdateForm = ({ setShowModal }) => {
         if (data && data.error) setErrors(data.errors);
       });
   };
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    dispatch(
+      deleteSpot({
+        id: spotId,
+      })
+    );
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-container">
@@ -87,6 +97,9 @@ const UpdateForm = ({ setShowModal }) => {
         </label>
         <button className="update-btn" type="submit">
           UPDATE
+        </button>
+        <button className="delete-btn" onClick={handleDelete}>
+          DELETE Spot
         </button>
       </div>
     </form>
