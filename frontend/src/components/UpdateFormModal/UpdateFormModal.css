@@ -13,6 +13,7 @@
 .update-btn{
   border-radius: 10px;
 }
+
 .update-btn:hover{
   cursor: pointer;
 }
@@ -20,6 +21,7 @@
 .delete-btn{
   border-radius: 10px
 }
+
 .delete-btn:hover{
   cursor: pointer;
 }
