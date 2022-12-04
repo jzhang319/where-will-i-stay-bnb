@@ -26,7 +26,7 @@ const CurrentUserSpots = () => {
         let currDate = date.toDateString();
 
         return (
-          <div className="each-spot">
+          <div key={spot.id} className="each-spot">
             <NavLink
               className="spot-link"
               key={spot.id}

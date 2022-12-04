@@ -1,12 +1,13 @@
 .nav-section {
   display: flex;
   margin: 20px;
-  height: 150px;
-  justify-content: space-evenly;
+  height: 100px;
+  align-items: center;
 }
 
 .menu-btn {
-  margin-left: 50%;
+  position: fixed;
+  margin-left: 90%;
   height: 90px;
   border: 2px solid gray;
   border-radius: 25px;
@@ -26,25 +27,53 @@
 
 ul.nav-ul{
   color: darkgray;
+  position: fixed;
+  margin-left: 78%;
 }
 
 button.demo-login-btn{
   height: 50px;
-  border-radius: 25px;
+  border-radius: 10px;
+  margin-left: 10%;
 }
 button.demo-login-btn:hover{
-  background-color: blue;
+  background-color: rgb(94, 94, 182);
   color: white;
   cursor: pointer;
 }
 
 .curr-owner-spot-btn{
+  margin-left: 5%;
   width: 150px;
   height: 50px;
-  border-radius: 25px;
+  border-radius: 10px;
 }
 .curr-owner-spot-btn:hover{
   background-color: greenyellow;
   color: black;
+  cursor: pointer;
+}
+
+img.logo{
+ width: 64px;
+ height: 64px;
+ display: block;
+}
+
+button.profile-btn{
+  margin-left: 5px;
+  border-radius: 10px;
+  border: 1px;
+}
+
+button.profile-btn:hover {
+  cursor: pointer;
+}
+
+button.logout-btn{
+  border-radius: 10px;
+  border: 1px;
+}
+button.logout-btn:hover {
   cursor: pointer;
 }

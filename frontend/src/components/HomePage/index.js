@@ -26,10 +26,10 @@ const HomePage = () => {
         let currDate = date.toDateString();
 
         return (
-          <div className="each-spot">
+          <div key={spot.id} className="each-spot">
             <NavLink
               className="spot-link"
-              key={spot.id}
+
               to={`/spots/${spot.id}`}
             >
               <div className="spot-img-box">

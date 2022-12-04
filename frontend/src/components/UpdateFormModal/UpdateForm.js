@@ -11,6 +11,7 @@ const UpdateForm = ({ setShowModal }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [hasSubmitted, setHasSubmitted] = useState(false);
   const [errors, setErrors] = useState([]);
 
   const spot = useSelector((state) => state.spot);
@@ -20,11 +21,30 @@ const UpdateForm = ({ setShowModal }) => {
     setName(spot.name);
     setDescription(spot.description);
     setPrice(spot.price);
-  }, [spot]);
+    // const err = [];
+    // if (spot.name.length >= 50)
+    //   err.push("Name can not be longer than 50 characters");
+    // if (spot.description.length > 255) err.push("Only allow 255 characters");
+    // if (spot.price > 10000) err.push("Please enter a value less than 10000");
+    // setErrors(err);
+  }, [spot, spot.name, spot.description, spot.price]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrors([]);
+    // setErrors([]);
+    setHasSubmitted(true);
+    if (errors.length)
+      return (
+        <div>
+          The following errors were found:
+          <ul>
+            {errors.map((error) => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
+        </div>
+      );
+    // alert("Error(s) in the form");
 
     dispatch(
       updateSpot({
@@ -40,7 +60,6 @@ const UpdateForm = ({ setShowModal }) => {
         id: spotId,
       })
     )
-      // (`/spots/${spot.id}`)
       .then(() => setShowModal(false))
 
       .catch(async (res) => {
@@ -51,12 +70,23 @@ const UpdateForm = ({ setShowModal }) => {
 
   const handleDelete = async (e) => {
     e.preventDefault();
-    dispatch(deleteSpot(spotId)).then(() => setShowModal(false));
-    history.push("/");
+    dispatch(deleteSpot(spotId))
+      .then(() => setShowModal(false))
+      .then(() => history.push("/"));
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      {hasSubmitted && errors.length > 0 && (
+        <div>
+          The following errors were found:
+          <ul>
+            {errors.map((error) => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
+        </div>
+      )}
       <div className="form-container">
         <ul>
           {errors.map((error, idx) => (

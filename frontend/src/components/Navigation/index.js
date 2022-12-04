@@ -9,6 +9,7 @@ import "./Navigation.css";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import CurrentUserSpots from "../CurrentUserSpots";
+import logo from "./logo.png";
 
 function Navigation({ isLoaded }) {
   const dispatch = useDispatch();
@@ -51,9 +52,11 @@ function Navigation({ isLoaded }) {
   return (
     <>
       <div className="nav-section">
-        <img src="../../img/logo.png" alt="page-logo" />
+        <NavLink to="/">
+          <img src={logo} alt="page-logo" className="logo" />
+        </NavLink>
         <button className="demo-login-btn" onClick={handleSubmit}>
-          <i class="fa-solid fa-user"></i>
+          <i className="fa-solid fa-user"></i>
           DEMO-USER
         </button>
         <button className="curr-owner-spot-btn" onClick={goNew}>
@@ -68,7 +71,7 @@ function Navigation({ isLoaded }) {
           className="menu-btn"
           onClick={() => setShowMenu(showMenu ? false : true)}
         >
-          <i class="fa-solid fa-bars"></i>
+          <i className="fa-solid fa-bars"></i>
         </button>
         {showMenu && (
           <ul className="nav-ul">
