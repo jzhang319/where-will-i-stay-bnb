@@ -21,12 +21,9 @@ function Navigation({ isLoaded }) {
   } else {
     sessionLinks = (
       <>
-        <li>
+        <a>
           <LoginFormModal />
-        </li>
-        <li>
-          <NavLink to="/signup">Sign Up</NavLink>
-        </li>
+        </a>
       </>
     );
   }
@@ -57,7 +54,7 @@ function Navigation({ isLoaded }) {
         </NavLink>
         <button className="demo-login-btn" onClick={handleSubmit}>
           <i className="fa-solid fa-user"></i>
-          DEMO-USER
+          DEMO-LOGIN
         </button>
         <button className="curr-owner-spot-btn" onClick={goNew}>
           <NavLink exact to="/spots/current">
@@ -66,6 +63,23 @@ function Navigation({ isLoaded }) {
         </button>
         <div className="join-bnb-section">
           {sessionUser && <CreateFormModal />}
+        </div>
+        <div class="dropdown">
+          <button class="dropbtn">
+            <i className="fa-solid fa-bars"></i>
+            <i class="fa-solid fa-user"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="#">
+              <NavLink exact to="/">
+                Home
+              </NavLink>
+            </a>
+            <a href="#">{isLoaded && sessionLinks}</a>
+            <a>
+              <NavLink to="/signup">Sign Up</NavLink>
+            </a>
+          </div>
         </div>
         <button
           className="menu-btn"

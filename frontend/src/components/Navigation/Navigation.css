@@ -9,7 +9,7 @@
   position: fixed;
   margin-left: 90%;
   height: 90px;
-  border: 2px solid gray;
+  border: 1px solid gray;
   border-radius: 25px;
   background: none;
   font-weight: 700;
@@ -33,16 +33,19 @@ ul.nav-ul{
 
 button.demo-login-btn{
   height: 50px;
+  border: none;
   border-radius: 10px;
   margin-left: 10%;
+  padding: 10px;
 }
 button.demo-login-btn:hover{
-  background-color: rgb(94, 94, 182);
+  background-color: rgb(220, 220, 220);
   color: white;
   cursor: pointer;
 }
 
 .curr-owner-spot-btn{
+  border: none;
   margin-left: 5%;
   width: 150px;
   height: 50px;
@@ -76,4 +79,68 @@ button.logout-btn{
 }
 button.logout-btn:hover {
   cursor: pointer;
+}
+
+
+/* Dropdown Button */
+.dropbtn {
+  background-color: white;
+  color: rgb(98, 97, 97);
+  padding: 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 25px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
+}
+.fa-bars{
+  padding-right: 8px;
+}
+.fa-user{
+  padding-left: 8px;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  left: 450px;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 10px;
+  right: 0px;
+
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  border-radius: 10px;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+  border-radius: 10px;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: #d4d4d4;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
 }
