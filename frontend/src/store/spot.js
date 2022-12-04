@@ -1,6 +1,6 @@
-//! Actions
-
 import { csrfFetch } from "./csrf";
+
+//! Actions
 
 const GET_SPOTS = "spots/GET_SPOTS";
 export const getSpots = (spots) => ({
