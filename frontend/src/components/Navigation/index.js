@@ -21,6 +21,7 @@ function Navigation({ isLoaded }) {
   } else {
     sessionLinks = (
       <>
+        <a>{sessionUser && <CreateFormModal />}</a>
         <a>
           <LoginFormModal />
         </a>
@@ -70,12 +71,12 @@ function Navigation({ isLoaded }) {
             <i class="fa-solid fa-user"></i>
           </button>
           <div class="dropdown-content">
-            <a href="#">
+            <a>
               <NavLink exact to="/">
                 Home
               </NavLink>
             </a>
-            <a href="#">{isLoaded && sessionLinks}</a>
+            <a>{isLoaded && sessionLinks}</a>
             <a>
               <NavLink to="/signup">Sign Up</NavLink>
             </a>

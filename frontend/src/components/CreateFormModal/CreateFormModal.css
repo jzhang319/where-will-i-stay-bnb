@@ -1,7 +1,4 @@
 .create-form-btn{
-  width: 150px;
-  background-color: white;
-  height: 50px;
   border-radius: 10px;
   margin-left: 5%;
   border: none;
@@ -9,5 +6,5 @@
 
 .create-form-btn:hover {
   cursor: pointer;
-  background-color: pink;
+  background-color: darkgray
 }

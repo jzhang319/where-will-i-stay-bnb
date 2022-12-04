@@ -17,6 +17,7 @@
   text-transform: uppercase;
   transition: background-color .25s, color .25s;
   cursor: pointer;
+  right: 350px;
 }
 
 .menu-btn:hover {
@@ -28,7 +29,7 @@
 ul.nav-ul{
   color: darkgray;
   position: fixed;
-  margin-left: 78%;
+  right: 430px;
 }
 
 button.demo-login-btn{
@@ -84,6 +85,7 @@ button.logout-btn:hover {
 
 /* Dropdown Button */
 .dropbtn {
+  position: fixed;
   background-color: white;
   color: rgb(98, 97, 97);
   padding: 15px;
@@ -91,6 +93,8 @@ button.logout-btn:hover {
   border: none;
   border-radius: 25px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
+  right: 100px;
+  top: 50px;
 }
 .fa-bars{
   padding-right: 8px;
@@ -101,9 +105,10 @@ button.logout-btn:hover {
 
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
-  position: relative;
+  position: fixed;
   display: inline-block;
-  left: 450px;
+  right: 100px;
+  top: 98px
 }
 
 /* Dropdown Content (Hidden by Default) */
@@ -116,7 +121,6 @@ button.logout-btn:hover {
   z-index: 1;
   border-radius: 10px;
   right: 0px;
-
 }
 
 /* Links inside the dropdown */
