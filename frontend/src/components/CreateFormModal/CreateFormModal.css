@@ -1,10 +1,11 @@
 .create-form-btn{
-  position: fixed;
+  position: absolute;
   border-radius: 10px;
   border: none;
-  height: 30px;
-  right: 220px;
-  top: 60px;
+  width: 120px;
+  height: 40px;
+  right: 200px;
+  top: 55px;
   background-color: white
 }
 

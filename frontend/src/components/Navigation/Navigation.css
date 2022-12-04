@@ -1,12 +1,16 @@
 .nav-section {
   display: flex;
   margin: 20px;
-  height: 100px;
+  padding: 20px;
+  height: 100%;
+  width: 100%;
+  border: 1px lightgray solid;
   align-items: center;
 }
 
 .menu-btn {
-  position: fixed;
+  position: absolute;
+  z-index: 1;
   margin-left: 90%;
   height: 90px;
   border: 1px solid gray;
@@ -28,7 +32,7 @@
 
 ul.nav-ul{
   color: darkgray;
-  position: fixed;
+  position: absolute;
   right: 430px;
 }
 
@@ -85,7 +89,7 @@ button.logout-btn:hover {
 
 /* Dropdown Button */
 .dropbtn {
-  position: fixed;
+  display: relative;
   background-color: white;
   color: rgb(98, 97, 97);
   padding: 15px;
@@ -93,8 +97,7 @@ button.logout-btn:hover {
   border: none;
   border-radius: 25px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
-  right: 100px;
-  top: 50px;
+
 }
 .fa-bars{
   padding-right: 8px;
@@ -105,10 +108,9 @@ button.logout-btn:hover {
 
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
-  position: fixed;
+  position: relative;
   display: inline-block;
-  right: 100px;
-  top: 98px
+  left: 800px;
 }
 
 /* Dropdown Content (Hidden by Default) */
