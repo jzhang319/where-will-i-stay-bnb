@@ -3,9 +3,9 @@ import { csrfFetch } from "./csrf";
 //! Actions
 
 const ADD_BOOKING = "spot/ADD_BOOKING";
-export const addBooking = (booking) => ({
+export const addBooking = (spot) => ({
   type: ADD_BOOKING,
-  booking,
+  booking: spot,
 });
 
 //! Thunks

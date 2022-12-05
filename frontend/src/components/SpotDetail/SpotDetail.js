@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { deleteSpot, getSpotWithId } from "../../store/spot";
 import defaultImage from "../../img/default-image.webp";
 import UpdateFormModal from "../UpdateFormModal";
-
+import BookingForm from "../BookingForm/BookingForm";
 
 const SpotDetail = () => {
   const sessionUser = useSelector((state) => state.session.user);
@@ -50,7 +50,7 @@ const SpotDetail = () => {
         {sessionUser && sessionUser.id === spot.ownerId && <UpdateFormModal />}
       </div>
       <div className="booking-container">
-
+        <BookingForm />
       </div>
     </div>
   );

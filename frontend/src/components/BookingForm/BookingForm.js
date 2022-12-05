@@ -10,11 +10,13 @@ const BookingForm = () => {
   const history = useHistory();
 
   const date = new Date();
+  let currDate = date.toDateString();
+
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [errors, setErrors] = useState([]);
 
-  const spot = useSelector((state) => state.spot);
+  const spot = useSelector((state) => state.spot[spotId]);
 
   useEffect(() => {
     dispatch(createBooking(spot[spotId]));
@@ -22,7 +24,12 @@ const BookingForm = () => {
 
   return (
     <form action="submit">
-      <div></div>
+      <div className="form-container">
+        <label>
+          Start Date
+          <input type="text" />
+        </label>
+      </div>
     </form>
   );
 };
