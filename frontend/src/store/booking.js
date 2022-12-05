@@ -3,18 +3,18 @@ import { csrfFetch } from "./csrf";
 //! Actions
 
 const ADD_BOOKING = "spot/ADD_BOOKING";
-export const addBooking = (spot) => ({
+export const addBooking = (booking) => ({
   type: ADD_BOOKING,
-  spot,
+  booking,
 });
 
 //! Thunks
 
 // CREATE BOOKING
-export const createBooking = (booking) => async (dispatch) => {
-  const { startDate, endDate } = booking;
+export const createBooking = (spot) => async (dispatch) => {
+  const { startDate, endDate } = spot;
 
-  const response = await csrfFetch("apit/spots/:spotId/bookings", {
+  const response = await csrfFetch("api/spots/:spotId/bookings", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -26,7 +26,7 @@ export const createBooking = (booking) => async (dispatch) => {
   });
   if (response.ok) {
     const booking = await response.json();
-    dispatch(addBooking(booking));
+    dispatch(addBooking(spot));
     return booking;
   }
 };
@@ -38,7 +38,7 @@ const bookingReducer = (state = initialState, action) => {
     case ADD_BOOKING: {
       const newState = {
         ...state,
-        [action.spot.id]: { ...action.spot }
+        [action.booking.id]: { ...action.booking },
       };
       return newState;
     }

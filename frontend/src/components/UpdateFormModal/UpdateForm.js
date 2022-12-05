@@ -8,6 +8,7 @@ const UpdateForm = ({ setShowModal }) => {
   const { spotId } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
+  
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");

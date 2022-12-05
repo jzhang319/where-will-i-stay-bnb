@@ -11,7 +11,7 @@
 .menu-btn {
   position: absolute;
   z-index: 1;
-  margin-left: 90%;
+
   height: 90px;
   border: 1px solid gray;
   border-radius: 25px;
@@ -89,7 +89,7 @@ button.logout-btn:hover {
 
 /* Dropdown Button */
 .dropbtn {
-  display: relative;
+  display: fixed;
   background-color: white;
   color: rgb(98, 97, 97);
   padding: 15px;
@@ -97,7 +97,7 @@ button.logout-btn:hover {
   border: none;
   border-radius: 25px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
-
+  right: 10px
 }
 .fa-bars{
   padding-right: 8px;

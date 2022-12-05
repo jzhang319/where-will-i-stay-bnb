@@ -8,18 +8,22 @@ div.homepage-container {
   flex-wrap: wrap;
 }
 
-img{
-  max-width: 100%;
-  max-height: 100%;
-  display: block;
-  max-height: 303px;
-}
-
-div.each-spot{
+div.each-spot {
   display: flex;
   margin: 20px;
   min-width: 250px;
   max-width: 320px;
+
+}
+
+div img{
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  max-height: 303px;
+  width: 320px;
+  height: 337px;
+  border-radius:10px;
 }
 
 div.city-country {

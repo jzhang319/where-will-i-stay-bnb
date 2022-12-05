@@ -6,6 +6,7 @@ import { deleteSpot, getSpotWithId } from "../../store/spot";
 import defaultImage from "../../img/default-image.webp";
 import UpdateFormModal from "../UpdateFormModal";
 
+
 const SpotDetail = () => {
   const sessionUser = useSelector((state) => state.session.user);
   const { spotId } = useParams();
@@ -47,6 +48,9 @@ const SpotDetail = () => {
       </div>
       <div className="edit-spot-section">
         {sessionUser && sessionUser.id === spot.ownerId && <UpdateFormModal />}
+      </div>
+      <div className="booking-container">
+
       </div>
     </div>
   );
