@@ -35,10 +35,12 @@ const BookingForm = () => {
   };
 
   const date1 = new Date(startDate);
+  console.log(startDate, ` <-- startDate`);
+  console.log(date1, ` <-- date1`);
   const date2 = new Date(endDate);
   let difference = date1.getTime() - date2.getTime();
   let total = Math.ceil(difference / (1000 * 3600 * 24));
-  // setTotalDays(total);
+  if (total !== 0) setTotalDays(total);
 
   return (
     <form action="submit">
