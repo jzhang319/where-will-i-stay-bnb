@@ -25,10 +25,24 @@ const BookingForm = () => {
   return (
     <form action="submit">
       <div className="form-container">
-        <label>
-          Start Date
-          <input type="text" />
-        </label>
+        <label for="start">Start date:</label>
+        <input
+          type="date"
+          id="start"
+          name="trip-start"
+          value={currDate}
+          min="2022-01-01"
+          max="2024-12-31"
+        ></input>
+        <label for="end">End date:</label>
+        <input
+          type="date"
+          id="end"
+          name="trip-end"
+          value={currDate}
+          min="2022-01-01"
+          max="2024-12-31"
+        ></input>
       </div>
     </form>
   );
