@@ -9,17 +9,18 @@ const BookingForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const date = new Date();
-  let currDate = date.toDateString();
-
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [totalDays, setTotalDays] = useState(0);
   const [errors, setErrors] = useState([]);
 
   const spot = useSelector((state) => state.spot);
+  const booking = useSelector((state) => state.booking);
 
   useEffect(() => {
-    dispatch(createBooking(spot[spotId]));
+    dispatch(createBooking(spot));
+    console.log(spot, ` <--- from bookingForm`);
+    // console.log(totalDays);
   }, []);
 
   const handleSubmit = async (e) => {
@@ -30,7 +31,14 @@ const BookingForm = () => {
         endDate,
       })
     );
+    history.push(`/spots/${spotId}`);
   };
+
+  const date1 = new Date(startDate);
+  const date2 = new Date(endDate);
+  let difference = date1.getTime() - date2.getTime();
+  let total = Math.ceil(difference / (1000 * 3600 * 24));
+  // setTotalDays(total);
 
   return (
     <form action="submit">
@@ -58,11 +66,10 @@ const BookingForm = () => {
         <div className="spot-detail">
           <div className="price">${spot.price} night</div>
           <div className="pricing">
-            ${spot.price} x {Number(endDate) - Number(startDate)}
+            ${spot.price} x {totalDays}
           </div>
           <div className="total">
-            Total before taxes: $
-            {spot.price * (Number(endDate) - Number(startDate))}
+            Total before taxes: ${spot.price * totalDays}
           </div>
         </div>
         <div className="button-section">

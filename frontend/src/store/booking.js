@@ -3,18 +3,19 @@ import { csrfFetch } from "./csrf";
 //! Actions
 
 const ADD_BOOKING = "spot/ADD_BOOKING";
-export const addBooking = (spot) => ({
+export const addBooking = (booking) => ({
   type: ADD_BOOKING,
-  booking: spot,
+  booking: booking,
 });
 
 //! Thunks
 
 // CREATE BOOKING
 export const createBooking = (spot) => async (dispatch) => {
-  const { startDate, endDate } = spot;
+  console.log(spot, ` <--- booking`);
+  const { startDate, endDate } = booking;
 
-  const response = await csrfFetch("api/spots/:spotId/bookings", {
+  const response = await csrfFetch(`api/spots/${spot.id}/bookings`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -26,7 +27,7 @@ export const createBooking = (spot) => async (dispatch) => {
   });
   if (response.ok) {
     const booking = await response.json();
-    dispatch(addBooking(spot));
+    dispatch(addBooking(booking));
     return booking;
   }
 };
