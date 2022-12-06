@@ -65,12 +65,12 @@ function Navigation({ isLoaded }) {
         <div className="join-bnb-section">
           {sessionUser && <CreateFormModal />}
         </div>
-        <div class="dropdown">
-          <button class="dropbtn">
+        <div className="dropdown">
+          <button className="dropbtn">
             <i className="fa-solid fa-bars"></i>
-            <i class="fa-solid fa-user"></i>
+            <i className="fa-solid fa-user"></i>
           </button>
-          <div class="dropdown-content">
+          <div className="dropdown-content">
             <a>
               <NavLink exact to="/">
                 Home

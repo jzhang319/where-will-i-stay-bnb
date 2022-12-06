@@ -48,7 +48,7 @@ const CreateFormModal = ({ setShowModal }) => {
   // };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="create-form" onSubmit={handleSubmit}>
       <div className="form-container">
         <ul>
           {errors.map((error, idx) => (
@@ -138,7 +138,9 @@ const CreateFormModal = ({ setShowModal }) => {
             required
           />
         </label>
-        <button type="submit">JOIN</button>
+        <button className="join-btn" type="submit">
+          JOIN
+        </button>
       </div>
     </form>
   );

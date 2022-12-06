@@ -6,6 +6,7 @@ import { deleteSpot, getSpotWithId } from "../../store/spot";
 import defaultImage from "../../img/default-image.webp";
 import UpdateFormModal from "../UpdateFormModal";
 import BookingForm from "../BookingForm/BookingForm";
+import CurrentUserBooking from "../CurrentUserBooking/CurrentUserBooking";
 
 const SpotDetail = () => {
   const sessionUser = useSelector((state) => state.session.user);
@@ -49,7 +50,10 @@ const SpotDetail = () => {
       <div className="edit-spot-section">
         {sessionUser && sessionUser.id === spot.ownerId && <UpdateFormModal />}
       </div>
-      <div className="booking-container">
+      <div className="current-user-booking-section">
+        <CurrentUserBooking />
+      </div>
+      <div className="booking-form-section">
         <BookingForm />
       </div>
     </div>

@@ -8,43 +8,40 @@ const UpdateForm = ({ setShowModal }) => {
   const { spotId } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
-  
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
+  const spot = useSelector((state) => state.spot);
+
+  const [name, setName] = useState(spot.name);
+  const [description, setDescription] = useState(spot.description);
+  const [price, setPrice] = useState(spot.price);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [errors, setErrors] = useState([]);
 
-  const spot = useSelector((state) => state.spot);
   // console.log(spot, ` <---`);
+  const err = [];
 
   useEffect(() => {
-    setName(spot.name);
-    setDescription(spot.description);
-    setPrice(spot.price);
-    // const err = [];
-    // if (spot.name.length >= 50)
-    //   err.push("Name can not be longer than 50 characters");
-    // if (spot.description.length > 255) err.push("Only allow 255 characters");
-    // if (spot.price > 10000) err.push("Please enter a value less than 10000");
-    // setErrors(err);
-  }, [spot, spot.name, spot.description, spot.price]);
+    if (name.length >= 50)
+      err.push("Name can not be longer than 50 characters");
+    if (description.length > 255) err.push("Only allow 255 characters");
+    if (price > 10000) err.push("Please enter a value less than 10000");
+    setErrors(err);
+  }, [name, description, price]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     // setErrors([]);
     setHasSubmitted(true);
-    if (errors.length)
-      return (
-        <div>
-          The following errors were found:
-          <ul>
-            {errors.map((error) => (
-              <li key={error}>{error}</li>
-            ))}
-          </ul>
-        </div>
-      );
+    // if (errors.length)
+    //   return (
+    //     <div>
+    //       The following errors were found:
+    //       <ul>
+    //         {errors.map((error) => (
+    //           <li key={error}>{error}</li>
+    //         ))}
+    //       </ul>
+    //     </div>
+    //   );
     // alert("Error(s) in the form");
 
     dispatch(
@@ -77,7 +74,7 @@ const UpdateForm = ({ setShowModal }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="update-form" onSubmit={handleSubmit}>
       {hasSubmitted && errors.length > 0 && (
         <div>
           The following errors were found:

@@ -280,7 +280,8 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
   // console.log(checkDate.length, ` <-------`);
 
   if (checkDate.length > 0 || checkDate.startDate === startDate) {
-    return res.status(403).json({
+    // console.log(1, ` <----`);
+    res.status(403).json({
       message: "Sorry, this spot is already booked for the specified dates",
       statusCode: 403,
       errors: {
@@ -290,6 +291,7 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
     });
   }
   if (endDate < startDate) {
+    // console.log(2, ` <----`);
     return res.status(400).json({
       message: "Validation error",
       statusCode: 400,
@@ -299,7 +301,8 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
     });
   }
   const numId = Number(id);
-  if (user.id === currSpot.ownerId) {
+  if (user.id == currSpot.ownerId) {
+    // console.log(3, ` <----`);
     return res.status(403).json({
       message: "Forbidden",
       statusCode: 403,

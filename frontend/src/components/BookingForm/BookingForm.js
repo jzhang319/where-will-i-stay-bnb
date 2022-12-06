@@ -9,43 +9,87 @@ const BookingForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  // console.log(spotId, ` <-- spotId`);
+
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [totalDays, setTotalDays] = useState(0);
   const [errors, setErrors] = useState([]);
 
-  const spot = useSelector((state) => state.spot);
-  const booking = useSelector((state) => state.booking);
+  // const currDate = new Date();
+  // const bookDate = new Date(startDate);
 
-  useEffect(() => {
-    dispatch(createBooking(spot));
-    console.log(spot, ` <--- from bookingForm`);
-    // console.log(totalDays);
-  }, []);
+  // console.log(currDate.getTime(), ` <-- currDate`);
+  // console.log(bookDate.getTime(), ` <-- bookDate`);
+
+  const spot = useSelector((state) => state.spot);
+  const sessionUser = useSelector((state) => state.session.user);
+
+  // if (sessionUser.id === spot.ownerId) {
+  //   setHidden(false);
+  // }
+
+  // useEffect(() => {
+
+  // }, []);
+
+  // history.push(`/spots/${spotId}`)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(
-      createBooking({
-        startDate,
-        endDate,
-      })
-    );
-    history.push(`/spots/${spotId}`);
+    // if (bookDate.getTime() < currDate.getTime()) {
+    //   return alert("Start date has to be future date");
+    // }
+
+    if (sessionUser.id === spot.ownerId)
+      // alert("Owner cannot reserve their own property");
+      setErrors(["Owner cannot reserve their own property"]);
+    // if (startDate.getTime() === currDate.getTime()) {
+    //   return alert("Start date cannot be the current date");
+    // }
+    else if (!startDate || !endDate) {
+      //  alert("Please enter start date and end date to continue");
+      setErrors(["Please enter start date and end date to continue"]);
+    } else {
+      const data = await dispatch(
+        createBooking({
+          startDate,
+          endDate,
+          spotId,
+        })
+      );
+      console.log(data, ` <-- bookingForm`);
+      if (data) {
+        setErrors([data]);
+      }
+    }
   };
 
-  const date1 = new Date(startDate);
-  console.log(startDate, ` <-- startDate`);
-  console.log(date1, ` <-- date1`);
-  const date2 = new Date(endDate);
-  let difference = date1.getTime() - date2.getTime();
-  let total = Math.ceil(difference / (1000 * 3600 * 24));
-  if (total !== 0) setTotalDays(total);
+  // const date1 = new Date(startDate);
+  // const date2 = new Date(endDate);
+  // console.log(startDate, ` <-- startDate`);
+  // console.log(date1, ` <-- date1`);
+  // let difference = date1.getTime() - date2.getTime();
+  // let total = Math.ceil(difference / (1000 * 3600 * 24));
+  // if (total !== 0) setTotalDays(total);
+  // console.log(date2 - date1, ` <-- difference`);
+  // if (difference === NaN) {
+  //   difference = 0;
+  // } else {
+  //   difference = total;
+  // }
 
   return (
     <form action="submit">
       <div className="form-container">
-        <label for="start">Start date:</label>
+        <ul>
+          {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </ul>
+      </div>
+      <div className="form-container">
+        <label>Start date:</label>
         <input
           type="date"
           id="start"
@@ -55,7 +99,7 @@ const BookingForm = () => {
           min="2022-01-01"
           max="2024-12-31"
         ></input>
-        <label for="end">End date:</label>
+        <label>End date:</label>
         <input
           type="date"
           id="end"
@@ -68,7 +112,7 @@ const BookingForm = () => {
         <div className="spot-detail">
           <div className="price">${spot.price} night</div>
           <div className="pricing">
-            ${spot.price} x {totalDays}
+            ${spot.price} x {totalDays} nights
           </div>
           <div className="total">
             Total before taxes: ${spot.price * totalDays}

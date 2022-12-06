@@ -1,3 +1,21 @@
+.create-form{
+  padding: 20px;
+  width: 400px;
+  height: auto;
+}
+
+.join-btn{
+  height: 50px;
+  width: 100px;
+  margin-top: 20px;
+  border-radius: 10px;
+  border: none;
+}
+.join-btn:hover{
+  cursor: pointer;
+  background-color: rgb(230, 138, 153);
+}
+
 .create-form-btn{
   position: absolute;
   border-radius: 10px;
