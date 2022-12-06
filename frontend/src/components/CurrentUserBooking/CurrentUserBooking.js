@@ -16,17 +16,11 @@ const CurrentUserBooking = () => {
     dispatch(getAllBookings(SpotId));
   },[])
 
-  useEffect(() => {
-    getAllBookings()
-     .then((res) => {
-        setBookings(res);
-      })
-
   return (
     <div className="current-user-booking-container">
       <div>Current User Booking(s):</div>
     </div>
-  );
-};
+  )
+}
 
 export default CurrentUserBooking;
