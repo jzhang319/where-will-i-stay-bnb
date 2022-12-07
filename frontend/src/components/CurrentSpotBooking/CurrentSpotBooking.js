@@ -3,11 +3,11 @@ import { deleteBookingThunk, getBookingsWithSpotId } from "../../store/booking";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
+import UpdateBookingModal from "../UpdateBookingModal";
 
 const CurrentSpotBooking = () => {
   const { spotId } = useParams();
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const [errors, setErrors] = useState([]);
 
@@ -52,6 +52,7 @@ const CurrentSpotBooking = () => {
               <button onClick={(e) => handleDelete(e, booking.id)}>
                 DELETE
               </button>
+              <UpdateBookingModal id={booking.id} />
             </div>
           );
         })}

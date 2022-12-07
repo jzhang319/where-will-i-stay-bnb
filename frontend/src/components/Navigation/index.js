@@ -92,7 +92,7 @@ function Navigation({ isLoaded }) {
             </a>
           </div>
         </div>
-        <button
+        {/* <button
           className="menu-btn"
           onClick={() => setShowMenu(showMenu ? false : true)}
         >
@@ -107,7 +107,7 @@ function Navigation({ isLoaded }) {
               {isLoaded && sessionLinks}
             </li>
           </ul>
-        )}
+        )} */}
       </div>
     </>
   );

@@ -20,14 +20,36 @@ export const deleteBooking = (bookingId) => ({
   bookingId,
 });
 
+const UPDATE_BOOKING = "spot/UPDATE_BOOKING";
+export const updateBooking = (bookingId) => ({
+  type: UPDATE_BOOKING,
+  bookingId,
+});
+
 //! Thunks
+
+// UPDATE
+export const updateBookingThunk = (bookingId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/bookings/${bookingId.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(bookingId),
+  });
+  if (response.ok) {
+    const booking = await response.json();
+    dispatch(updateBooking(booking));
+    return booking;
+  }
+};
 
 // GET BOOKING with SPOT ID
 export const getBookingsWithSpotId = (spotId) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${spotId}/bookings`)
     .then(async (response) => {
       const data = await response.json();
-      console.log(data, ` <--- thunk `);
+      // console.log(data, ` <--- thunk `);
       dispatch(getBookings(data));
       return data;
     })
@@ -58,7 +80,7 @@ export const createBooking = (booking) => async (dispatch) => {
       const booking = await response.json();
       // console.log(booking, ` <---- thunk booking`);
       const { startDate, endDate, spotId, id } = booking;
-      console.log(booking, ` <--- booking from booking.js`);
+      // console.log(booking, ` <--- booking from booking.js`);
       dispatch(addBooking({ startDate, endDate, spotId, id }));
       return booking;
     })
@@ -75,12 +97,6 @@ export const deleteBookingThunk = (bookingId) => async (dispatch) => {
   const response = await csrfFetch(`/api/bookings/${bookingId}`, {
     method: "DELETE",
   });
-  // .then(async (response) => {
-  //   const data = await response.json();
-  //   console.log(data, ` <--- test here`);
-  //   dispatch(deleteBooking());
-  //   return data;
-  // })
   if (response.ok) {
     const booking = await response.json();
     dispatch(deleteBooking(bookingId));
@@ -109,6 +125,11 @@ const bookingReducer = (state = initialState, action) => {
     case DELETE_BOOKING: {
       const newState = { ...state };
       delete newState[action.bookingId];
+      return newState;
+    }
+    case UPDATE_BOOKING: {
+      const newState = { ...state, ...action.bookingId };
+      // console.log(newState, ` <---- update thunk`);
       return newState;
     }
     default:

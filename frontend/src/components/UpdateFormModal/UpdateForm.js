@@ -29,20 +29,8 @@ const UpdateForm = ({ setShowModal }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // setErrors([]);
+
     setHasSubmitted(true);
-    // if (errors.length)
-    //   return (
-    //     <div>
-    //       The following errors were found:
-    //       <ul>
-    //         {errors.map((error) => (
-    //           <li key={error}>{error}</li>
-    //         ))}
-    //       </ul>
-    //     </div>
-    //   );
-    // alert("Error(s) in the form");
 
     dispatch(
       updateSpot({
@@ -62,7 +50,7 @@ const UpdateForm = ({ setShowModal }) => {
 
       .catch(async (res) => {
         const data = await res.json();
-        if (data && data.error) setErrors(data.errors);
+        if (data && data.error) setErrors(data.error);
       });
   };
 
