@@ -21,9 +21,9 @@ export const deleteBooking = (bookingId) => ({
 });
 
 const UPDATE_BOOKING = "spot/UPDATE_BOOKING";
-export const updateBooking = (bookingId) => ({
+export const updateBooking = (booking) => ({
   type: UPDATE_BOOKING,
-  bookingId,
+  booking,
 });
 
 //! Thunks
@@ -128,8 +128,9 @@ const bookingReducer = (state = initialState, action) => {
       return newState;
     }
     case UPDATE_BOOKING: {
-      const newState = { ...state, ...action.bookingId };
+      const newState = { ...state };
       // console.log(newState, ` <---- update thunk`);
+      newState[action.booking.id] = action.booking;
       return newState;
     }
     default:
