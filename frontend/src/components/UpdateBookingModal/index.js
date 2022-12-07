@@ -7,8 +7,8 @@ const UpdateBookingModal = ({ id }) => {
   const [showModal, setShowModal] = useState(false);
   // console.log(id, ` <--- test here`)
   return (
-    <div className="update-booking-btn" onClick={() => setShowModal(true)}>
-      <button>EDIT</button>
+    <div className="update-booking-sec" onClick={() => setShowModal(true)}>
+      <button className="update-booking-btn">EDIT</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <UpdateBookingForm setShowModal={setShowModal} id={id} />

@@ -49,7 +49,7 @@ const CurrentSpotBooking = () => {
               {/* <div className="booking-detail">{booking.id}</div> */}
               <div className="start-date">Booked from: {dateStr1}</div>
               <div className="end-date">Booked Until : {dateStr2}</div>
-              <button onClick={(e) => handleDelete(e, booking.id)}>
+              <button className="current-spot-booking-btn" onClick={(e) => handleDelete(e, booking.id)}>
                 DELETE
               </button>
               <UpdateBookingModal id={booking.id} />
