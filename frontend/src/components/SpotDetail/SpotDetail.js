@@ -50,11 +50,13 @@ const SpotDetail = () => {
       <div className="edit-spot-section">
         {sessionUser && sessionUser.id === spot.ownerId && <UpdateFormModal />}
       </div>
-      <div className="current-user-booking-section">
-        <CurrentSpotBooking />
-      </div>
-      <div className="booking-form-section">
-        <BookingForm />
+      <div className="current-booking-bookingform">
+        <div className="current-user-booking-section">
+          <CurrentSpotBooking />
+        </div>
+        <div className="booking-form-section">
+          <BookingForm />
+        </div>
       </div>
     </div>
   );

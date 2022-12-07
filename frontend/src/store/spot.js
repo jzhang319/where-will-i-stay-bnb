@@ -170,7 +170,7 @@ const spotReducer = (state = initialState, action) => {
     }
     case DEL_SPOT: {
       const newState = { ...state };
-      console.log(newState[action.spotId]);
+      // console.log(newState[action.spotId]);
       delete newState[action.spotId];
       return newState;
     }

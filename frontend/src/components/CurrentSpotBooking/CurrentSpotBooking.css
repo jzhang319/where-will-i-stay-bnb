@@ -1,5 +1,4 @@
 .current-spot-booking-container{
-  margin-top: 10px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -7,6 +6,7 @@
   border-radius: 10px;
   width: 300px;
   height: auto;
+  margin-right: 10px;
 }
 
 .current-booking-title{

@@ -259,7 +259,9 @@ router.get("/", async (req, res) => {
 // POST create a Booking from a Spot based on Spot id
 router.post("/:spotId/bookings", requireAuth, async (req, res) => {
   const id = req.params.spotId;
-  const { startDate, endDate } = req.body;
+  let { startDate, endDate } = req.body;
+  startDate = new Date(startDate);
+  endDate = new Date(endDate);
   // console.log(req.body, ` <-------`);
   const currSpot = await Spot.findByPk(id, {
     include: [{ model: Booking }],
@@ -277,11 +279,25 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
       statusCode: 404,
     });
   }
+  let errors = false;
   // console.log(checkDate.length, ` <-------`);
+  // let date1 = new Date(checkDate.startDate);
+  // let date2 = new Date(startDate);
 
-  if (checkDate.length > 0 || checkDate.startDate === startDate) {
+  checkDate.map((el) => {
+    // console.log(el.startDate, ` <--- test 1`);
+    // console.log(startDate, ` <---- test 2`);
+    // console.log(endDate, ` <---- test 3`);
+
+    if (el.startDate >= startDate && el.startDate <= endDate) {
+      errors = true;
+    }
+  });
+
+  if (errors) {
     // console.log(1, ` <----`);
-    res.status(403).json({
+    // console.log(checkDate.length);
+    return res.status(403).json({
       message: "Sorry, this spot is already booked for the specified dates",
       statusCode: 403,
       errors: {
@@ -384,22 +400,28 @@ router.get("/:spotId/bookings", requireAuth, async (req, res) => {
       delete currBooking.User;
       delete currBooking.Spot;
       delete currBooking.userId;
-      delete currBooking.id;
+      // delete currBooking.id;
       delete currBooking.createdAt;
       delete currBooking.updatedAt;
       nonOwnerArray.push(currBooking);
     }
   }
-
-  // console.log(allBookings, ` <-------`);
-  // console.log(ownerIdnum, ` <-------`);
-  // console.log(ownerArray);
-  if (!ownerArray.length && !nonOwnerArray.length) {
+  if (allBookings === undefined) {
     return res.status(404).json({
       message: "Spot couldn't be found",
       statusCode: 404,
     });
   }
+
+  // console.log(allBookings, ` <-------`);
+  // console.log(ownerIdnum, ` <-------`);
+  // console.log(ownerArray);
+  // if (!ownerArray.length && !nonOwnerArray.length) {
+  //   return res.status(404).json({
+  //     message: "Booking couldn't be found",
+  //     statusCode: 404,
+  //   });
+  // }
   if (user.id !== ownerIdnum) {
     return res.json({
       Bookings: nonOwnerArray,

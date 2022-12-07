@@ -14,12 +14,20 @@ export const getBookings = (booking) => ({
   booking,
 });
 
+const DELETE_BOOKING = "spot/DELETE_BOOKING";
+export const deleteBooking = (bookingId) => ({
+  type: DELETE_BOOKING,
+  bookingId,
+});
+
 //! Thunks
 
+// GET BOOKING with SPOT ID
 export const getBookingsWithSpotId = (spotId) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${spotId}/bookings`)
     .then(async (response) => {
       const data = await response.json();
+      console.log(data, ` <--- thunk `);
       dispatch(getBookings(data));
       return data;
     })
@@ -29,24 +37,12 @@ export const getBookingsWithSpotId = (spotId) => async (dispatch) => {
       dispatch(getBookings({}));
       return data;
     });
-
-  // if (response.status == 404) {
-  //   const data = {};
-  //   dispatch(getBookings(data));
-  //   return data;
-  // } else if (response.ok) {
-  //   const data = await response.json();
-  //   dispatch(getBookings(data));
-  //   return data;
-  // }
 };
 
 // CREATE BOOKING
 export const createBooking = (booking) => async (dispatch) => {
   // console.log(booking, ` <--- booking`);
-
   const { startDate, endDate, spotId } = booking;
-
   // console.log(`before fetch`);
   const response = await csrfFetch(`/api/spots/${spotId}/bookings`, {
     method: "POST",
@@ -60,7 +56,10 @@ export const createBooking = (booking) => async (dispatch) => {
   })
     .then(async (response) => {
       const booking = await response.json();
-      dispatch(addBooking(booking));
+      // console.log(booking, ` <---- thunk booking`);
+      const { startDate, endDate, spotId, id } = booking;
+      console.log(booking, ` <--- booking from booking.js`);
+      dispatch(addBooking({ startDate, endDate, spotId, id }));
       return booking;
     })
     .catch(async (response) => {
@@ -71,6 +70,23 @@ export const createBooking = (booking) => async (dispatch) => {
   return response;
 };
 
+// DELETE BOOKING
+export const deleteBookingThunk = (bookingId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/bookings/${bookingId}`, {
+    method: "DELETE",
+  });
+  // .then(async (response) => {
+  //   const data = await response.json();
+  //   console.log(data, ` <--- test here`);
+  //   dispatch(deleteBooking());
+  //   return data;
+  // })
+  if (response.ok) {
+    const booking = await response.json();
+    dispatch(deleteBooking(bookingId));
+    return booking;
+  }
+};
 const initialState = {};
 
 const bookingReducer = (state = initialState, action) => {
@@ -83,9 +99,16 @@ const bookingReducer = (state = initialState, action) => {
       return newState;
     }
     case GET_BOOKINGS: {
-      const newState = {
-        ...action.booking,
-      };
+      const newState = {};
+      action.booking.Bookings.forEach((booking) => {
+        newState[booking.id] = booking;
+        // console.log(booking, ` <---`);
+      });
+      return newState;
+    }
+    case DELETE_BOOKING: {
+      const newState = { ...state };
+      delete newState[action.bookingId];
       return newState;
     }
     default:

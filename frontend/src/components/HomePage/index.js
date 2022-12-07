@@ -29,7 +29,6 @@ const HomePage = () => {
           <div key={spot.id} className="each-spot">
             <NavLink
               className="spot-link"
-
               to={`/spots/${spot.id}`}
             >
               <div className="spot-img-box">

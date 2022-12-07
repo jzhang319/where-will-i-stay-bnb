@@ -32,7 +32,7 @@ function Navigation({ isLoaded }) {
   const [showMenu, setShowMenu] = useState(false);
   const [errors, setErrors] = useState([]);
 
-  const handleSubmit = (e) => {
+  const handleDemoUser = (e) => {
     let credential = "demo@user.io";
     let password = "password";
     e.preventDefault();
@@ -46,6 +46,12 @@ function Navigation({ isLoaded }) {
   const goNew = () => {
     <CurrentUserSpots />;
   };
+  let hideButton;
+  if (sessionUser) {
+    hideButton = true;
+  } else {
+    hideButton = false;
+  }
 
   return (
     <>
@@ -53,14 +59,18 @@ function Navigation({ isLoaded }) {
         <NavLink to="/">
           <img src={logo} alt="page-logo" className="logo" />
         </NavLink>
-        <button className="demo-login-btn" onClick={handleSubmit}>
-          <i className="fa-solid fa-user"></i>
-          DEMO-LOGIN
-        </button>
         <button className="curr-owner-spot-btn" onClick={goNew}>
           <NavLink exact to="/spots/current">
             Current Owner Spots
           </NavLink>
+        </button>
+        <button
+          hidden={hideButton}
+          className="demo-login-btn"
+          onClick={handleDemoUser}
+        >
+          <i className="fa-solid fa-user"></i>
+          DEMO-LOGIN
         </button>
         <div className="join-bnb-section">
           {sessionUser && <CreateFormModal />}

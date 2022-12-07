@@ -53,15 +53,15 @@ const BookingForm = () => {
     } else {
       const data = await dispatch(
         createBooking({
+          spotId,
           startDate,
           endDate,
-          spotId,
         })
       );
-      // console.log(data, ` <-- bookingForm`);
-      if (data) {
-        setErrors([data]);
-      }
+      console.log(data, ` <-- from bookingForm`);
+      // if (data) {
+      //   setErrors([data]);
+      // }
     }
   };
 
@@ -80,7 +80,7 @@ const BookingForm = () => {
   // }
 
   return (
-    <form action="submit">
+    <form className="booking-form" action="submit">
       <div className="form-container">
         <ul>
           {errors.map((error, idx) => (

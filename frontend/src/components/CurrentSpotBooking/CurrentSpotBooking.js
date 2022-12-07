@@ -1,5 +1,5 @@
 import "./CurrentSpotBooking.css";
-import { getBookingsWithSpotId } from "../../store/booking";
+import { deleteBookingThunk, getBookingsWithSpotId } from "../../store/booking";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
@@ -13,8 +13,8 @@ const CurrentSpotBooking = () => {
 
   // const spot = useSelector((state) => state.spot);
   const sessionUser = useSelector((state) => state.session.user);
-  const allBookings = useSelector((state) => state.booking.Bookings);
-  // console.log(allBookings, ` <-- currentSpotBooking`);
+  const allBookings = useSelector((state) => Object.values(state.booking));
+  // console.log(allBookings, ` <-- currentSpotBooking1`);
 
   // console.log(spotId, ` <-- currSpotBooking`);
 
@@ -23,9 +23,11 @@ const CurrentSpotBooking = () => {
   }, [dispatch, spotId]);
 
   // const data = dispatch(getBookingsWithSpotId(spotId));
-  // if (data) {
-  //   setErrors([data]);
-  // }
+
+  const handleDelete = async (e, bookingId) => {
+    e.preventDefault();
+    dispatch(deleteBookingThunk(bookingId));
+  };
 
   return (
     <div className="current-spot-booking-container">
@@ -44,9 +46,12 @@ const CurrentSpotBooking = () => {
 
           return (
             <div key={booking.id} className="each-booking">
-              <div className="booking-detail">{booking.spotId}</div>
+              <div className="booking-detail">{booking.id}</div>
               <div className="start-date">Booked from: {dateStr1}</div>
               <div className="end-date">Booked Until : {dateStr2}</div>
+              <button onClick={(e) => handleDelete(e, booking.id)}>
+                DELETE
+              </button>
             </div>
           );
         })}
