@@ -46,7 +46,7 @@ const CurrentSpotBooking = () => {
 
           return (
             <div key={booking.id} className="each-booking">
-              <div className="booking-detail">{booking.id}</div>
+              {/* <div className="booking-detail">{booking.id}</div> */}
               <div className="start-date">Booked from: {dateStr1}</div>
               <div className="end-date">Booked Until : {dateStr2}</div>
               <button onClick={(e) => handleDelete(e, booking.id)}>

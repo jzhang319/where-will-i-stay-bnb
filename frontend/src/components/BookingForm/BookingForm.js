@@ -29,9 +29,7 @@ const BookingForm = () => {
   //   setHidden(false);
   // }
 
-  // useEffect(() => {
-
-  // }, []);
+  useEffect(() => {}, []);
 
   // history.push(`/spots/${spotId}`)
 
@@ -44,12 +42,11 @@ const BookingForm = () => {
     if (sessionUser.id === spot.ownerId)
       // alert("Owner cannot reserve their own property");
       setErrors(["Owner cannot reserve their own property"]);
-    // if (startDate.getTime() === currDate.getTime()) {
-    //   return alert("Start date cannot be the current date");
-    // }
     else if (!startDate || !endDate) {
       //  alert("Please enter start date and end date to continue");
       setErrors(["Please enter start date and end date to continue"]);
+    } else if (new Date(startDate) > new Date(endDate)) {
+      setErrors(["Start date cannot be later than end date"]);
     } else {
       const data = await dispatch(
         createBooking({
@@ -60,7 +57,7 @@ const BookingForm = () => {
       );
       console.log(data, ` <-- from bookingForm`);
       // if (data) {
-      //   setErrors([data]);
+      // setErrors([data]);
       // }
     }
   };
