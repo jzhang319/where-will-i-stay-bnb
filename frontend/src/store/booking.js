@@ -65,7 +65,7 @@ export const createBooking = (booking) => async (dispatch) => {
     .catch(async (response) => {
       const data = await response.json();
       // console.log(data);
-      return data.message;
+      return data;
     });
   return response;
 };

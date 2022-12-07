@@ -55,10 +55,10 @@ const BookingForm = () => {
           endDate,
         })
       );
-      console.log(data, ` <-- from bookingForm`);
-      // if (data) {
-      // setErrors([data]);
-      // }
+      // console.log(data, ` <-- from bookingForm`);
+      if (data.statusCode === 403) {
+        setErrors([data.message]);
+      }
     }
   };
 
