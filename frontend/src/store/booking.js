@@ -16,15 +16,29 @@ export const getBookings = (booking) => ({
 
 //! Thunks
 
-export const getAllBookings = (booking) => async (dispatch) => {
-  const { spotId } = booking;
+export const getBookingsWithSpotId = (spotId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spotId}/bookings`)
+    .then(async (response) => {
+      const data = await response.json();
+      dispatch(getBookings(data));
+      return data;
+    })
+    .catch(async (response) => {
+      const data = await response.json();
+      // console.log(data.message, ` <--data from here, thunk`);
+      dispatch(getBookings({}));
+      return data;
+    });
 
-  const response = await csrfFetch(`/api/spots/${spotId}/bookings`);
-  if (response.ok) {
-    const data = await response.json();
-    dispatch(getAllBookings(data));
-    return data;
-  }
+  // if (response.status == 404) {
+  //   const data = {};
+  //   dispatch(getBookings(data));
+  //   return data;
+  // } else if (response.ok) {
+  //   const data = await response.json();
+  //   dispatch(getBookings(data));
+  //   return data;
+  // }
 };
 
 // CREATE BOOKING
@@ -55,12 +69,6 @@ export const createBooking = (booking) => async (dispatch) => {
       return data.message;
     });
   return response;
-  // console.log("after fetch");
-  // if (response.ok) {
-  // } else {
-  //   const data = await response.json();
-  //   console.log(data, ` <--- errors`);
-  // }
 };
 
 const initialState = {};
@@ -76,7 +84,7 @@ const bookingReducer = (state = initialState, action) => {
     }
     case GET_BOOKINGS: {
       const newState = {
-        ...state,
+        ...action.booking,
       };
       return newState;
     }

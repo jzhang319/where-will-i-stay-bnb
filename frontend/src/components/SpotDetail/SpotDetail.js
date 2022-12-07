@@ -6,7 +6,7 @@ import { deleteSpot, getSpotWithId } from "../../store/spot";
 import defaultImage from "../../img/default-image.webp";
 import UpdateFormModal from "../UpdateFormModal";
 import BookingForm from "../BookingForm/BookingForm";
-import CurrentUserBooking from "../CurrentUserBooking/CurrentUserBooking";
+import CurrentSpotBooking from "../CurrentSpotBooking/CurrentSpotBooking";
 
 const SpotDetail = () => {
   const sessionUser = useSelector((state) => state.session.user);
@@ -32,7 +32,7 @@ const SpotDetail = () => {
   useEffect(() => {
     // console.log(spotId);
     dispatch(getSpotWithId(spotId));
-  }, [dispatch]);
+  }, [dispatch, spotId]);
 
   return (
     <div className="spot-detail-container">
@@ -51,7 +51,7 @@ const SpotDetail = () => {
         {sessionUser && sessionUser.id === spot.ownerId && <UpdateFormModal />}
       </div>
       <div className="current-user-booking-section">
-        <CurrentUserBooking />
+        <CurrentSpotBooking />
       </div>
       <div className="booking-form-section">
         <BookingForm />

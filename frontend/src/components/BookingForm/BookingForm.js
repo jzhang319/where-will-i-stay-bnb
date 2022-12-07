@@ -58,7 +58,7 @@ const BookingForm = () => {
           spotId,
         })
       );
-      console.log(data, ` <-- bookingForm`);
+      // console.log(data, ` <-- bookingForm`);
       if (data) {
         setErrors([data]);
       }

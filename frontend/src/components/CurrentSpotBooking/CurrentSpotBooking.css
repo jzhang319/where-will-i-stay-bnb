@@ -1,0 +1,21 @@
+.current-spot-booking-container{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  width: 300px;
+  height: auto;
+}
+
+.current-booking-title{
+  margin: 10px;
+}
+.each-booking{
+  margin: 10px;
+  flex-wrap: wrap;
+  border: 1px solid lightgray;
+  padding: 5px;
+  width: 250px;
+}
