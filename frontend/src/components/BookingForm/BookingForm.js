@@ -13,7 +13,6 @@ const BookingForm = () => {
 
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [totalDays, setTotalDays] = useState(0);
   const [errors, setErrors] = useState([]);
 
   // const currDate = new Date();
@@ -47,7 +46,7 @@ const BookingForm = () => {
       setErrors(["Please enter start date and end date to continue"]);
     } else if (new Date(startDate) > new Date(endDate)) {
       setErrors(["Start date cannot be later than end date"]);
-    } else {
+    } else if (sessionUser && spot) {
       const data = await dispatch(
         createBooking({
           spotId,
@@ -62,19 +61,17 @@ const BookingForm = () => {
     }
   };
 
-  // const date1 = new Date(startDate);
-  // const date2 = new Date(endDate);
+  const date1 = new Date(startDate).getTime();
+  const date2 = new Date(endDate).getTime();
   // console.log(startDate, ` <-- startDate`);
   // console.log(date1, ` <-- date1`);
-  // let difference = date1.getTime() - date2.getTime();
-  // let total = Math.ceil(difference / (1000 * 3600 * 24));
-  // if (total !== 0) setTotalDays(total);
-  // console.log(date2 - date1, ` <-- difference`);
-  // if (difference === NaN) {
-  //   difference = 0;
-  // } else {
-  //   difference = total;
-  // }
+  if (date1 && date2) {
+  }
+  let answer = Math.ceil((date2 - date1) / (1000 * 3600 * 24));
+  if (answer !== Number(answer)) {
+    answer = 0;
+  }
+
 
   return (
     <form className="booking-form" action="submit">
@@ -109,10 +106,10 @@ const BookingForm = () => {
         <div className="spot-detail">
           <div className="price">${spot.price} night</div>
           <div className="pricing">
-            ${spot.price} x {totalDays} nights
+            ${spot.price} x {answer} nights
           </div>
           <div className="total">
-            Total before taxes: ${spot.price * totalDays}
+            Total before taxes: ${spot.price * answer}
           </div>
         </div>
         <div className="button-section">
