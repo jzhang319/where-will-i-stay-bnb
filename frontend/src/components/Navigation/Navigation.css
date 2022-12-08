@@ -1,6 +1,6 @@
 .nav-section {
   display: flex;
-  margin: 20px;
+
   padding: 20px;
   border: 1px lightgray solid;
   align-items: center;
@@ -117,7 +117,7 @@ button.logout-btn:hover {
 .dropdown {
   position: sticky;
   display: inline-block;
-  left: 1380px;
+  left: 1340px;
 }
 
 /* Dropdown Content (Hidden by Default) */
