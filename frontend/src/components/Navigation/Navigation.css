@@ -66,21 +66,33 @@ img.logo{
 }
 
 button.profile-btn{
-  margin-left: 5px;
   border-radius: 10px;
   border: 1px;
+  height: 30px;
+  width: 150px;
+  background-color: white;
+}
+button.home-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 button.profile-btn:hover {
   cursor: pointer;
+  background-color: pink;
 }
 
 button.logout-btn{
   border-radius: 10px;
   border: 1px;
+  height: 30px;
+  width: 150px;
+  background-color: white;
 }
 button.logout-btn:hover {
   cursor: pointer;
+  background-color: pink;
 }
 
 

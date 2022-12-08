@@ -91,7 +91,7 @@ function Navigation({ isLoaded }) {
           </button>
           <div className="dropdown-content">
             <a>
-              <NavLink exact to="/">
+              <NavLink className='home-btn' exact to="/">
                 Home
               </NavLink>
             </a>
