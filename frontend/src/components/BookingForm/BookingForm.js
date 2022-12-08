@@ -116,9 +116,14 @@ const BookingForm = () => {
           </div>
         </div>
         <div className="button-section">
-          <button className="reserve-btn" onClick={handleSubmit}>
-            Reserve
-          </button>
+          {sessionUser && (
+            <button className="reserve-btn" onClick={handleSubmit}>
+              Reserve
+            </button>
+          )}
+          {!sessionUser && (
+            <div className="reminder-btn">Please LOG IN to Reserve</div>
+          )}
         </div>
       </div>
     </form>

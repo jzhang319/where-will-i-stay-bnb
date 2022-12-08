@@ -9,7 +9,7 @@ function CreateFormModal() {
   return (
     <>
       <button className="create-form-btn" onClick={() => setShowModal(true)}>
-        bnb your home
+        Host your home
       </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>

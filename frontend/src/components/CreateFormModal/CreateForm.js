@@ -139,7 +139,7 @@ const CreateFormModal = ({ setShowModal }) => {
           />
         </label>
         <button className="join-btn" type="submit">
-          JOIN
+          HOST
         </button>
       </div>
     </form>

@@ -39,3 +39,21 @@ form.booking-form{
   cursor: pointer;
   color: black;
 }
+
+.reminder-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  background-color: pink;
+  margin: 10px;
+  padding: 5px;
+  height: 40px;
+  text-transform: uppercase;
+}
+/* .reminder-btn:hover{
+  cursor: pointer;
+  color: white;
+  box-shadow: 5px 5px 5px gray;
+} */

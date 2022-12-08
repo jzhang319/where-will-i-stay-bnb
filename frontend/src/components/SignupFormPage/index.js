@@ -34,7 +34,7 @@ function SignupFormPage() {
   };
 
   return (
-    <form className='signup-form' onSubmit={handleSubmit}>
+    <form className="signup-form" onSubmit={handleSubmit}>
       <ul>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
@@ -43,7 +43,7 @@ function SignupFormPage() {
       <label>
         Email
         <input
-          type="text"
+          type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required

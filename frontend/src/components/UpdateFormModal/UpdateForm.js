@@ -108,9 +108,11 @@ const UpdateForm = ({ setShowModal }) => {
             required
           />
         </label>
-        <button className="update-btn" type="submit">
-          UPDATE
-        </button>
+        <div className="update-button-section">
+          <button className="update-btn" type="submit">
+            UPDATE
+          </button>
+        </div>
         <button className="delete-btn" onClick={handleDelete}>
           DELETE Spot
         </button>

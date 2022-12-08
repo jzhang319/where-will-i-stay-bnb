@@ -59,11 +59,15 @@ function Navigation({ isLoaded }) {
         <NavLink to="/">
           <img src={logo} alt="page-logo" className="logo" />
         </NavLink>
-        <button className="curr-owner-spot-btn" onClick={goNew}>
-          <NavLink exact to="/spots/current">
+        <NavLink exact to="/spots/current">
+          <button
+            hidden={!hideButton}
+            className="curr-owner-spot-btn"
+            onClick={goNew}
+          >
             Current Owner Spots
-          </NavLink>
-        </button>
+          </button>
+        </NavLink>
         <button
           hidden={hideButton}
           className="demo-login-btn"

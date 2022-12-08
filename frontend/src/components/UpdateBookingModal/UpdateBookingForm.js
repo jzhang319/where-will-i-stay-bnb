@@ -9,7 +9,10 @@ const UpdateBookingForm = ({ setShowModal, id }) => {
   const { bookingId } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const thisId = useSelector((state) => state.spot.id);
   const booking = useSelector((state) => Object.values(state.booking));
+
   let currBooking;
   booking.map((el) => {
     if (el.id === id) {
@@ -24,7 +27,9 @@ const UpdateBookingForm = ({ setShowModal, id }) => {
   const [endDate, setEndDate] = useState(currBooking.endDate);
   const [errors, setErrors] = useState([]);
 
-  useEffect(() => {}, [currBooking.startDate, currBooking.endDate]);
+  useEffect(() => {
+    
+  }, [currBooking.startDate, currBooking.endDate]);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -39,7 +44,7 @@ const UpdateBookingForm = ({ setShowModal, id }) => {
       .then(() => setShowModal(false))
       .catch(async (res) => {
         const data = await res.json();
-        console.log(data, ` <--- data testing`);
+        // console.log(data, ` <--- data testing`);
       });
 
     // if (data === 403) {
@@ -50,11 +55,11 @@ const UpdateBookingForm = ({ setShowModal, id }) => {
     //   if (data && data.error) setErrors(data.error);
     // });
   };
-  const handleCancel = async (e) => {
-    e.preventDefault();
-    // history.push(`/spots/${}`);
-    // setShowModal(false);
-  };
+  // const handleCancel = (e) => {
+  //   e.preventDefault();
+  //   // history.push(`/spots/${thisId}`);
+  //   setShowModal(false);
+  // };
 
   return (
     <form className="booking-form-modal" action="submit">
@@ -69,8 +74,6 @@ const UpdateBookingForm = ({ setShowModal, id }) => {
         <label>Start date:</label>
         <input
           type="date"
-          id="start"
-          name="trip-start"
           value={startDate}
           onChange={(e) => setStartDate(e.target.value)}
           min="2022-01-01"
@@ -79,8 +82,6 @@ const UpdateBookingForm = ({ setShowModal, id }) => {
         <label>End date:</label>
         <input
           type="date"
-          id="end"
-          name="trip-end"
           value={endDate}
           onChange={(e) => setEndDate(e.target.value)}
           min="2022-01-01"
@@ -90,9 +91,9 @@ const UpdateBookingForm = ({ setShowModal, id }) => {
           <button className="booking-update-btn" onClick={handleUpdate}>
             UPDATE BOOKING
           </button>
-          <button className="booking-cancel-btn" onClick={handleCancel}>
+          {/* <button className="booking-cancel-btn" onClick={() => handleCancel}>
             CANCEL
-          </button>
+          </button> */}
         </div>
       </div>
     </form>

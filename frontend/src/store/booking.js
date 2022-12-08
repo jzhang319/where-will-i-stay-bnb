@@ -56,7 +56,7 @@ export const getBookingsWithSpotId = (spotId) => async (dispatch) => {
     .catch(async (response) => {
       const data = await response.json();
       // console.log(data.message, ` <--data from here, thunk`);
-      dispatch(getBookings({}));
+      // dispatch(getBookings({}));
       return data;
     });
 };
@@ -99,7 +99,9 @@ export const deleteBookingThunk = (bookingId) => async (dispatch) => {
   });
   if (response.ok) {
     const booking = await response.json();
-    dispatch(deleteBooking(bookingId));
+    dispatch(deleteBooking(bookingId)).catch((error) => {
+      console.log(error, ` <--- error from thunk`);
+    });
     return booking;
   }
 };

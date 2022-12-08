@@ -317,7 +317,7 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
     });
   }
   const numId = Number(id);
-  if (user.id == currSpot.ownerId) {
+  if (user.id === currSpot.ownerId) {
     // console.log(3, ` <----`);
     return res.status(403).json({
       message: "Forbidden",
