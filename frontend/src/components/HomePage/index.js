@@ -27,20 +27,19 @@ const HomePage = () => {
 
         return (
           <div key={spot.id} className="each-spot">
-            <NavLink
-              className="spot-link"
-              to={`/spots/${spot.id}`}
-            >
+            <NavLink className="spot-link" to={`/spots/${spot.id}`}>
               <div className="spot-img-box">
                 <img src={spot.previewImage} alt="" />
               </div>
               <div className="spot-info">
-                <div className="city-country">
+                <div key={spot.id} className="city-country">
                   {spot.city},{spot.country}
                 </div>
                 <div className="spot-description">{spot.description}</div>
                 <div className="updated-at">{currDate}</div>
-                <div className="price">${spot.price} night</div>
+                <div key={spot.id} className="price">
+                  ${spot.price} night
+                </div>
               </div>
             </NavLink>
           </div>

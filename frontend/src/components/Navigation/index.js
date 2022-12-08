@@ -53,6 +53,11 @@ function Navigation({ isLoaded }) {
     hideButton = false;
   }
 
+  const logout = (e) => {
+    e.preventDefault();
+    dispatch(sessionActions.logout());
+  };
+
   return (
     <>
       <div className="nav-section">
@@ -92,8 +97,17 @@ function Navigation({ isLoaded }) {
             </a>
             <a>{isLoaded && sessionLinks}</a>
             <a>
-              <NavLink to="/signup">Sign Up</NavLink>
+              {sessionUser && (
+                <button className="logout-btn" onClick={logout}>
+                  Log Out
+                </button>
+              )}
             </a>
+            {!sessionUser && (
+              <a>
+                <NavLink to="/signup">Sign Up</NavLink>
+              </a>
+            )}
           </div>
         </div>
         {/* <button

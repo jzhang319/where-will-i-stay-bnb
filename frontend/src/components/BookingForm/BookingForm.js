@@ -94,7 +94,7 @@ const BookingForm = () => {
           value={startDate}
           onChange={(e) => setStartDate(e.target.value)}
           min="2022-01-01"
-          max="2024-12-31"
+          max="2028-12-31"
         ></input>
         <label>End date:</label>
         <input
@@ -104,7 +104,7 @@ const BookingForm = () => {
           value={endDate}
           onChange={(e) => setEndDate(e.target.value)}
           min="2022-01-01"
-          max="2024-12-31"
+          max="2028-12-31"
         ></input>
         <div className="spot-detail">
           <div className="price">${spot.price} night</div>
