@@ -39,6 +39,7 @@ const CurrentSpotBooking = () => {
       </ul>
       {sessionUser &&
         allBookings?.map((booking) => {
+          
           const date1 = new Date(booking.startDate);
           let dateStr1 = date1.toDateString();
           const date2 = new Date(booking.endDate);

@@ -54,8 +54,8 @@ button.demo-login-btn:hover{
   border-radius: 10px;
 }
 .curr-owner-spot-btn:hover{
-  background-color: greenyellow;
-  color: black;
+  background-color: rgb(255, 143, 162);
+  color: white;
   cursor: pointer;
 }
 
