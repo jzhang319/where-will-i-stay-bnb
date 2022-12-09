@@ -95,34 +95,29 @@ const BookingForm = () => {
         </ul>
       </div>
       <div className="form-container">
-        <label>Start date:</label>
-        <input
-          type="date"
-          id="start"
-          name="trip-start"
-          value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}
-          min="2022-01-01"
-          max="2028-12-31"
-        ></input>
-        <label>End date:</label>
-        <input
-          type="date"
-          id="end"
-          name="trip-end"
-          value={endDate}
-          onChange={(e) => setEndDate(e.target.value)}
-          min="2022-01-01"
-          max="2028-12-31"
-        ></input>
-        <div className="spot-detail">
-          <div className="price">${spot.price} night</div>
-          <div className="pricing">
-            ${spot.price} x {answer} nights
-          </div>
-          <div className="total">
-            Total before taxes: ${spot.price * answer}
-          </div>
+        <div className="dates-section">
+          <label className="name-date">Start date:</label>
+          <input
+            className="booking-date"
+            type="date"
+            id="start"
+            name="trip-start"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+            min="2022-01-01"
+            max="2028-12-31"
+          ></input>
+          <label className="name-date">End date:</label>
+          <input
+            className="booking-date"
+            type="date"
+            id="end"
+            name="trip-end"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+            min="2022-01-01"
+            max="2028-12-31"
+          ></input>
         </div>
         <div className="button-section">
           {sessionUser && (
@@ -133,6 +128,15 @@ const BookingForm = () => {
           {!sessionUser && (
             <div className="reminder-btn">Please LOG IN to Reserve</div>
           )}
+        </div>
+        <div className="spot-detail">
+          <div className="price">${spot.price} night</div>
+          <div className="pricing">
+            ${spot.price} x {answer} nights
+          </div>
+          <div className="total">
+            Total before taxes: ${spot.price * answer}
+          </div>
         </div>
       </div>
     </form>

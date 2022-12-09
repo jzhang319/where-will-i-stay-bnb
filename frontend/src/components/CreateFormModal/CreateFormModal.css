@@ -2,14 +2,21 @@
   padding: 20px;
   width: 400px;
   height: auto;
+  border-radius: 10px;
+}
+.join-btn-section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .join-btn{
   height: 50px;
-  width: 100px;
+  width: 130px;
   margin-top: 20px;
   border-radius: 10px;
   border: none;
+  background-color: white;
 }
 .join-btn:hover{
   cursor: pointer;
@@ -17,14 +24,16 @@
 }
 
 .create-form-btn{
-  position: absolute;
+  grid-area: host-home;
+  display: block;
   border-radius: 10px;
+  background-color: white;
   border: none;
-  width: 150px;
+  width: 130px;
   height: 50px;
-  right: 200px;
+  right: 150px;
   top: 40px;
-  background-color: white
+  margin-left: 20px;
 }
 
 .create-form-btn:hover {

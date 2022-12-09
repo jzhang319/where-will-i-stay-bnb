@@ -2,6 +2,11 @@ import { csrfFetch } from "./csrf";
 
 //! Actions
 
+const EMPTY = "spot/EMPTY";
+export const emptyBookings = () => ({
+  type: EMPTY,
+});
+
 const ADD_BOOKING = "spot/ADD_BOOKING";
 export const addBooking = (booking) => ({
   type: ADD_BOOKING,
@@ -133,6 +138,10 @@ const bookingReducer = (state = initialState, action) => {
       const newState = { ...state };
       // console.log(newState, ` <---- update thunk`);
       newState[action.booking.id] = action.booking;
+      return newState;
+    }
+    case EMPTY: {
+      const newState = {};
       return newState;
     }
     default:

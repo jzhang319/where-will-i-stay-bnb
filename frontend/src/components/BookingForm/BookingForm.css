@@ -1,13 +1,23 @@
 form.booking-form{
-  width: 450px;
-  height: 280px;
+  width: 430px;
+  height: auto;
   border: 1px lightgray solid;
   border-radius: 10px;
   margin-left: 10px;
+  padding: 10px;
+}
+
+.booking-date{
+  padding: 10px;
+}
+.dates-section{
+  display:flex;
+  justify-content: space-between;
 }
 .spot-detail{
   display: block;
   border: 1px lightgray solid;
+  border-radius: 10px
 }
 .price{
   margin: 10px;
@@ -31,7 +41,7 @@ form.booking-form{
   background-color: rgb(252, 107, 131);
   color: white;
   border-radius: 10px;
-  margin-top: 10px;
+  margin: 20px;
   border: 1px solid lightgray;
 }
 

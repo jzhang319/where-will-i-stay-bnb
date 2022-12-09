@@ -16,8 +16,16 @@
   margin: 10px;
   flex-wrap: wrap;
   border: 1px solid lightgray;
-  padding: 5px;
+  border-radius: 10px;;
+  padding: 15px;
   width: 250px;
+}
+
+.start-date{
+  padding: 5px;
+}
+.end-date{
+  padding: 5px;
 }
 
 .current-spot-booking-btn{
@@ -32,4 +40,9 @@
 
 .current-spot-booking-btn:hover{
   color: black;
+}
+
+.update-delete-section{
+  display: flex;
+  justify-content: center;
 }

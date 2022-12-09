@@ -113,9 +113,7 @@ const UpdateForm = ({ setShowModal }) => {
             UPDATE
           </button>
         </div>
-        <button className="delete-btn" onClick={handleDelete}>
-          DELETE Spot
-        </button>
+        
       </div>
     </form>
   );

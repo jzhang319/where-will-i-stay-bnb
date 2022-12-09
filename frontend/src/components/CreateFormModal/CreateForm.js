@@ -138,9 +138,11 @@ const CreateFormModal = ({ setShowModal }) => {
             required
           />
         </label>
-        <button className="join-btn" type="submit">
-          HOST
-        </button>
+        <div className="join-btn-section">
+          <button className="join-btn" type="submit">
+            HOST
+          </button>
+        </div>
       </div>
     </form>
   );

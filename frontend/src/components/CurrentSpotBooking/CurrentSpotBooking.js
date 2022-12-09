@@ -2,7 +2,7 @@ import "./CurrentSpotBooking.css";
 import { deleteBookingThunk, getBookingsWithSpotId } from "../../store/booking";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import UpdateBookingModal from "../UpdateBookingModal";
 
 const CurrentSpotBooking = () => {
@@ -36,6 +36,7 @@ const CurrentSpotBooking = () => {
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
         ))}
+        {allBookings.length === 0 && "No Bookings Found"}
       </ul>
       {sessionUser &&
         allBookings?.map((booking) => {
@@ -43,22 +44,25 @@ const CurrentSpotBooking = () => {
           let dateStr1 = date1.toDateString();
           const date2 = new Date(booking.endDate);
           let dateStr2 = date2.toDateString();
+
           if (booking.spotId === Number(spotId)) {
             return (
               <div key={booking.id} className="each-booking">
-                <div className="booking-detail">Booking ID# {booking.id}</div>
+                {/* <div className="booking-detail">Booking ID# {booking.id}</div>
                 <div className="booking-detail">
                   Booking Spot ID# {booking.spotId}
-                </div>
+                </div> */}
                 <div className="start-date">Booked from: {dateStr1}</div>
                 <div className="end-date">Booked Until : {dateStr2}</div>
-                <button
-                  className="current-spot-booking-btn"
-                  onClick={(e) => handleDelete(e, booking.id)}
-                >
-                  DELETE
-                </button>
-                <UpdateBookingModal id={booking.id} />
+                <div className="update-delete-section">
+                  <UpdateBookingModal id={booking.id} />
+                  <button
+                    className="current-spot-booking-btn"
+                    onClick={(e) => handleDelete(e, booking.id)}
+                  >
+                    DELETE
+                  </button>
+                </div>
               </div>
             );
           }

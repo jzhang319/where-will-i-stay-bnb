@@ -10,6 +10,7 @@ import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import CurrentUserSpots from "../CurrentUserSpots";
 import logo from "./logo.png";
+import { emptyBookings, getBookingsWithSpotId } from "../../store/booking";
 
 function Navigation({ isLoaded }) {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ function Navigation({ isLoaded }) {
   const handleDemoUser = (e) => {
     let credential = "demo@user.io";
     let password = "password";
+
     e.preventDefault();
     return dispatch(sessionActions.login({ credential, password })).catch(
       async (res) => {
@@ -55,6 +57,7 @@ function Navigation({ isLoaded }) {
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
+    dispatch(emptyBookings());
   };
 
   return (
