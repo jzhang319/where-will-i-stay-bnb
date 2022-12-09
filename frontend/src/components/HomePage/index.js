@@ -32,14 +32,12 @@ const HomePage = () => {
                 <img src={spot.previewImage} alt="" />
               </div>
               <div className="spot-info">
-                <div key={spot.id} className="city-country">
+                <div className="city-country">
                   {spot.city},{spot.country}
                 </div>
                 <div className="spot-description">{spot.description}</div>
                 <div className="updated-at">{currDate}</div>
-                <div key={spot.id} className="price">
-                  ${spot.price} night
-                </div>
+                <div className="price">${spot.price} night</div>
               </div>
             </NavLink>
           </div>

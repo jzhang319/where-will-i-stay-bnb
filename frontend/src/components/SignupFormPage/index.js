@@ -23,17 +23,25 @@ function SignupFormPage() {
     if (password === confirmPassword) {
       setErrors([]);
       return dispatch(
-        sessionActions.signup({
-          firstName,
-          lastName,
-          email,
-          username,
-          password,
-        }),
-        history.push("/")
+        sessionActions
+          .signup({
+            firstName,
+            lastName,
+            email,
+            username,
+            password,
+          })
+          .then(() => {
+            history.push("/");
+          })
       ).catch(async (res) => {
         const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
+        console.log(data, ` <-- data from signupForm`);
+        if (data && data.errors) {
+          setErrors(data.errors);
+        } else if (data && data.message) {
+          setErrors([data.message]);
+        }
       });
     }
     return setErrors([

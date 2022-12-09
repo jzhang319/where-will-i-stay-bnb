@@ -51,13 +51,13 @@ export const signup = (user) => async (dispatch) => {
   })
     .then(async (response) => {
       const data = await response.json();
-      console.log(data, ` <--- data from thunk`);
+      // console.log(data, ` <--- data from thunk`);
       dispatch(setUser(data));
       return data;
     })
     .catch(async (response) => {
       const data = await response.json();
-      console.log(data, ` <------ data from error`);
+      // console.log(data.errors, ` <------ data from error`);
       return data;
     });
 };

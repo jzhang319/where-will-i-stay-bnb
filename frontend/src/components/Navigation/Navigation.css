@@ -73,9 +73,9 @@ button.profile-btn{
   background-color: white;
 }
 button.home-btn{
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 }
 
 button.profile-btn:hover {

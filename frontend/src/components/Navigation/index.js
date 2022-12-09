@@ -21,10 +21,9 @@ function Navigation({ isLoaded }) {
   } else {
     sessionLinks = (
       <>
-        <a>{sessionUser && <CreateFormModal />}</a>
-        <a>
-          <LoginFormModal />
-        </a>
+        {sessionUser && <CreateFormModal />}
+
+        <LoginFormModal />
       </>
     );
   }
@@ -90,24 +89,19 @@ function Navigation({ isLoaded }) {
             <i className="fa-solid fa-user"></i>
           </button>
           <div className="dropdown-content">
-            <a>
-              <NavLink className='home-btn' exact to="/">
-                Home
-              </NavLink>
-            </a>
-            <a>{isLoaded && sessionLinks}</a>
-            <a>
-              {sessionUser && (
-                <button className="logout-btn" onClick={logout}>
-                  Log Out
-                </button>
-              )}
-            </a>
-            {!sessionUser && (
-              <a>
-                <NavLink to="/signup">Sign Up</NavLink>
-              </a>
+            <NavLink className="home-btn" exact to="/">
+              Home
+            </NavLink>
+
+            {isLoaded && sessionLinks}
+
+            {sessionUser && (
+              <button className="logout-btn" onClick={logout}>
+                Log Out
+              </button>
             )}
+
+            {!sessionUser && <NavLink to="/signup">Sign Up</NavLink>}
           </div>
         </div>
         {/* <button
