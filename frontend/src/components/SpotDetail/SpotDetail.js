@@ -43,6 +43,10 @@ const SpotDetail = () => {
       <div className="preview-picture">
         <img src={url} alt="" />
       </div>
+      <div className="other-pictures-spot">
+        Other Images:
+        {sessionUser && sessionUser.id === spot.ownerId}
+      </div>
       <div className="spot-details">
         <h2>{spot.description}</h2>
         <h3>${spot.price} night</h3>

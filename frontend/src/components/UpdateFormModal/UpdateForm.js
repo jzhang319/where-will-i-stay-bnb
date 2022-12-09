@@ -54,12 +54,12 @@ const UpdateForm = ({ setShowModal }) => {
       });
   };
 
-  const handleDelete = async (e) => {
-    e.preventDefault();
-    dispatch(deleteSpot(spotId))
-      .then(() => setShowModal(false))
-      .then(() => history.push("/"));
-  };
+  // const handleDelete = async (e) => {
+  //   e.preventDefault();
+  //   dispatch(deleteSpot(spotId))
+  //     .then(() => setShowModal(false))
+  //     .then(() => history.push("/"));
+  // };
 
   return (
     <form className="update-form" onSubmit={handleSubmit}>
@@ -113,7 +113,7 @@ const UpdateForm = ({ setShowModal }) => {
             UPDATE
           </button>
         </div>
-        
+
       </div>
     </form>
   );
