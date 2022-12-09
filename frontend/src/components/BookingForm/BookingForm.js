@@ -34,14 +34,27 @@ const BookingForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // if (bookDate.getTime() < currDate.getTime()) {
-    //   return alert("Start date has to be future date");
-    // }
-
-    if (sessionUser.id === spot.ownerId)
+    const currDate = new Date();
+    let year = currDate.getFullYear();
+    let month = currDate.getMonth();
+    let day = currDate.getDate();
+    if (day < 10) {
+      day = `0${day}`;
+    }
+    if (month < 10) {
+      month = `0${month + 1}`;
+    } else {
+      month = `${month + 1}`;
+    }
+    const newDate = year + "-" + month + "-" + day;
+    console.log(newDate, ` <-- currDate`);
+    console.log(startDate, ` <-- startDate`);
+    if (sessionUser.id === spot.ownerId) {
       // alert("Owner cannot reserve their own property");
       setErrors(["Owner cannot reserve their own property"]);
-    else if (!startDate || !endDate) {
+    } else if (startDate === newDate) {
+      setErrors(["Cannot make booking on the same day"]);
+    } else if (!startDate || !endDate) {
       //  alert("Please enter start date and end date to continue");
       setErrors(["Please enter start date and end date to continue"]);
     } else if (new Date(startDate) > new Date(endDate)) {
@@ -71,7 +84,6 @@ const BookingForm = () => {
   if (answer !== Number(answer)) {
     answer = 0;
   }
-
 
   return (
     <form className="booking-form" action="submit">
