@@ -6,3 +6,27 @@
   color: blue;
   cursor: pointer;
 }
+
+form.login-form{
+  border-radius: 10px;
+  width: 400px;
+  padding: 10px;
+
+}
+.login-btn-section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-btn{
+  height: 40px;
+  width: 70px;
+  background-color: pink;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 10px;
+}
+.login-btn:hover{
+  color: white
+}

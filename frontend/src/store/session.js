@@ -38,18 +38,28 @@ export const restoreUser = () => async (dispatch) => {
 };
 
 export const signup = (user) => async (dispatch) => {
-  const { username, email, password } = user;
+  const { firstName, lastName, username, email, password } = user;
   const response = await csrfFetch("/api/users", {
     method: "POST",
     body: JSON.stringify({
+      firstName,
+      lastName,
       username,
       email,
       password,
     }),
-  });
-  const data = await response.json();
-  dispatch(setUser(data.user));
-  return response;
+  })
+    .then(async (response) => {
+      const data = await response.json();
+      console.log(data, ` <--- data from thunk`);
+      dispatch(setUser(data));
+      return data;
+    })
+    .catch(async (response) => {
+      const data = await response.json();
+      console.log(data, ` <------ data from error`);
+      return data;
+    });
 };
 
 export const logout = () => async (dispatch) => {

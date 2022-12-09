@@ -9,7 +9,24 @@ a {
   font-size: 16px;
 }
 
+form.form-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form.signup-form{
+  width: 500px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 50px;
+  position: absolute;
+  left: 30%
+}
+
 button.sign-up-btn {
+  display: flex;
   border: 0;
   border-radius: 10px;
   background: none;
@@ -18,6 +35,7 @@ button.sign-up-btn {
   text-transform: uppercase;
   transition: background-color .25s, color .25s;
   cursor: pointer;
+  margin: 20px;
 }
 
 button:hover.sign-up-btn {
@@ -25,10 +43,7 @@ button:hover.sign-up-btn {
   color: white;
 }
 
-form.signup-form {
-  margin-top: 100px;
-  flex: 0 0 400px;
-}
+
 
 input {
   border: 0;
