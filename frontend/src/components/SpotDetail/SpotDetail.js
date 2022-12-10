@@ -41,8 +41,11 @@ const SpotDetail = () => {
       <h3>
         {spot.city}, {spot.state}, {spot.country}
       </h3>
-      <div className="preview-picture">
-        <img src={url} alt="" />
+      <div className="picture-section">
+        <div className="preview-picture">
+          <img src={url} alt="" />
+        </div>
+        
       </div>
       <div className="spot-details">
         <h2>{spot.description}</h2>

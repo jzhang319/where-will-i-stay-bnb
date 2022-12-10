@@ -1,5 +1,51 @@
 # <where-will-i-stay-bnb>
 
+## Introduction
+
+where-will-i-stay-bnb is a clone to the airbnb website. It has similar functionality and styling of the actual bnb website.
+
+## List of Technologies
+
+| Frontend           | Backend                |
+| :----------------- | :--------------------- |
+| \*js-cookie        | \*bcryptjs             |
+| \*react            | \*cookie-parser        |
+| \*react-dom        | \*cors                 |
+| \*react-redux      | \*csurf                |
+| \*react-router-dom | \*dotenv               |
+| \*react-scripts    | \*express              |
+| \*redux            | \*express-async-errors |
+| \*redux-thunk      | \*express-validator    |
+|                    | \*helmet               |
+|                    | \*jsonwebtoken         |
+|                    | \*morgan               |
+|                    | \*mysql2               |
+|                    | \*per-env              |
+|                    | \*sequelize            |
+|                    | \*sequelize-cli        |
+
+### Backend
+
+```
+*bcryptjs
+*cookie-parser
+*cors
+*csurf
+*dotenv
+*express
+*express-async-errors
+*express-validator
+*helmet
+*jsonwebtoken
+*morgan
+*mysql2
+*per-env
+*sequelize
+*sequelize-cli
+```
+
+## HomePage
+
 ## schema
 
 ![image](https://user-images.githubusercontent.com/99565823/196004856-0ed91d4b-c9ea-43b3-8dc4-f2a5a917ab2a.png)
