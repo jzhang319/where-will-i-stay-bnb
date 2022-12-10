@@ -5,14 +5,29 @@ import { csrfFetch } from "./csrf";
 const ADD_SPOTIMAGE = "spots/ADD_SPOTIMAGE";
 export const addSpotImage = (spotImage) => ({
   type: ADD_SPOTIMAGE,
-  [spotImage.spotId]: spotImage,
+  spotImage,
 });
 
 //! Thunks
 
-// POST SPOTIMAGE
-export const addSpotImageThunk = (spotId) => async (dispatch) => {
-  const response = await fetch(`/api/spots/${spotId}/images`);
+// POST SPOT IMAGE
+export const addSpotImageThunk = (spotImage) => async (dispatch) => {
+  const { spotId, url, preview } = spotImage;
+  console.log(spotId, ` <-- spotId thunk`);
+  console.log(url, ` <-- url thunk`);
+  console.log(preview, ` <-- preview thunk`);
+
+  const response = await csrfFetch(`/api/spots/${spotId}/images`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      spotId,
+      url,
+      preview,
+    }),
+  });
   if (response.ok) {
     const data = await response.json();
     dispatch(addSpotImage(data));
@@ -27,7 +42,7 @@ const spotImageReducer = (state = initialState, action) => {
     case ADD_SPOTIMAGE: {
       const newState = {
         ...state,
-        [action.spotId]: action.spotImage,
+        [action.spotImage.id]: action.spotImage,
       };
       return newState;
     }

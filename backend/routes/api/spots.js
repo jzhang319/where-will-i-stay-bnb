@@ -363,7 +363,7 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
     preview,
   });
   let obj = newSpotImage.toJSON();
-  delete obj.spotId;
+  // delete obj.spotId;
   delete obj.createdAt;
   delete obj.updatedAt;
   res.json(obj);

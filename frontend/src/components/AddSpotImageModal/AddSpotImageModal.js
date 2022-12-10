@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { addSpotImageThunk } from "../../store/spotImage";
 
-const AddSpotImageForm = ({setShowModal}) => {
+const AddSpotImageForm = ({ setShowModal }) => {
   const { spotId } = useParams();
   const dispatch = useDispatch();
   // const history = useHistory();
-  const spot = useSelector((state) => state.spot);
+
+  // const spot = useSelector((state) => state.spot);
 
   const [url, setUrl] = useState("");
   const [preview, setPreview] = useState(false);
@@ -18,21 +19,21 @@ const AddSpotImageForm = ({setShowModal}) => {
     e.preventDefault();
 
     setHasSubmitted(true);
-  dispatch(
-    addSpotImageThunk({
-      spotId,
-      url,
-      preview,
-    })
-  )
-    .then(() => setShowModal(false))
 
-    .catch(async (res) => {
-      const data = await res.json();
-      if (data && data.error) setErrors(data.error);
-    });
+    dispatch(
+      addSpotImageThunk({
+        spotId,
+        url,
+        preview,
+      })
+    )
+      .then(() => setShowModal(false))
 
-  }
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.error) setErrors(data.error);
+      });
+  };
 
   return (
     <div className="add-spot-image-modal-container">
@@ -56,7 +57,7 @@ const AddSpotImageForm = ({setShowModal}) => {
         </div>
         <div className="update-form-elements">
           <label>
-            Please enter URL of picture:
+            Please enter URL of a picture:
             <input
               type="url"
               value={url}
@@ -64,19 +65,16 @@ const AddSpotImageForm = ({setShowModal}) => {
               required
             />
           </label>
-          <label>
-            Preview:
-            <input
-              type="checkbox"
-              checked={preview}
-              />
-            <input
-              type="radio"
-              value={preview}
-              onChange={(e) => setPreview(e.target.value)}
-              required
-            />
-          </label>
+          <fieldset className="preview-section">
+            <legend>Is this a preview image ?</legend>
+            <div className="preview-answer-section">
+              <select className="ice-cream" name="ice-cream">
+                <option value="">Select One …</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </div>
+          </fieldset>
           <div className="add-image-button-section">
             <button className="add-image-btn" type="submit">
               ADD IMAGE
