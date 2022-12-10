@@ -1,4 +1,4 @@
-# <where-will-i-stay-bnb>
+# < **where-will-i-stay-bnb** >
 
 ## Introduction
 
@@ -24,29 +24,23 @@ where-will-i-stay-bnb is a clone to the airbnb website. It has similar functiona
 |                    | \*sequelize            |
 |                    | \*sequelize-cli        |
 
-### Backend
-
-```
-*bcryptjs
-*cookie-parser
-*cors
-*csurf
-*dotenv
-*express
-*express-async-errors
-*express-validator
-*helmet
-*jsonwebtoken
-*morgan
-*mysql2
-*per-env
-*sequelize
-*sequelize-cli
-```
+# Screenshots
 
 ## HomePage
 
-## schema
+![image](https://cdn.discordapp.com/attachments/950229895341031585/1051213213087309835/image.png)
+
+## Spot Detail Page with Spot Editing and Booking feature
+
+![image](https://cdn.discordapp.com/attachments/950229895341031585/1051213524170461184/image.png)
+
+# Instructions on how to launch application locally
+
+1. Type 'npm install' in the root directory of the application.
+2. Then 'cd' into the front end directory and type 'npm start' to start the frontend server.
+3. Open a second terminal window and 'cd' into the backend directory, then type 'npm start' to start the backend server.
+
+## Schema of the database
 
 ![image](https://user-images.githubusercontent.com/99565823/196004856-0ed91d4b-c9ea-43b3-8dc4-f2a5a917ab2a.png)
 
