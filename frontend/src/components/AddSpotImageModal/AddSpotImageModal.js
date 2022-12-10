@@ -67,6 +67,10 @@ const AddSpotImageForm = ({setShowModal}) => {
           <label>
             Preview:
             <input
+              type="checkbox"
+              checked={preview}
+              />
+            <input
               type="radio"
               value={preview}
               onChange={(e) => setPreview(e.target.value)}

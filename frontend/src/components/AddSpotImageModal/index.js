@@ -1,4 +1,4 @@
-import './AddSpotImageModal.css'
+import "./AddSpotImageModal.css";
 import React, { useState } from "react";
 import { Modal } from "../../context/Modal";
 import AddSpotImageForm from "./AddSpotImageModal";
@@ -23,7 +23,7 @@ function AddSpotImageModal() {
   return (
     <>
       <button className="update-form-btn" onClick={() => setShowModal(true)}>
-        ADD
+        ADD IMAGE
       </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
