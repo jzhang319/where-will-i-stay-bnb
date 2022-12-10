@@ -1,12 +1,13 @@
 .nav-section {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-
+  grid-template-columns: 1fr 1fr 4fr 1fr 1fr;
+  grid-template-rows: 1fr;
   grid-template-areas:
-  "logo current-owner host-home menu-drop-btn";
+  "logo current-owner . . . .host-home menu-drop-btn";
   min-width: 500px;
   padding: 20px;
   border: 1px lightgray solid;
+  align-items: center;
 }
 
 
@@ -58,6 +59,11 @@ button.profile-btn{
   width: 150px;
   background-color: white;
 }
+button.home-btn{
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
 
 button.profile-btn:hover {
   cursor: pointer;
@@ -79,7 +85,7 @@ button.logout-btn:hover {
 
 /* Dropdown Button */
 .dropbtn {
-  grid-area: menu-drop-btn;
+  grid-area: menu-btn;
   background-color: white;
   color: rgb(98, 97, 97);
   padding: 15px;

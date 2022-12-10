@@ -8,23 +8,14 @@ export const addSpotImage = (spotImage) => ({
   spotImage,
 });
 
-const GET_ALL_SPOTIMAGE = "spots/GET_ALL_SPOTIMAGE";
-export const getAllSpotImages = () => ({
-  type: GET_ALL_SPOTIMAGE,
-});
-
 //! Thunks
-// GET ALL SPOT IMAGES
-// export const getAllSpotImagesThunk = () => async(dispatch)=>{
-//   const response = await csrfFetch('/api/spots/')
-// }
 
 // POST SPOT IMAGE
 export const addSpotImageThunk = (spotImage) => async (dispatch) => {
   const { spotId, url, preview } = spotImage;
-  // console.log(spotId, ` <-- spotId thunk`);
-  // console.log(url, ` <-- url thunk`);
-  // console.log(preview, ` <-- preview thunk`);
+  console.log(spotId, ` <-- spotId thunk`);
+  console.log(url, ` <-- url thunk`);
+  console.log(preview, ` <-- preview thunk`);
 
   const response = await csrfFetch(`/api/spots/${spotId}/images`, {
     method: "POST",
