@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { updateSpot, deleteSpot } from "../../store/spot";
+import { updateSpot } from "../../store/spot";
 import "./UpdateFormModal.css";
 
 const UpdateForm = ({ setShowModal }) => {
   const { spotId } = useParams();
   const dispatch = useDispatch();
-  const history = useHistory();
+  // const history = useHistory();
   const spot = useSelector((state) => state.spot);
 
   const [name, setName] = useState(spot.name);
@@ -113,7 +113,6 @@ const UpdateForm = ({ setShowModal }) => {
             UPDATE
           </button>
         </div>
-
       </div>
     </form>
   );

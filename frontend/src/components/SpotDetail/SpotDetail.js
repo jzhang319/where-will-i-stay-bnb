@@ -7,6 +7,7 @@ import defaultImage from "../../img/default-image.webp";
 import UpdateFormModal from "../UpdateFormModal";
 import BookingForm from "../BookingForm/BookingForm";
 import CurrentSpotBooking from "../CurrentSpotBooking/CurrentSpotBooking";
+import AddSpotImageModal from "../AddSpotImageModal";
 
 const SpotDetail = () => {
   const sessionUser = useSelector((state) => state.session.user);
@@ -43,16 +44,18 @@ const SpotDetail = () => {
       <div className="preview-picture">
         <img src={url} alt="" />
       </div>
-      <div className="other-pictures-spot">
-        Other Images:
-        {sessionUser && sessionUser.id === spot.ownerId}
-      </div>
       <div className="spot-details">
         <h2>{spot.description}</h2>
         <h3>${spot.price} night</h3>
       </div>
       <div className="edit-spot-section">
         {sessionUser && sessionUser.id === spot.ownerId && <UpdateFormModal />}
+      </div>
+      <div className="other-pictures-spot">
+        Add Image:
+        {sessionUser && sessionUser.id === spot.ownerId && (
+          <AddSpotImageModal />
+        )}
       </div>
       <div className="current-booking-bookingform">
         <div className="current-user-booking-section">

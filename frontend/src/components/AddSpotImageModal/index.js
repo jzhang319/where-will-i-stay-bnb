@@ -23,7 +23,7 @@ function AddSpotImageModal() {
   return (
     <>
       <button className="update-form-btn" onClick={() => setShowModal(true)}>
-        EDIT
+        ADD
       </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
