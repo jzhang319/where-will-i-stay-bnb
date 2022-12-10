@@ -2,7 +2,7 @@
 
 ## Introduction
 
-where-will-i-stay-bnb is a clone to the airbnb website. It has similar functionality and styling of the actual bnb website.
+where-will-i-stay-bnb is a clone of the airbnb website. It has similar functionality and styling of the actual bnb website.
 
 ## List of Technologies
 
