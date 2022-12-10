@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import LoginFormModal from "../LoginFormModal";
@@ -14,6 +14,8 @@ import { emptyBookings, getBookingsWithSpotId } from "../../store/booking";
 
 function Navigation({ isLoaded }) {
   const dispatch = useDispatch();
+  const history = useHistory();
+
   const sessionUser = useSelector((state) => state.session.user);
 
   let sessionLinks;
@@ -58,6 +60,7 @@ function Navigation({ isLoaded }) {
     e.preventDefault();
     dispatch(sessionActions.logout());
     dispatch(emptyBookings());
+    history.pushState("/");
   };
 
   return (
