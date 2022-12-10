@@ -32,7 +32,7 @@ function SignupFormPage() {
         })
       ).catch(async (res) => {
         const data = await res.json();
-        console.log(data, ` <-- data from signupForm`);
+        // console.log(data, ` <-- data from signupForm`);
         if (data && data.errors) {
           setErrors(data.errors);
         } else if (data && data.message) {
