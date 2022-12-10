@@ -16,6 +16,11 @@ const SpotDetail = () => {
   const dispatch = useDispatch();
   const spot = useSelector((state) => state.spot);
   // spot?.SpotImages?.find((spotImg) => spotImg.preview === true).url
+  const allSpotImages = useSelector((state) => state.spot.SpotImages);
+  console.log(allSpotImages, ` <-- allSpotImages`);
+
+  // const allSpotImagesArr = [...allSpotImages];
+  // console.log(allSpotImagesArr, ` <-- allSpotImagesArr`);
 
   let url;
   (() => {
@@ -45,7 +50,11 @@ const SpotDetail = () => {
         <div className="preview-picture">
           <img src={url} alt="" />
         </div>
-        
+        {/* <div className="other-pictures">
+          {allSpotImages?.map((img) => {
+            return <img key={img.id} url={img.url} />;
+          })}
+        </div> */}
       </div>
       <div className="spot-details">
         <h2>{spot.description}</h2>
