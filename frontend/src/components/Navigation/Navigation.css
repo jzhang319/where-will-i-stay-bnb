@@ -1,16 +1,15 @@
 .nav-section {
   display: grid;
   grid-template-columns: 1fr 1fr 4fr 1fr 1fr;
-  grid-template-rows: 1fr;
+
   grid-template-areas:
   "logo current-owner . . . .host-home menu-drop-btn";
   min-width: 500px;
   padding: 20px;
   border: 1px lightgray solid;
   align-items: center;
+  max-width: 100%;
 }
-
-
 
 ul.nav-ul{
   color: darkgray;
@@ -39,6 +38,7 @@ button.demo-login-btn:hover{
   border-radius: 10px;
   margin: 0;
 }
+
 .curr-owner-spot-btn:hover{
   background-color: rgb(255, 143, 162);
   color: white;
@@ -59,27 +59,21 @@ button.profile-btn{
   width: 150px;
   background-color: white;
 }
-button.home-btn{
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
-}
 
-button.profile-btn:hover {
+.profile-btn:hover {
   cursor: pointer;
   background-color: pink;
 }
 
-button.logout-btn{
+.logout-btn{
   border-radius: 10px;
   border: 1px;
   height: 30px;
   width: 150px;
   background-color: white;
 }
-button.logout-btn:hover {
+.logout-btn:hover {
   cursor: pointer;
-  background-color: pink;
 }
 
 
@@ -105,7 +99,7 @@ button.logout-btn:hover {
 .dropdown {
   grid-area: menu-btn;
   position: sticky;
-  display: inline-block;
+
 
 }
 

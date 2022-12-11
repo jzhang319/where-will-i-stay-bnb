@@ -102,9 +102,9 @@ function Navigation({ isLoaded }) {
             {isLoaded && sessionLinks}
 
             {sessionUser && (
-              <button className="logout-btn" onClick={logout}>
+              <a className="logout-btn" onClick={logout}>
                 Log Out
-              </button>
+              </a>
             )}
 
             {!sessionUser && <NavLink to="/signup">Sign Up</NavLink>}
