@@ -51,11 +51,18 @@ const SpotDetail = () => {
       </h3>
       <div className="picture-section">
         <div className="preview-picture">
-          <img className="preview-picture-itself" src={url} />
+          <img className="preview-picture-itself" src={url} alt={spot.name} />
         </div>
         <div className="other-pictures">
           {otherImgArr?.map((img) => {
-            return <img className="smaller-pictures" key={img.id} src={img.url} />;
+            return (
+              <img
+                className="smaller-pictures"
+                key={img.id}
+                src={img.url}
+                alt={spot.name}
+              />
+            );
           })}
         </div>
       </div>
