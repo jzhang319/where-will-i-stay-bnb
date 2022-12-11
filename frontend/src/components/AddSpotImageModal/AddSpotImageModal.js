@@ -11,7 +11,7 @@ const AddSpotImageForm = ({ setShowModal }) => {
   // const spot = useSelector((state) => state.spot);
 
   const [url, setUrl] = useState("");
-  const [preview, setPreview] = useState(false);
+  const [preview, setPreview] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [errors, setErrors] = useState([]);
 
@@ -68,10 +68,14 @@ const AddSpotImageForm = ({ setShowModal }) => {
           <fieldset className="preview-section">
             <legend>Is this a preview image ?</legend>
             <div className="preview-answer-section">
-              <select className="ice-cream" name="ice-cream">
+              <select
+                className="preview-selection"
+                onChange={(e) => setPreview(e.target.value)}
+                value={preview}
+              >
                 <option value="">Select One …</option>
-                <option value="true">Yes</option>
-                <option value="false">No</option>
+                <option value={true}>Yes</option>
+                <option value={false}>No</option>
               </select>
             </div>
           </fieldset>

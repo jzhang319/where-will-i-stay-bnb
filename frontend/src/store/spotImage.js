@@ -13,9 +13,9 @@ export const addSpotImage = (spotImage) => ({
 // POST SPOT IMAGE
 export const addSpotImageThunk = (spotImage) => async (dispatch) => {
   const { spotId, url, preview } = spotImage;
-  console.log(spotId, ` <-- spotId thunk`);
-  console.log(url, ` <-- url thunk`);
-  console.log(preview, ` <-- preview thunk`);
+  // console.log(spotId, ` <-- spotId thunk`);
+  // console.log(url, ` <-- url thunk`);
+  // console.log(preview, ` <-- preview thunk`);
 
   const response = await csrfFetch(`/api/spots/${spotId}/images`, {
     method: "POST",

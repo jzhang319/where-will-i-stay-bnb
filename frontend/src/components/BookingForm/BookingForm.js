@@ -120,7 +120,7 @@ const BookingForm = () => {
           ></input>
         </div>
         <div className="button-section">
-          {sessionUser.id === spot.ownerId}
+          {sessionUser?.id === spot?.ownerId}
           {sessionUser && (
             <button className="reserve-btn" onClick={handleSubmit}>
               Reserve

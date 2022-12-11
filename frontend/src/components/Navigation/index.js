@@ -60,7 +60,7 @@ function Navigation({ isLoaded }) {
     e.preventDefault();
     dispatch(sessionActions.logout());
     dispatch(emptyBookings());
-    history.pushState("/");
+    // history.pushState("/");
   };
 
   return (

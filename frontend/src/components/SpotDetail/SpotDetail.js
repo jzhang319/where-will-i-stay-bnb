@@ -33,7 +33,7 @@ const SpotDetail = () => {
   useEffect(() => {
     // console.log(spotId);
     dispatch(getSpotWithId(spotId));
-  }, [dispatch, spotId]);
+  }, [dispatch, spotId, url]);
 
   return (
     <div className="spot-detail-container">
@@ -45,7 +45,6 @@ const SpotDetail = () => {
         <div className="preview-picture">
           <img src={url} alt="" />
         </div>
-        
       </div>
       <div className="spot-details">
         <h2>{spot.description}</h2>
