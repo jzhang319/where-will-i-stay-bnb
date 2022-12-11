@@ -1,10 +1,11 @@
 .modal-login-btn{
   border-radius: 5px;
+  position: relative;
 }
 
 .modal-login-btn:hover{
-  color: blue;
   cursor: pointer;
+  background-color: lightgray;
 }
 
 form.login-form{

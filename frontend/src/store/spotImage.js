@@ -1,4 +1,6 @@
 import { csrfFetch } from "./csrf";
+import { getAllSpots, getSpotWithId } from "./spot";
+import { useDispatch } from "react-redux";
 
 //! Actions
 
@@ -31,6 +33,7 @@ export const addSpotImageThunk = (spotImage) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     dispatch(addSpotImage(data));
+    dispatch(getSpotWithId(spotId));
     return data;
   }
 };
