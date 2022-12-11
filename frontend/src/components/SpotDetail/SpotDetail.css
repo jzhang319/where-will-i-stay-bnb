@@ -2,3 +2,27 @@
   display:flex;
   justify-content: center;
 }
+
+.picture-section {
+  display: flex;
+  margin: 0;
+  padding: 0;;
+  box-sizing: border-box;
+}
+.preview-picture{
+  width: 400px;
+}
+.preview-picture-itself{
+  width: 400px;
+  height: auto;
+  border-radius: 10px;
+  margin: 0;
+}
+.smaller-pictures{
+  display: flex;
+  flex-direction: row;
+  width: 200px;
+  height: auto;
+  border-radius: 10px;
+  margin: 5px;
+}

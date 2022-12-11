@@ -47,8 +47,8 @@ const BookingForm = () => {
       month = `${month + 1}`;
     }
     const newDate = year + "-" + month + "-" + day;
-    console.log(newDate, ` <-- currDate`);
-    console.log(startDate, ` <-- startDate`);
+    // console.log(newDate, ` <-- currDate`);
+    // console.log(startDate, ` <-- startDate`);
     if (sessionUser.id === spot.ownerId) {
       // alert("Owner cannot reserve their own property");
       setErrors(["Owner cannot reserve their own property"]);

@@ -29,11 +29,19 @@ const SpotDetail = () => {
     }
   })();
 
+  const otherImgArr = [];
+  spot?.SpotImages?.map((img) => {
+    if (img.preview === false) {
+      otherImgArr.push(img);
+    }
+  });
+  console.log(otherImgArr, ` <-- otherImgArr`);
+
   // console.log(spot, ` <---`);
   useEffect(() => {
     // console.log(spotId);
     dispatch(getSpotWithId(spotId));
-  }, [dispatch, spotId, url]);
+  }, [dispatch, spotId]);
 
   return (
     <div className="spot-detail-container">
@@ -43,7 +51,12 @@ const SpotDetail = () => {
       </h3>
       <div className="picture-section">
         <div className="preview-picture">
-          <img src={url} alt="" />
+          <img className="preview-picture-itself" src={url} />
+        </div>
+        <div className="other-pictures">
+          {otherImgArr?.map((img) => {
+            return <img className="smaller-pictures" key={img.id} src={img.url} />;
+          })}
         </div>
       </div>
       <div className="spot-details">
