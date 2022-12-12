@@ -104,8 +104,9 @@ export const deleteBookingThunk = (bookingId) => async (dispatch) => {
   });
   if (response.ok) {
     const booking = await response.json();
-    dispatch(deleteBooking(bookingId))?.catch((error) => {
+    dispatch(deleteBooking(bookingId))?.catch(async (error) => {
       console.log(error, ` <--- error from thunk`);
+      return error;
     });
     return booking;
   }

@@ -26,7 +26,15 @@ const CurrentSpotBooking = () => {
 
   const handleDelete = async (e, bookingId) => {
     e.preventDefault();
-    dispatch(deleteBookingThunk(bookingId));
+    dispatch(deleteBookingThunk(bookingId)).catch(async (response) => {
+      const data = await response.json();
+      // console.log(data, ` <-- data from currentSpotBooking`);
+      if (data && data.errors) {
+        setErrors(data.errors);
+      } else if (data && data.message) {
+        setErrors([data.message]);
+      }
+    });
   };
 
   return (
@@ -34,7 +42,7 @@ const CurrentSpotBooking = () => {
       <div className="current-booking-title">Your Current Booking(s):</div>
       <ul>
         {errors.map((error, idx) => (
-          <li key={idx}>{error}</li>
+          <li className="error-list" key={idx}>{error}</li>
         ))}
         {allBookings.length === 0 && "No Bookings Found"}
       </ul>

@@ -59,6 +59,8 @@ const BookingForm = () => {
       setErrors(["Please enter start date and end date to continue"]);
     } else if (new Date(startDate) > new Date(endDate)) {
       setErrors(["Start date cannot be later than end date"]);
+    } else if (new Date(startDate) < currDate) {
+      setErrors(["Cannot make bookings in the past"]);
     } else if (sessionUser && spot) {
       const data = await dispatch(
         createBooking({
