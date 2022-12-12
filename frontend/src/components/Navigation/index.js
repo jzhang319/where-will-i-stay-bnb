@@ -106,7 +106,6 @@ function Navigation({ isLoaded }) {
                 Log Out
               </a>
             )}
-
             {!sessionUser && <NavLink to="/signup">Sign Up</NavLink>}
           </div>
         </div>

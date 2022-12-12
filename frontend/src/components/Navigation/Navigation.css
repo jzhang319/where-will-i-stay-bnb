@@ -1,6 +1,6 @@
 .nav-section {
   display: grid;
-  grid-template-columns: 1fr 1fr 4fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-areas:
   'logo current-owner . . . . host-home menu-drop-btn';
   min-width: 500px;

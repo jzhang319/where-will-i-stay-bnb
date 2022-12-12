@@ -18,11 +18,11 @@ function SignupFormPage() {
 
   if (sessionUser) return <Redirect to="/" />;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (password === confirmPassword) {
       setErrors([]);
-      return dispatch(
+      const response = await dispatch(
         sessionActions.signup({
           firstName,
           lastName,
@@ -30,19 +30,28 @@ function SignupFormPage() {
           username,
           password,
         })
-      ).catch(async (res) => {
-        const data = await res.json();
-        // console.log(data, ` <-- data from signupForm`);
-        if (data && data.errors) {
-          setErrors(data.errors);
-        } else if (data && data.message) {
-          setErrors([data.message]);
-        }
-      });
+      );
+
+      // console.log(response, ` <-- response`);
+      if (response.statusCode === 403) {
+        setErrors([response.message]);
+      }
+      //     .catch(async (res) => {
+      //       const data = await res.json();
+      //       console.log(res, ` <-- data from signupForm`);
+      //       if (data && data.errors) {
+      //         setErrors(data.errors);
+      //       } else if (data && data.message) {
+      //         setErrors([data.message]);
+      //       }
+      //     });
+      // } else if (password !== confirmPassword) {
+      //   setErrors(["Passwords don't match"]);
+    } else {
+      return setErrors([
+        "Confirm Password field must be the same as the Password field",
+      ]);
     }
-    return setErrors([
-      "Confirm Password field must be the same as the Password field",
-    ]);
   };
 
   return (
