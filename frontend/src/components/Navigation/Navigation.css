@@ -1,9 +1,8 @@
 .nav-section {
   display: grid;
   grid-template-columns: 1fr 1fr 4fr 1fr 1fr;
-
   grid-template-areas:
-  "logo current-owner . . . .host-home menu-drop-btn";
+  'logo current-owner . . . . host-home menu-drop-btn';
   min-width: 500px;
   padding: 20px;
   border: 1px lightgray solid;
@@ -11,11 +10,7 @@
   max-width: 100%;
 }
 
-ul.nav-ul{
-  color: darkgray;
-  position: absolute;
-  right: 430px;
-}
+
 
 button.demo-login-btn{
   height: 50px;
@@ -76,10 +71,14 @@ button.profile-btn{
   cursor: pointer;
 }
 
+.create-form-btn{
+  grid-area: host-home;
+
+}
 
 /* Dropdown Button */
 .dropbtn {
-  grid-area: menu-btn;
+  grid-area: menu-drop-btn;
   background-color: white;
   color: rgb(98, 97, 97);
   padding: 15px;

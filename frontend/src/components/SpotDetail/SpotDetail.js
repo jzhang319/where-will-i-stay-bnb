@@ -45,10 +45,12 @@ const SpotDetail = () => {
 
   return (
     <div className="spot-detail-container">
-      <h1 className="title">{spot.name}</h1>
-      <h3>
-        {spot.city}, {spot.state}, {spot.country}
-      </h3>
+      <div className="h1-city-info-container">
+        <h1 className="title">{spot.name}</h1>
+        <h3>
+          {spot.city}, {spot.state}, {spot.country}
+        </h3>
+      </div>
       <div className="picture-section">
         <div className="preview-picture">
           <img className="preview-picture-itself" src={url} alt={spot.name} />
@@ -66,25 +68,32 @@ const SpotDetail = () => {
           })}
         </div>
       </div>
-      <div className="spot-details">
-        <h2>{spot.description}</h2>
-        <h3>${spot.price} night</h3>
-      </div>
-      <div className="edit-spot-section">
-        {sessionUser && sessionUser.id === spot.ownerId && <UpdateFormModal />}
-      </div>
-      <div className="other-pictures-spot">
-        Add Image:
-        {sessionUser && sessionUser.id === spot.ownerId && (
-          <AddSpotImageModal />
-        )}
-      </div>
-      <div className="current-booking-bookingform">
-        <div className="current-user-booking-section">
-          <CurrentSpotBooking />
+
+      <div className="whole-info-container">
+        <div className="stuff-before-bookings">
+          <div className="spot-details">
+            <h2>{spot.description}</h2>
+            <h3>${spot.price} night</h3>
+          </div>
+          <div className="edit-spot-section">
+            {sessionUser && sessionUser.id === spot.ownerId && (
+              <UpdateFormModal />
+            )}
+          </div>
+          <div className="other-pictures-spot">
+            Add Image:
+            {sessionUser && sessionUser.id === spot.ownerId && (
+              <AddSpotImageModal />
+            )}
+          </div>
         </div>
-        <div className="booking-form-section">
-          <BookingForm />
+        <div className="current-booking-bookingform">
+          <div className="current-user-booking-section">
+            <CurrentSpotBooking />
+          </div>
+          <div className="booking-form-section">
+            <BookingForm />
+          </div>
         </div>
       </div>
     </div>

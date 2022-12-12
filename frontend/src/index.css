@@ -1,15 +1,13 @@
 /* TODO Add site wide styles */
 
-html{
+body{
   min-width: 450px;
-  max-width: 1475px;
+  max-width: 100%;
   object-fit: scale-down;
 }
 
 form {
-  border: 5px;
-  border-style: solid;
-
+  border: 5px solid lightgray;
 }
 
 i {
