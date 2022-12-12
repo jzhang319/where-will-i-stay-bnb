@@ -22,6 +22,7 @@ function AddSpotImageModal() {
 
   return (
     <>
+      Add Image:
       <button className="update-form-btn" onClick={() => setShowModal(true)}>
         ADD IMAGE
       </button>

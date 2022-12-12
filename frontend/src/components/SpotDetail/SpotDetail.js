@@ -81,7 +81,6 @@ const SpotDetail = () => {
             )}
           </div>
           <div className="other-pictures-spot">
-            Add Image:
             {sessionUser && sessionUser.id === spot.ownerId && (
               <AddSpotImageModal />
             )}
