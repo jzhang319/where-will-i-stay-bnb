@@ -35,7 +35,7 @@ const SpotDetail = () => {
       otherImgArr.push(img);
     }
   });
-  console.log(otherImgArr, ` <-- otherImgArr`);
+  // console.log(otherImgArr, ` <-- otherImgArr`);
 
   // console.log(spot, ` <---`);
   useEffect(() => {

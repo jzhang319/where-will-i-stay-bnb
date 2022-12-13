@@ -74,7 +74,7 @@ const BookingForm = () => {
         setErrors([data.message]);
       }
     }
-  };
+  }; 
 
   const date1 = new Date(startDate).getTime();
   const date2 = new Date(endDate).getTime();
