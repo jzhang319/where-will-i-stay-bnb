@@ -47,7 +47,7 @@ const SpotDetail = () => {
     <div className="spot-detail-container">
       <div className="h1-city-info-container">
         <h1 className="title">{spot.name}</h1>
-        <h3>
+        <h3 className="info">
           {spot.city}, {spot.state}, {spot.country}
         </h3>
       </div>
@@ -68,13 +68,15 @@ const SpotDetail = () => {
           })}
         </div>
       </div>
+      <div className="spot-details-container">
+        <div className="spot-details">
+          <h2>{spot.description}</h2>
+          <h3>${spot.price} night</h3>
+        </div>
+      </div>
 
       <div className="whole-info-container">
         <div className="stuff-before-bookings">
-          <div className="spot-details">
-            <h2>{spot.description}</h2>
-            <h3>${spot.price} night</h3>
-          </div>
           <div className="edit-spot-section">
             {sessionUser && sessionUser.id === spot.ownerId && (
               <UpdateFormModal />

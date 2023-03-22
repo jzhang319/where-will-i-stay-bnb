@@ -6,6 +6,10 @@ body{
   object-fit: scale-down;
 }
 
+div{
+  font-family: 'Roboto', sans-serif;
+}
+
 form {
   border: 5px solid lightgray;
 }

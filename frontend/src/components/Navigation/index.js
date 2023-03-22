@@ -68,6 +68,7 @@ function Navigation({ isLoaded }) {
       <div className="nav-section">
         <NavLink to="/">
           <img src={logo} alt="page-logo" className="logo" />
+        where-will-i-stay-bnb
         </NavLink>
         <NavLink exact to="/spots/current">
           <button

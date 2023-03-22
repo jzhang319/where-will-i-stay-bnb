@@ -2,12 +2,27 @@
   display:flex;
   justify-content: center;
 }
+/* .spot-detail-container{
+  color: red;
+} */
 .h1-city-info-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100%;
+}
+.title {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 650px;
+}
+.info {
+   display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 650px;
 }
 .picture-section {
   display: flex;
@@ -15,29 +30,48 @@
   height: 350px;
   width: 100%;
 }
+.spot-details-container{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+}
+.spot-details{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 650px;
+}
+
 .preview-picture{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   width: 420px;
-  height: 400px;
+  height: 350px;
 }
 .preview-picture-itself{
   width: 100%;
+  height: 100%;
   object-fit: cover;
+
 }
 .other-pictures {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
+  height: 350px;
 }
+
 .smaller-pictures{
+  object-fit: cover;
   display: flex;
   flex-direction: row;
-  width: 225px;
-  height: auto;
+  width: 250px;
+  height: 175px;
   border-radius: 10px;
   margin-left:5px;
-  margin-bottom: 5px;
+
 }
 
 .whole-info-container{
@@ -46,10 +80,6 @@
 
 }
 
-.stuff-before-bookings{
-  width: 400px;
-  box-sizing: border-box;
-}
 .edit-spot-section{
   margin-bottom: 20px;
 }

@@ -33,7 +33,7 @@ const CurrentUserSpots = () => {
               to={`/spots/${spot.id}`}
             >
               <div className="spot-img-box">
-                <img src={spot.previewImage} alt="" />
+                <img className="img-itself" src={spot.previewImage} alt="" />
               </div>
               <div className="spot-info">
                 <div className="city-country">
