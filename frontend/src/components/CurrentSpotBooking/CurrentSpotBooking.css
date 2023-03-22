@@ -31,15 +31,17 @@
 .current-spot-booking-btn{
   margin: 10px;
   cursor: pointer;
-  background-color: rgb(255, 130, 151);
+  /* background-color: rgb(255, 130, 151); */
   border-radius: 10px;
   border: 1px solid lightgray;
-  color: white;
+  color: black;
   padding: 10px;
 }
 
 .current-spot-booking-btn:hover{
-  color: black;
+  cursor: pointer;
+  background-color: pink;
+  color: white;
 }
 
 .update-delete-section{
