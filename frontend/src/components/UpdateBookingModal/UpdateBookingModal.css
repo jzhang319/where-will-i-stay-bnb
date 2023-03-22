@@ -38,6 +38,6 @@
 }
 .update-booking-btn:hover{
   cursor: pointer;
-  background-color: pink;
+  background-color: rgb(255, 143, 162);
   color: white;
 }
