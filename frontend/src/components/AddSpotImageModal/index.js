@@ -31,9 +31,9 @@ function AddSpotImageModal() {
           <AddSpotImageForm setShowModal={setShowModal} />
         </Modal>
       )}
-      <button className="delete-btn" onClick={handleDelete}>
+      {/* <button className="delete-btn" onClick={handleDelete}>
         DELETE IMAGE
-      </button>
+      </button> */}
     </>
   );
 }

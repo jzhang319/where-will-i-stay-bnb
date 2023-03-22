@@ -8,6 +8,7 @@ import UpdateFormModal from "../UpdateFormModal";
 import BookingForm from "../BookingForm/BookingForm";
 import CurrentSpotBooking from "../CurrentSpotBooking/CurrentSpotBooking";
 import AddSpotImageModal from "../AddSpotImageModal";
+import * as SpotImageActions from "../../store/spotImage";
 
 const SpotDetail = () => {
   const sessionUser = useSelector((state) => state.session.user);
@@ -63,6 +64,10 @@ const SpotDetail = () => {
                 key={img.id}
                 src={img.url}
                 alt={spot.name}
+                onClick={(e) => {
+                  e.preventDefault();
+                  dispatch(SpotImageActions.deleteTheSpotImage(img));
+                }}
               />
             );
           })}

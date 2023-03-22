@@ -10,7 +10,24 @@ export const addSpotImage = (spotImage) => ({
   spotImage,
 });
 
+const DELETE_SPOTIMAGE = "spots/DELETE_SPOTIMAGE";
+export const deleteSpotImage = (spotImage) => ({
+  type: DELETE_SPOTIMAGE,
+  spotImage,
+});
+
 //! Thunks
+// DELETE SPOTIMAGE
+export const deleteTheSpotImage = (spotImage) => async (dispatch) => {
+  const response = await fetch(`/api/spots/${spotImage.id}`, {
+    method: "DELETE",
+  });
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(deleteSpotImage(spotImage));
+    return data;
+  }
+};
 
 // POST SPOT IMAGE
 export const addSpotImageThunk = (spotImage) => async (dispatch) => {
@@ -47,6 +64,11 @@ const spotImageReducer = (state = initialState, action) => {
         ...state,
         [action.spotImage.id]: action.spotImage,
       };
+      return newState;
+    }
+    case DELETE_SPOTIMAGE: {
+      const newState = { ...state };
+      delete newState[action.spotImage.id];
       return newState;
     }
     default:
