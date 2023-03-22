@@ -108,7 +108,7 @@ button.profile-btn{
 .dropdown {
   grid-area: menu-btn;
   position: sticky;
-
+  right: 10px;
 }
 
 /* Dropdown Content (Hidden by Default) */
