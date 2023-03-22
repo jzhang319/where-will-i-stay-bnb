@@ -1,8 +1,16 @@
 .add-image-form{
-  width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 350px;
+  height: 380px;
   border: 1px solid lightgray;
   border-radius: 10px;
   padding: 10px;;
+  background: linear-gradient(to bottom,
+        white,
+        rgba(213, 3, 38, 0.771),
+        rgba(0, 0, 0, 0.568));
 }
 .preview-section{
   margin-top: 20px;
@@ -15,9 +23,13 @@
 }
 .add-image-btn{
   cursor: pointer;
-  background-color: rgb(255, 128, 149);
   border: 1px solid lightgray;
   border-radius: 5px;
   padding: 5px;
   margin: 10px;
+}
+.add-image-btn:hover{
+  cursor: pointer;
+  background-color: rgb(255, 143, 162);
+  color: white;
 }

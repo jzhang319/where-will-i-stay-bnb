@@ -1,9 +1,27 @@
 .update-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 400px;
-  height: auto;
+  height: 450px;
   border: 1px solid lightgray;
   border-radius: 10px;
   padding: 10px;
+  background: linear-gradient(to bottom,
+        white,
+        rgba(213, 3, 38, 0.771),
+        rgba(0, 0, 0, 0.568));
+
+}
+.update-form-elements{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.update-form-elements > label{
+  width: 80%;
 }
 
 .update-form-btn{
@@ -16,17 +34,21 @@
 
 .update-form-btn:hover{
   cursor: pointer;
-  background-color: pink;
+  background-color: rgb(255, 143, 162);
   color: white;
 }
 
 .update-btn{
   border-radius: 10px;
-  background-color: pink;
+  width: 100px;
+  height: 40px;
+  margin: 10px;
 }
 
 .update-btn:hover{
   cursor: pointer;
+  background-color: rgb(255, 143, 162);
+  color: white;
 }
 
 .delete-btn{
