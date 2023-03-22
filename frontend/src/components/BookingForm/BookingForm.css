@@ -38,16 +38,16 @@ form.booking-form{
 .reserve-btn{
   width: 150px;
   height: 50px;
-  background-color: rgb(252, 107, 131);
-  color: white;
+  color: black;
   border-radius: 10px;
   margin: 20px;
   border: 1px solid lightgray;
 }
 
 .reserve-btn:hover{
+  background-color: rgb(255, 143, 162);
+  color: white;
   cursor: pointer;
-  color: black;
 }
 
 .reminder-btn{

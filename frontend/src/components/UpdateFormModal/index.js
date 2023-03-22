@@ -23,7 +23,7 @@ function UpdateFormModal() {
   return (
     <>
       <button className="update-form-btn" onClick={() => setShowModal(true)}>
-        EDIT
+        EDIT SPOT
       </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
