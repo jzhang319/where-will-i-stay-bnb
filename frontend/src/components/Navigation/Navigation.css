@@ -1,11 +1,14 @@
 .nav-section {
-  display: grid;
+  /* display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-areas:
-  'logo current-owner . . . . host-home menu-drop-btn';
+  'logo current-owner . . . . host-home menu-drop-btn'; */
+  display: flex;
+  justify-content: space-between;
   min-width: 500px;
   padding: 20px;
   border: 1px lightgray solid;
+  border-radius: 10px;
   align-items: center;
   max-width: 100%;
 }

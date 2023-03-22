@@ -29,7 +29,7 @@ const HomePage = () => {
           <div key={spot.id} className="each-spot">
             <NavLink className="spot-link" to={`/spots/${spot.id}`}>
               <div className="spot-img-box">
-                <img src={spot.previewImage} alt={spot.name} />
+                <img className="img-itself" src={spot.previewImage} alt={spot.name} />
               </div>
               <div className="spot-info">
                 <div className="city-country">
