@@ -55,7 +55,7 @@ function SignupFormPage() {
   };
 
   return (
-    <div className="form-container">
+    <div className="signup-form-container">
       <form className="signup-form" onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
