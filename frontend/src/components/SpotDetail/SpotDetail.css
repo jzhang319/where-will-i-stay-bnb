@@ -6,11 +6,13 @@
   color: red;
 } */
 .h1-city-info-container {
+  position: sticky;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 78%;
+  height: 300px;
 }
 .title {
   display: flex;
@@ -33,7 +35,7 @@
 .spot-details-container{
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: 78%;
 
 }
 .spot-details{
@@ -61,6 +63,7 @@
   flex-wrap: wrap;
   flex-direction: column;
   height: 350px;
+  width: 510px;
 }
 
 .smaller-pictures{
