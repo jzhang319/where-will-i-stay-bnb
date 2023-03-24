@@ -16,7 +16,6 @@ const SpotDetail = () => {
   // const history = useHistory();
   const dispatch = useDispatch();
   const spot = useSelector((state) => state.spot);
-  // spot?.SpotImages?.find((spotImg) => spotImg.preview === true).url
 
   let url;
   (() => {
