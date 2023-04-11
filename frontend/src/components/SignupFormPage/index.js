@@ -62,6 +62,9 @@ function SignupFormPage() {
             <li key={idx}>{error}</li>
           ))}
         </ul>
+        <div className="logo">
+          where-will-i-stay-bnb
+        </div>
         <label>
           First Name
           <input

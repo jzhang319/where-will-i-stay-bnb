@@ -30,6 +30,9 @@ function LoginForm() {
           <li key={idx}>{error}</li>
         ))}
       </ul>
+      <div className="logo">
+        where-will-i-stay-bnb
+      </div>
       <label>
         Username or Email
         <input

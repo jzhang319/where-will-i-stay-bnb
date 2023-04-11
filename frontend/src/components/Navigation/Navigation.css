@@ -15,7 +15,7 @@
   width: 100%;
   padding-left: 25px;
   padding-right: 25px;
-  z-index: 2;
+  z-index: 1;
 }
 
 a{
@@ -25,20 +25,21 @@ a{
 
 button.demo-login-btn{
   height: 50px;
-  border: none;
+  border: solid 1px;
   border-radius: 10px;
   margin-left: 10%;
   padding: 10px;
+  background: none;
 }
 button.demo-login-btn:hover{
-  background-color: rgb(220, 220, 220);
+  background-color: pink;
   color: white;
   cursor: pointer;
 }
 
 .curr-owner-spot-btn{
   grid-area: current-owner;
-  border: none;
+  border: solid 1px;
   width: 150px;
   height: 50px;
   border-radius: 10px;

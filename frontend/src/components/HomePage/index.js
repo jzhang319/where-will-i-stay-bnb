@@ -19,7 +19,7 @@ const HomePage = () => {
   return (
     <div className="homepage-container">
       {allSpots.map((spot) => {
-        if (spot.previewImage === "no preview image found" || spot)
+        if (spot.previewImage === "no preview image found" || spot.previewImage === false)
           spot.previewImage = defaultImage;
 
         const date = new Date(spot.updatedAt);

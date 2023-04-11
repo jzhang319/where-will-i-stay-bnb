@@ -8,35 +8,41 @@ a {
   font-family: 'Open Sans';
   font-size: 16px;
 }
-
-form.form-container{
-  display: flex;
-  justify-content: center;
+.logo{
+  margin: 10px;
+  padding: 10px;
+  color: white;
+  font-size: 30px;
+  height: 50px;
 }
+
+
 .signup-form-container{
   display: flex;
   justify-content: center;
+  align-self: center;
+  margin-top: 10%;
 }
+
 form.signup-form{
-  top: 5%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   place-items: center;
-  height: 80vh;
+  height: 70vh;
   width: 500px;
   border: 1px solid rgb(255, 0, 0);
   border-radius: 10px;
-  position: absolute;
   background: linear-gradient(to bottom,
-        white,
-        rgba(213, 3, 38, 0.771),
-        rgba(0, 0, 0, 0.568));
+  white,
+  rgba(213, 3, 38, 0.771),
+  rgba(0, 0, 0, 0.568));
+  z-index: 1;
 }
 
 button.sign-up-btn {
   display: flex;
-  border: 0;
+  border: solid 1px;
   border-radius: 10px;
   background: none;
   font-weight: 700;
@@ -51,8 +57,6 @@ button:hover.sign-up-btn {
   background-color: pink;
   color: white;
 }
-
-
 
 input {
   border: 0;

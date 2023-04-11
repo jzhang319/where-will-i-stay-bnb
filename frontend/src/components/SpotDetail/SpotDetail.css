@@ -1,3 +1,7 @@
+.spot-detail-container{
+  margin-top: 5%;
+}
+
 .current-booking-bookingform{
   display:flex;
   justify-content: center;

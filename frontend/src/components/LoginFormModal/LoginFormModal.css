@@ -9,10 +9,20 @@
 }
 
 form.login-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  place-items: center;
+  height: 50vh;
+  border: 1px solid rgb(255, 0, 0);
   border-radius: 10px;
-  width: 400px;
+  width: 500px;
   padding: 10px;
-
+  background: linear-gradient(to bottom,
+        white,
+        rgba(213, 3, 38, 0.771),
+        rgba(0, 0, 0, 0.568));
+  margin-top: 15%;
 }
 .login-btn-section{
   display: flex;
@@ -22,12 +32,17 @@ form.login-form{
 .login-btn{
   height: 40px;
   width: 70px;
-  background-color: pink;
   border: 1px solid lightgray;
   border-radius: 10px;
   cursor: pointer;
   margin: 10px;
+  background: none;
+  font-weight: 700;
 }
 .login-btn:hover{
-  color: white
+  background-color: pink;
+  color: white;
+}
+label{
+  margin: 10px;
 }

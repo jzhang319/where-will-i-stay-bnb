@@ -55,6 +55,9 @@ const CreateFormModal = ({ setShowModal }) => {
             <li key={idx}>{error}</li>
           ))}
         </ul>
+        <div className="logo">
+          where-will-i-stay-bnb
+        </div>
       </div>
       <div className="create-form-elements">
         <label>
