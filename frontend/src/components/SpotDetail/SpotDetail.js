@@ -9,6 +9,7 @@ import BookingForm from "../BookingForm/BookingForm";
 import CurrentSpotBooking from "../CurrentSpotBooking/CurrentSpotBooking";
 import AddSpotImageModal from "../AddSpotImageModal";
 import * as SpotImageActions from "../../store/spotImage";
+import ReviewSection from "../ReviewSection/ReviewSection";
 
 const SpotDetail = () => {
   const sessionUser = useSelector((state) => state.session.user);
@@ -80,6 +81,7 @@ const SpotDetail = () => {
       </div>
 
       <div className="whole-info-container">
+        <ReviewSection />
         <div className="stuff-before-bookings">
           <div className="edit-spot-section">
             {sessionUser && sessionUser.id === spot.ownerId && (

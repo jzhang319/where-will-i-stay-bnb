@@ -4,6 +4,7 @@ import sessionReducer from "./session";
 import spotReducer from "./spot";
 import bookingReducer from "./booking";
 import spotImageReducer from "./spotImage";
+import reviewReducer from "./review";
 
 const rootReducer = combineReducers({
   // add reducer functions here
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   spot: spotReducer,
   booking: bookingReducer,
   spotImage: spotImageReducer,
+  review: reviewReducer,
 });
 
 let enhancer;
