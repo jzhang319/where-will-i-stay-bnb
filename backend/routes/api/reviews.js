@@ -63,7 +63,6 @@ router.post("/:reviewId/images", requireAuth, async (req, res) => {
   }
   // console.log(user.id, ` <-----------`);
 
-
   const numReviewImages = await ReviewImage.findAll({
     where: { reviewId: id },
   });
@@ -90,7 +89,7 @@ router.post("/:reviewId/images", requireAuth, async (req, res) => {
 // GET all reviews of current user
 router.get("/current", requireAuth, async (req, res) => {
   const { user } = req;
-  // console.log(user);
+  // console.log(user, ' <------ req object');
 
   const userReviews = await Review.findAll({
     where: { userId: user.id },
@@ -106,9 +105,9 @@ router.get("/current", requireAuth, async (req, res) => {
     ],
   });
 
-  // console.log(userReviews, ` <-----------`);
-
-  if (userReviews.length === 0) {
+  // console.log(userReviews, ` <----------- userReviews`);
+  // changed from (userReviews.length === 0)
+  if (!userReviews) {
     return res.status(404).json({
       message: "This user has no reviews",
       statusCode: 404,
@@ -119,7 +118,7 @@ router.get("/current", requireAuth, async (req, res) => {
   userReviews.forEach((review) => {
     reviewArray.push(review.toJSON());
   });
-  // console.log(reviewArray, ` <-----------`);
+  console.log(reviewArray, ` <----------- reviewArray`);
   reviewArray.forEach((review) => {
     // console.log(review.Spot.SpotImages[0].url, ` <-----------`);
     if (review.Spot.SpotImages[0]) {
@@ -130,10 +129,12 @@ router.get("/current", requireAuth, async (req, res) => {
     // console.log(review.Spot, ` <-----`);
     delete review.Spot.SpotImages;
   });
-
-  res.json({
-    Reviews: reviewArray,
+  return res.json({
+    Reviews: userReviews,
   });
+  // return res.json({
+  //   Reviews: reviewArray,
+  // });
 });
 
 // PUT edit a review

@@ -81,7 +81,6 @@ const SpotDetail = () => {
       </div>
 
       <div className="whole-info-container">
-        <ReviewSection />
         <div className="stuff-before-bookings">
           <div className="edit-spot-section">
             {sessionUser && sessionUser.id === spot.ownerId && (
@@ -102,6 +101,7 @@ const SpotDetail = () => {
             <BookingForm />
           </div>
         </div>
+        <ReviewSection />
       </div>
     </div>
   );

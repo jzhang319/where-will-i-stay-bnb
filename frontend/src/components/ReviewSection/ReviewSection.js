@@ -6,20 +6,16 @@ import { useEffect } from "react";
 function ReviewSection() {
   const dispatch = useDispatch();
   const userReviews = useSelector((state) => state.review);
+  const spot = useSelector((state) => state.spot);
 
   useEffect(() => {
-    dispatch(reviewActions.getReviews());
+    dispatch(reviewActions.getTheReviews(spot));
   }, [dispatch]);
 
   return (
-    <div>
+    <div className="review-container">
       review section
-      {/* {userReviews.map((review) => (
-        <div key={review.id}>
-          <h3>{review.title}</h3>
-          <p>{review.description}</p>
-        </div>
-      ))} */}
+      {/* {userReviews} */}
     </div>
   );
 }

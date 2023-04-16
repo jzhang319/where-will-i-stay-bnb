@@ -24,11 +24,12 @@ const reviewReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_REVIEWS:{
       const allReviews = {};
-      action.reviews.Reviews.forEach((spot) => {
-        console.log(spot, ' <-------');
-        allReviews[spot.id] = spot;
-      });
-      // console.log(allSpots);
+      console.log(action.reviews, ' <-------');
+      // action.reviews.Reviews.forEach((spot) => {
+      //   // console.log(spot, ' <-------');
+      //   allReviews[spot.id] = spot;
+      // });
+      // // console.log(allSpots);
       return {
         ...allReviews,
       };
