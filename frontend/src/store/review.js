@@ -19,24 +19,20 @@ export const getTheReviews = () => async (dispatch) => {
 
 //! reducer
 
-let initialState = {}
+let initialState = {};
 const reviewReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_REVIEWS:{
-      const allReviews = {};
-      console.log(action.reviews, ' <-------');
-      // action.reviews.Reviews.forEach((spot) => {
-      //   // console.log(spot, ' <-------');
-      //   allReviews[spot.id] = spot;
-      // });
-      // // console.log(allSpots);
+    case GET_REVIEWS: {
+      const userReviews = {};
+      console.log(action.reviews.Reviews[0].review, " <-------");
       return {
-        ...allReviews,
-      };
+        ...state,
+        [action.reviews.Reviews]: {...action.reviews.Reviews[0]}
+      }
     }
     default:
       return state;
   }
 };
 
-export default reviewReducer
+export default reviewReducer;
