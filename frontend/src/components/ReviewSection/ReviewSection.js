@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 function ReviewSection() {
   const dispatch = useDispatch();
-  const userReviews = useSelector((state) => state.review);
+  const userReviews = useSelector((state) => state.review.review);
   const spot = useSelector((state) => state.spot);
 
   useEffect(() => {
@@ -14,8 +14,8 @@ function ReviewSection() {
 
   return (
     <div className="review-container">
-      review section
-      {/* {userReviews} */}
+      User's Review :
+      <div className="individual-review">{userReviews}</div>
     </div>
   );
 }

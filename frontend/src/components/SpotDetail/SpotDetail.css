@@ -90,3 +90,15 @@
 .edit-spot-section{
   /* margin-bottom: 20px; */
 }
+.review-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+.individual-review{
+  color: gray;
+  font-weight: 400;
+}

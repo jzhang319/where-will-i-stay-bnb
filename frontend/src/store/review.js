@@ -23,11 +23,11 @@ let initialState = {};
 const reviewReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_REVIEWS: {
-      const userReviews = {};
-      console.log(action.reviews.Reviews[0].review, " <-------");
+
+      // console.log(action.reviews.Reviews[0].review, " <------- reducer");
       return {
         ...state,
-        [action.reviews.Reviews]: {...action.reviews.Reviews[0]}
+        ...action.reviews.Reviews[0]
       }
     }
     default:
