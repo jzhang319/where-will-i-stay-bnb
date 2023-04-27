@@ -79,7 +79,7 @@ const SpotDetail = () => {
           <h3>${spot.price} night</h3>
         </div>
       </div>
-      <ReviewSection />
+      <ReviewSection spotId={spot.id}/>
       <div className="whole-info-container">
         <div className="stuff-before-bookings">
           <div className="edit-spot-section">

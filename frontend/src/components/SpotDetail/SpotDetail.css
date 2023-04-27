@@ -5,6 +5,7 @@
 .current-booking-bookingform{
   display:flex;
   justify-content: center;
+  margin-left: 20px;
 }
 /* .spot-detail-container{
   color: red;
