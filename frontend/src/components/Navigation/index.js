@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
@@ -60,7 +60,7 @@ function Navigation({ isLoaded }) {
     e.preventDefault();
     dispatch(sessionActions.logout());
     dispatch(emptyBookings());
-    // history.pushState("/");
+    history.push("/");
   };
 
   return (
@@ -68,7 +68,7 @@ function Navigation({ isLoaded }) {
       <div className="nav-section">
         <NavLink to="/">
           <img src={logo} alt="page-logo" className="logo" />
-        where-will-i-stay-bnb
+          where-will-i-stay-bnb
         </NavLink>
         <NavLink exact to="/spots/current">
           <button
