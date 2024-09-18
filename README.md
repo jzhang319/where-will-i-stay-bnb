@@ -4,6 +4,10 @@
 
 where-will-i-stay-bnb is a clone of the airbnb website. It has similar functionality and styling of the actual bnb website.
 
+## Schema of the database
+
+![image](https://user-images.githubusercontent.com/99565823/196004856-0ed91d4b-c9ea-43b3-8dc4-f2a5a917ab2a.png)
+
 ## List of Technologies
 
 | Frontend           | Backend                |
@@ -34,10 +38,6 @@ where-will-i-stay-bnb is a clone of the airbnb website. It has similar functiona
 ## Spot Detail Page with Spot Editing and Booking feature
 ![Screenshot 2024-09-18 at 5 21 29 PM](https://github.com/user-attachments/assets/edf77d8c-7197-4647-9de8-ece025a59b0b)
 
-
-## Schema of the database
-
-![image](https://user-images.githubusercontent.com/99565823/196004856-0ed91d4b-c9ea-43b3-8dc4-f2a5a917ab2a.png)
 
 
 # Instructions on how to launch application locally
