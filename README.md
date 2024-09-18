@@ -35,15 +35,17 @@ where-will-i-stay-bnb is a clone of the airbnb website. It has similar functiona
 ![Screenshot 2024-09-18 at 5 21 29 PM](https://github.com/user-attachments/assets/edf77d8c-7197-4647-9de8-ece025a59b0b)
 
 
+## Schema of the database
+
+![image](https://user-images.githubusercontent.com/99565823/196004856-0ed91d4b-c9ea-43b3-8dc4-f2a5a917ab2a.png)
+
+
 # Instructions on how to launch application locally
 
 1. Type 'npm install' in the root directory of the application.
 2. Then 'cd' into the front end directory and type 'npm start' to start the frontend server.
 3. Open a second terminal window and 'cd' into the backend directory, then type 'npm start' to start the backend server.
 
-## Schema of the database
-
-![image](https://user-images.githubusercontent.com/99565823/196004856-0ed91d4b-c9ea-43b3-8dc4-f2a5a917ab2a.png)
 
 ### All endpoints that require authentication
 
