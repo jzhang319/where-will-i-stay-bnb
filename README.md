@@ -27,12 +27,13 @@ where-will-i-stay-bnb is a clone of the airbnb website. It has similar functiona
 # Screenshots
 
 ## HomePage
+![Screenshot 2024-09-18 at 5 20 31 PM](https://github.com/user-attachments/assets/a68c90d3-7cfb-44e7-b3de-bdcc0cda363e)
 
-![image](https://cdn.discordapp.com/attachments/950229895341031585/1051213213087309835/image.png)
+
 
 ## Spot Detail Page with Spot Editing and Booking feature
+![Screenshot 2024-09-18 at 5 21 29 PM](https://github.com/user-attachments/assets/edf77d8c-7197-4647-9de8-ece025a59b0b)
 
-![image](https://cdn.discordapp.com/attachments/950229895341031585/1051213524170461184/image.png)
 
 # Instructions on how to launch application locally
 
