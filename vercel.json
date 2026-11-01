@@ -1,7 +1,7 @@
 {
   "version": 2,
   "framework": null,
-  "installCommand": "npm --prefix backend install && npm --prefix frontend install && npm --prefix frontend run build",
+  "installCommand": "npm --prefix backend install && npm --prefix frontend install && CI=false npm --prefix frontend run build",
   "buildCommand": "mkdir -p .vercel-empty-output && echo 'unused output dir — all requests are routed to /api, see vercel.json rewrites' > .vercel-empty-output/_unused.txt",
   "outputDirectory": ".vercel-empty-output",
   "functions": {

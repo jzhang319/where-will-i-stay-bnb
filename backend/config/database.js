@@ -23,7 +23,7 @@ module.exports = {
       schema: process.env.SCHEMA,
     },
     pool: {
-      max: 1,
+      max: process.env.VERCEL ? 1 : 5,
       min: 0,
       idle: 1000,
       acquire: 10000,
