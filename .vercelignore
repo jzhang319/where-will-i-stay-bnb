@@ -1,0 +1,8 @@
+# Never upload local secrets or local-only dirs with `vercel deploy` (CLI ignores .gitignore for these)
+.env
+.env.*
+**/.env
+**/.env.*
+!**/.env.example
+.vercel
+**/node_modules
