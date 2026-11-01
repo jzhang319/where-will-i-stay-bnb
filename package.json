@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/jzhang319/where-will-i-stay-bnb#readme",
   "dependencies": {
-    "sqlite3": "^5.1.2"
+    "sqlite3": "^6.0.1"
   },
   "proxy": "http://localhost:8000"
 }
