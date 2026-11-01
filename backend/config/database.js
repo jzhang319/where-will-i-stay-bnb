@@ -22,5 +22,11 @@ module.exports = {
       // define schema here
       schema: process.env.SCHEMA,
     },
+    pool: {
+      max: 1,
+      min: 0,
+      idle: 1000,
+      acquire: 10000,
+    },
   },
 };
