@@ -8,8 +8,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "render-postbuild": "npm run build --prefix frontend",
-    "dev:backend": "npm install --prefix backend start",
-    "dev:frontend": "npm install --prefix frontend start",
+    "dev:backend": "npm --prefix backend start",
+    "dev:frontend": "npm --prefix frontend start",
     "sequelize": "npm run --prefix backend sequelize",
     "sequelize-cli": "npm run --prefix backend sequelize-cli",
     "start": "npm start --prefix backend",
