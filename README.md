@@ -42,7 +42,7 @@ where-will-i-stay-bnb is a clone of the airbnb website. It has similar functiona
 
 # Instructions on how to launch application locally
 
-1. Type 'npm install' in the root directory of the application.
+1. In the root directory of the application, run `npm --prefix backend install && npm --prefix frontend install` (the root `package.json` no longer has an `install` script that does this for you — it used to run `npm --prefix backend install backend && npm --prefix frontend install frontend`, which also tried to install registry packages literally named `backend`/`frontend` as a side effect of the typo'd extra argument).
 2. Then 'cd' into the front end directory and type 'npm start' to start the frontend server.
 3. Open a second terminal window and 'cd' into the backend directory, then type 'npm start' to start the backend server.
 
